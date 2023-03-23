@@ -6,6 +6,8 @@
 .pnp.js
 .env
 .pem
+*/dummy
+*/zdummy
 
 # testing
 /coverage

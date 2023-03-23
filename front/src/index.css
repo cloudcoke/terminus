@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-family: "Menlo, D2Coding, SCoreDream";
+    font-weight: 400;
+    font-size: 62.5%;
+    /* 1rem =16px  ; 100%*/
+    /* 1rem = 10px ; 62.5%*/
+}
+ul,
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+color {
+    color: #118ab2;
+    color: #ff5a5f;
+    color: #ffd166;
+    color: #06d6a0;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    html {
+        font-size: 40%;
+    }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    html {
+        font-size: 50%;
+    }
+}
+@media (min-width: 1024px) {
+    html {
+        font-size: 62.5%;
+    }
+}
