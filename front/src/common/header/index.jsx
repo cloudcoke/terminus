@@ -15,6 +15,7 @@ export const Header = () => {
                     <Toggle height="6" />
                 </ToggleArea>
                 <Navi />
+                <Button text="Free Terminal" height="5" long />
             </HeaderWrap>
         </>
     )
