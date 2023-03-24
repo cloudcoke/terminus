@@ -9,13 +9,15 @@ export const Header = () => {
                 <Logo />
                 <BtnArea>
                     <Button text="Sign Up" height="4" />
-                    <Button text="Sing In" height="4" />
+                    <Button text="Sign In" height="4" />
                 </BtnArea>
                 <ToggleArea>
                     <Toggle height="6" />
                 </ToggleArea>
                 <Navi />
-                <Button text="Free Terminal" height="5" long />
+                <ToggleArea className="btnWrap">
+                    <Button text="Free Terminal" height="5" long />
+                </ToggleArea>
             </HeaderWrap>
         </>
     )

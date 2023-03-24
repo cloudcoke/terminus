@@ -8,7 +8,9 @@ export const Btn = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #233041;
-    color: #fff;
     font-size: 1.6rem;
     font-weight: bold;
+    a {
+        color: #fff;
+    }
 `

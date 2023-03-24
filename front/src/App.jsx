@@ -1,6 +1,7 @@
 import { Header } from "./common"
-import { Body } from "./pages"
 import styled from "styled-components"
+import { BodyWrap } from "./common/body"
+import { AppRouter } from "./routes"
 
 const Wrap = styled.div`
     display: flex;
@@ -13,7 +14,9 @@ const App = () => {
     return (
         <Wrap>
             <Header />
-            <Body />
+            <BodyWrap>
+                <AppRouter />
+            </BodyWrap>
         </Wrap>
     )
 }
