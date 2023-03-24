@@ -1,3 +1,6 @@
 import { combineReducers } from "redux"
+import { typing } from "./types"
 
-export const reducer = combineReducers({})
+export const rootReducer = combineReducers({
+    typing,
+})
