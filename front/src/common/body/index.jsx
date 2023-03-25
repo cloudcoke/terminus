@@ -18,6 +18,7 @@ export const BodyWrap = styled.div`
     .bashlogo {
         font-size: 1.8rem;
     }
+    form > p,
     .content {
         line-height: 3rem;
         font-size: 1.8rem;

@@ -1,11 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import BashLogo from "../component/logo"
+import { SignInForm } from "../component/signInForm"
 import TypingEffect from "../component/Typing"
 
 export const SignIn = () => {
     const [logoState, setLogoState] = useState(false)
     const [prompt, setPrompt] = useState(false)
-    console.log(logoState, prompt)
 
     return (
         <>
@@ -27,26 +27,7 @@ export const SignIn = () => {
                         )}
                     </div>
                 </div>
-                <form autoComplete="off" action="32">
-                    {prompt && (
-                        <li>
-                            &gt; "Enter Your UserId:
-                            <input type="text" className="userId" />
-                        </li>
-                    )}
-                    <dl>
-                        <dt>WARNING :</dt>
-                        <dd>UserId ‘sampleId’ is already exists.</dd>
-                    </dl>
-                    <li>
-                        &gt; "Enter Your Password:
-                        <input type="text" className="userPw" />
-                    </li>
-                    <li>
-                        &gt; "Enter Your Password again:
-                        <input type="text" className="userPwCheck" />
-                    </li>
-                </form>
+                <SignInForm state={prompt} />
             </div>
         </>
     )

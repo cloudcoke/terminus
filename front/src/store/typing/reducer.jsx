@@ -10,7 +10,6 @@ export const typing = (state = initialState, action) => {
         case TYPING_START:
             return {
                 ...state,
-                // displayText: action.payload,
                 isTyping: true,
                 error: null,
             }

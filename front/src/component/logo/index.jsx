@@ -1,6 +1,7 @@
+import { memo } from "react"
 import TypingEffect from "../Typing"
 
-const BashLogo = ({ state }) => {
+const BashLogo = memo(({ state }) => {
     return (
         <>
             <p>
@@ -42,6 +43,6 @@ const BashLogo = ({ state }) => {
             </p>
         </>
     )
-}
+})
 
 export default BashLogo

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { StyledCursor } from "./styled"
 
-const TypingEffect = ({ text, speed, state }) => {
+const TypingEffect = ({ text, speed, state, element }) => {
     const [displayText, setDisplayText] = useState(false)
     const [isTyping, setIsTyping] = useState(false)
     const [cursorActive, setCursorActive] = useState(true)
@@ -26,7 +26,6 @@ const TypingEffect = ({ text, speed, state }) => {
                 setIsTyping(false)
                 clearInterval(interval)
                 if (state) state(true)
-                console.log(111111)
             }
         }, speed)
 
@@ -35,7 +34,15 @@ const TypingEffect = ({ text, speed, state }) => {
         }
     }, [text])
 
-    return (
+    return element ? (
+        <>
+            <li>
+                <p>{displayText}</p>
+                {element}
+            </li>
+            {isTyping && <StyledCursor isActive={cursorActive} />}
+        </>
+    ) : (
         <>
             {displayText}
             {isTyping && <StyledCursor isActive={cursorActive} />}
