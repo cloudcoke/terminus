@@ -1,3 +1,9 @@
+import { Loading } from "../component/button/loading"
+
 export const Main = () => {
-    return <>MAin</>
+    return (
+        <>
+            <Loading />
+        </>
+    )
 }

@@ -60,9 +60,13 @@ export const BodyWrap = styled.div`
         font-size: 1.8rem;
         margin-top: 0.5rem;
     }
-    dt {
+    .warning {
         font-weight: bold;
         color: red;
+    }
+    .success {
+        font-weight: bold;
+        color: #05ff00;
     }
     dd {
         margin-left: 1rem;
