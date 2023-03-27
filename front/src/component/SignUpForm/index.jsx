@@ -1,11 +1,11 @@
 import { useState } from "react"
-import request from "../../utils/request"
+// import request from "../../utils/request"
 import { SignUpMessage } from "../message"
 import TypingEffect from "../Typing"
 
 export const SignUpForm = ({ state: prompt }) => {
     const [isIdDuplicates, setIsIdDuplicates] = useState(false)
-    const [isPwDuplicates, setIsPwDuplicates] = useState(false)
+    // const [isPwDuplicates, setIsPwDuplicates] = useState(false)
     const [formState, setFormState] = useState({
         mode: "",
         userId: "",
@@ -135,11 +135,7 @@ export const SignUpForm = ({ state: prompt }) => {
                     }
                 />
             )}
-            <SignUpMessage
-                isPwDuplicates={isPwDuplicates}
-                userPw={formState.userPw}
-                userPwCheck={formState.userPwCheck}
-            />
+            <SignUpMessage userPw={formState.userPw} userPwCheck={formState.userPwCheck} />
         </form>
     )
 }
