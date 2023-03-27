@@ -22,7 +22,7 @@ export const SignIn = () => {
                                 text={
                                     "Welcome to our site, where you can learn and master the most useful Linux and MySQL commands. Our site provides a comprehensive platform for anyone interested in improving their skills in these areas. Whether you are a beginner or an experienced user, our site has something to offer for everyone. So, let's get started and enhance your knowledge and skills today!"
                                 }
-                                speed={5}
+                                speed={1}
                             />
                         )}
                     </div>
