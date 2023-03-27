@@ -18,6 +18,7 @@ jobs:
       - name: Install dependencies & Build
         working-directory: front
         run: |
+          NODE_ENV=development
           npm install
           npm run build
 
