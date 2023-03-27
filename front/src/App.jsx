@@ -7,7 +7,7 @@ const Wrap = styled.div`
     display: flex;
     justify-content: center;
     width: 192rem;
-    height: 108rem;
+    height: 100vh;
 `
 
 const App = () => {
