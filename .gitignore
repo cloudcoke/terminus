@@ -25,3 +25,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/front/src/component/SignUpForm/check.jsx

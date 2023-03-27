@@ -1,8 +1,13 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+// import request from "../../utils/request"
+import { SignUpMessage } from "../message"
 import TypingEffect from "../Typing"
 
 export const SignUpForm = ({ state: prompt }) => {
-    const [stateCode, setStateCode] = useState(0)
+    const [isIdDuplicates, setIsIdDuplicates] = useState(false)
+    const [isPwDuplicates, setIsPwDuplicates] = useState(false)
+    const navigator = useNavigate()
     const [formState, setFormState] = useState({
         mode: "",
         userId: "",
@@ -10,36 +15,73 @@ export const SignUpForm = ({ state: prompt }) => {
         userPwCheck: "",
         submit: "",
     })
-    const checkKeyCode = (e) => {
+    console.log(formState)
+    const checkKeyCode = async (e) => {
         if (e.key === "Enter") {
-            if (e.target.className === "mode") {
+            if (e.target.className === "mode" || e.target.className === "submit") {
                 switch (e.target.value.toUpperCase()) {
                     case "Y":
-                        return handleChange(e)
+                        handleChange(e)
+                        break
                     default:
                         break
+                }
+                if (e.target.className === "submit") {
+                    navigator("/")
                 }
             }
             if (e.target.className === "userId") {
                 switch (/^[a-zA-Z0-9]*$/.test(e.target.value)) {
                     case true:
-                    // axios
-                    //체크하는 로직 안에 handle chane넣어서 3단계로 바꾸자..
-                    // return handleChange(e)
+                        try {
+                            // const result = await request.post("/user/check", { userId: e.target.value })
+                            // const { isCheck } = result.data
+
+                            // const stateCode = request.data.status
+                            const isDuplicates = true
+
+                            setIsIdDuplicates(isDuplicates)
+                            handleChange(e)
+                        } catch (error) {
+                            return error
+                        }
+                        break
                     default:
                         break
+                }
+            }
+            if (e.target.className === "userPw") {
+                handleChange(e)
+            }
+            if (e.target.className === "userPwCheck") {
+                handleChange(e)
+                if (formState.userPwCheck && formState.userPw === formState.userPwCheck) {
+                    setFormState(true)
                 }
             }
         }
     }
     const handleChange = (e) => {
-        setFormState((initial) => ({
-            ...initial,
-            [e.target.className]: e.target.value,
-        }))
-        e.target.disabled = true
+        if (e.target.className === "userId") {
+            if (isIdDuplicates === true) {
+                setFormState((initial) => ({
+                    ...initial,
+                    [e.target.className]: e.target.value,
+                }))
+                e.target.disabled = true
+            } else {
+                setFormState((initial) => ({
+                    ...initial,
+                    [e.target.className]: e.target.value,
+                }))
+            }
+        } else {
+            setFormState((initial) => ({
+                ...initial,
+                [e.target.className]: e.target.value,
+            }))
+        }
     }
-    console.log(formState)
     return (
         <form
             onSubmit={(e) => {
@@ -72,14 +114,14 @@ export const SignUpForm = ({ state: prompt }) => {
                     }
                 />
             )}
-            {formState.userId && (
+            <SignUpMessage isIdDuplicates={isIdDuplicates} userId={formState.userId} />
+            {formState.userId && isIdDuplicates && (
                 <TypingEffect
-                    text={` > Enter Your UserId: `}
+                    text={` > Enter Your Password: `}
                     element={
                         <input
-                            type="text"
-                            className="userId"
-                            // value={formState.userId}
+                            type="password"
+                            className="userPw"
                             autoFocus
                             onKeyDown={checkKeyCode}
                             pattern="^[a-zA-Z0-9]+$"
@@ -87,18 +129,35 @@ export const SignUpForm = ({ state: prompt }) => {
                     }
                 />
             )}
-            {/* <dl>
-                <dt>WARNING :</dt>
-                <dd>UserId ‘sampleId’ is already exists.</dd>
-            </dl>
-            <li>
-                &gt; "Enter Your Password:
-                <input type="text" className="userPw" />
-            </li>
-            <li>
-                &gt; "Enter Your Password again:
-                <input type="text" className="userPwCheck" />
-            </li> */}
+            {formState.userPw && (
+                <TypingEffect
+                    text={` > Enter Your Password again: `}
+                    element={
+                        <input
+                            type="password"
+                            className="userPwCheck"
+                            autoFocus
+                            onKeyDown={checkKeyCode}
+                            pattern="^[a-zA-Z0-9]+$"
+                        />
+                    }
+                />
+            )}
+            <SignUpMessage userPw={formState.userPw} userPwCheck={formState.userPwCheck} />
+            {formState.userPwCheck && formState.userPw === formState.userPwCheck && (
+                <TypingEffect
+                    text={` > Are you Submit ? [Y/N] :`}
+                    element={
+                        <input
+                            type="text"
+                            className="submit"
+                            autoFocus
+                            onKeyDown={checkKeyCode}
+                            pattern="^[a-zA-Z0-9]+$"
+                        />
+                    }
+                />
+            )}
         </form>
     )
 }

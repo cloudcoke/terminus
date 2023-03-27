@@ -1,34 +1,29 @@
 const express = require("express");
 const cors = require("cors");
 
-const setMiddleware = (app) => {
-    app.use(
-        cors({
-            origin: true,
-            credentials: true,
-        })
-    );
-    app.use(express.json());
-};
+class App {
+    constructor() {
+        this.app = express();
+        this.setMiddleware();
+        this.setRouting();
+        this.errorHandler();
+    }
 
-const setRouter = (app) => {
-    const router = require("./routes");
-    app.use(router);
-};
+    setMiddleware() {
+        this.app.use(cors({ origin: true, credentials: true }));
+        this.app.use(express.json());
+    }
 
-const setErrorHandler = (app) => {
-    app.use((err, req, res, next) => {
-        res.status(500).send(err.message);
-    });
-};
+    setRouting() {
+        this.app.use(require("./routes"));
+    }
 
-const App = () => {
-    const app = express();
-    setMiddleware(app);
-    setErrorHandler(app);
-    setRouter(app);
-    return app;
-};
+    errorHandler() {
+        this.app.use((err, req, res, next) => {
+            res.status(500).send(err.message);
+        });
+    }
+}
 
-module.exports = App();
+module.exports = new App().app;
 

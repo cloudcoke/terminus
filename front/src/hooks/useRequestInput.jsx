@@ -1,5 +1,3 @@
-import request from "../utils/request"
-
 export const RequestInput = (e) => {
     if (e.key === "Enter") {
         if (e.target.className === "userId") {

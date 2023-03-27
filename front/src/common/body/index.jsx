@@ -8,7 +8,7 @@ export const BodyWrap = styled.div`
         width: 100%;
         margin-top: 5rem;
         padding: 13rem 30rem 10rem 4rem;
-        height: 89rem;
+        height: 79%;
         background-color: #343541;
     }
     h1 {
