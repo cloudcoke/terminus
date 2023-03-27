@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const request = axios.create({
-    baseURL: "http://localhost:3005",
+    baseURL: "https://api.terminus.run",
     withCredentials: true,
     headers: {
         "Content-Type": "application/json",
