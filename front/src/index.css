@@ -24,6 +24,9 @@ color {
     color: #ffd166;
     color: #06d6a0;
 }
+input:focus {
+    outline-style: none;
+}
 
 @media (min-width: 320px) and (max-width: 767px) {
     html {

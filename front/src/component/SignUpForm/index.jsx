@@ -1,8 +1,11 @@
 import { useState } from "react"
+import request from "../../utils/request"
+import { SignUpMessage } from "../message"
 import TypingEffect from "../Typing"
 
 export const SignUpForm = ({ state: prompt }) => {
-    const [stateCode, setStateCode] = useState(0)
+    const [isIdDuplicates, setIsIdDuplicates] = useState(false)
+    const [isPwDuplicates, setIsPwDuplicates] = useState(false)
     const [formState, setFormState] = useState({
         mode: "",
         userId: "",
@@ -10,7 +13,8 @@ export const SignUpForm = ({ state: prompt }) => {
         userPwCheck: "",
         submit: "",
     })
-    const checkKeyCode = (e) => {
+    console.log(formState)
+    const checkKeyCode = async (e) => {
         if (e.key === "Enter") {
             if (e.target.className === "mode") {
                 switch (e.target.value.toUpperCase()) {
@@ -23,23 +27,53 @@ export const SignUpForm = ({ state: prompt }) => {
             if (e.target.className === "userId") {
                 switch (/^[a-zA-Z0-9]*$/.test(e.target.value)) {
                     case true:
-                    // axios
-                    //체크하는 로직 안에 handle chane넣어서 3단계로 바꾸자..
-                    // return handleChange(e)
+                        try {
+                            // const result = await request.post("/user/check", { userId: e.target.value })
+                            // const { isCheck } = result.data
+
+                            // const stateCode = request.data.status
+                            const isDuplicates = true
+
+                            setIsIdDuplicates(isDuplicates)
+                            handleChange(e)
+                        } catch (error) {
+                            return null
+                        }
+                        break
                     default:
                         break
                 }
             }
+            if (e.target.className === "userPw") {
+                handleChange(e)
+            }
+            if (e.target.className === "userPwCheck") {
+                handleChange(e)
+            }
         }
     }
     const handleChange = (e) => {
-        setFormState((initial) => ({
-            ...initial,
-            [e.target.className]: e.target.value,
-        }))
-        e.target.disabled = true
+        if (e.target.className === "userId") {
+            if (isIdDuplicates === true) {
+                setFormState((initial) => ({
+                    ...initial,
+                    [e.target.className]: e.target.value,
+                }))
+                e.target.disabled = true
+            } else {
+                setFormState((initial) => ({
+                    ...initial,
+                    [e.target.className]: e.target.value,
+                }))
+            }
+        } else {
+            setFormState((initial) => ({
+                ...initial,
+                [e.target.className]: e.target.value,
+            }))
+        }
     }
-    console.log(formState)
+    console.log(isIdDuplicates)
     return (
         <form
             onSubmit={(e) => {
@@ -72,14 +106,14 @@ export const SignUpForm = ({ state: prompt }) => {
                     }
                 />
             )}
-            {formState.userId && (
+            <SignUpMessage isIdDuplicates={isIdDuplicates} userId={formState.userId} />
+            {formState.userId && isIdDuplicates && (
                 <TypingEffect
-                    text={` > Enter Your UserId: `}
+                    text={` > Enter Your Password: `}
                     element={
                         <input
-                            type="text"
-                            className="userId"
-                            // value={formState.userId}
+                            type="password"
+                            className="userPw"
                             autoFocus
                             onKeyDown={checkKeyCode}
                             pattern="^[a-zA-Z0-9]+$"
@@ -87,18 +121,25 @@ export const SignUpForm = ({ state: prompt }) => {
                     }
                 />
             )}
-            {/* <dl>
-                <dt>WARNING :</dt>
-                <dd>UserId ‘sampleId’ is already exists.</dd>
-            </dl>
-            <li>
-                &gt; "Enter Your Password:
-                <input type="text" className="userPw" />
-            </li>
-            <li>
-                &gt; "Enter Your Password again:
-                <input type="text" className="userPwCheck" />
-            </li> */}
+            {formState.userPw && (
+                <TypingEffect
+                    text={` > Enter Your Password again: `}
+                    element={
+                        <input
+                            type="password"
+                            className="userPwCheck"
+                            autoFocus
+                            onKeyDown={checkKeyCode}
+                            pattern="^[a-zA-Z0-9]+$"
+                        />
+                    }
+                />
+            )}
+            <SignUpMessage
+                isPwDuplicates={isPwDuplicates}
+                userPw={formState.userPw}
+                userPwCheck={formState.userPwCheck}
+            />
         </form>
     )
 }
