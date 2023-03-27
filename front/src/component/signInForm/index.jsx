@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { RequestInput, useInput, UseKeyCheck } from "../../hooks"
-import { Message } from "../message"
+import { SignInMessage } from "../message"
 import TypingEffect from "../Typing"
 
 export const SignInForm = ({ state: prompt }) => {
@@ -13,45 +13,47 @@ export const SignInForm = ({ state: prompt }) => {
     const [idState, setIdState] = useState(false)
     const [pwState, setPwState] = useState(false)
     const [submitState, setSubmitState] = useState(false)
+    const [statusCode, setStatusCode] = useState(0)
     const signInData = useInput("")
     const userIdData = useInput("")
     const userPwData = useInput("")
     const submitData = useInput("")
     const navigate = useNavigate()
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target
-
-        switch (name) {
-            case "userId":
-                setIdState(value.toLowerCase() === "y")
-                signin.current.disabled = value.toLowerCase() === "y"
-                break
-            case "userPw":
-                setPwState(!!value)
-                userIdRef.current.disabled = !!value
-                break
-            case "submit":
-                setSubmitState(!!value)
-                userPwRef.current.disabled = !!value
-                break
-            default:
-                break
+    const handleIdState = (value) => {
+        if (value === "Y" || value === "y") {
+            setIdState(true)
+            signin.current.disabled = true
         }
     }
-
+    const handlePwState = (value) => {
+        if (value) {
+            setPwState(true)
+            userIdRef.current.disabled = true
+        }
+    }
+    const handleSubState = (value) => {
+        if (value) {
+            setSubmitState(true)
+            userPwRef.current.disabled = true
+        }
+    }
     const handleSubmit = (value) => {
         if (value === "Y" || value === "y") {
             const userId = userIdRef.current.value
             const userPw = userPwRef.current.value
-            console.dir(submitFrm)
             console.log(userId, userPw, submitFrm)
             const response = { status: 200 }
+            setStatusCode(response.status)
             if (response.status === 200) {
-                const message = Message(response.status)
                 setTimeout(() => {
-                    // navigate("/")
+                    navigate("/")
                 }, 1000)
+            } else if (response.status >= 400) {
+                setPwState("")
+                setSubmitState("")
+                userIdRef.current.disabled = false
+                userPwRef.current.disabled = false
             }
         }
     }
@@ -74,7 +76,7 @@ export const SignInForm = ({ state: prompt }) => {
                                 autoFocus
                                 ref={signin}
                                 {...signInData}
-                                onKeyDown={(e) => handleInputChange(UseKeyCheck(e))}
+                                onKeyDown={(e) => handleIdState(UseKeyCheck(e))}
                             />
                         </>
                     }
@@ -91,7 +93,7 @@ export const SignInForm = ({ state: prompt }) => {
                                 className="userId"
                                 autoFocus
                                 {...userIdData}
-                                onKeyDown={(e) => handleInputChange(RequestInput(e))}
+                                onKeyDown={(e) => handlePwState(RequestInput(e))}
                             />
                         </>
                     }
@@ -108,7 +110,7 @@ export const SignInForm = ({ state: prompt }) => {
                                 ref={userPwRef}
                                 autoFocus
                                 {...userPwData}
-                                onKeyDown={(e) => handleInputChange(RequestInput(e))}
+                                onKeyDown={(e) => handleSubState(RequestInput(e))}
                             />
                         </>
                     }
@@ -131,6 +133,7 @@ export const SignInForm = ({ state: prompt }) => {
                     }
                 />
             )}
+            <SignInMessage statusCode={statusCode} />
         </form>
     )
 }
