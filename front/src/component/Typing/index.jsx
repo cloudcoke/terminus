@@ -32,7 +32,7 @@ const TypingEffect = ({ text, speed, state, element }) => {
         return () => {
             clearInterval(interval)
         }
-    }, [text])
+    }, [text, speed])
 
     return element ? (
         <>
