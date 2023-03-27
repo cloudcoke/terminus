@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react"
+import { useState } from "react"
 import BashLogo from "../component/bashlogo"
 import { SignInForm } from "../component/signInForm"
 import TypingEffect from "../component/Typing"
