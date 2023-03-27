@@ -5,7 +5,7 @@ import TypingEffect from "../Typing"
 
 export const SignUpForm = ({ state: prompt }) => {
     const [isIdDuplicates, setIsIdDuplicates] = useState(false)
-    // const [isPwDuplicates, setIsPwDuplicates] = useState(false)
+    const [isPwDuplicates, setIsPwDuplicates] = useState(false)
     const [formState, setFormState] = useState({
         mode: "",
         userId: "",
@@ -49,6 +49,9 @@ export const SignUpForm = ({ state: prompt }) => {
             }
             if (e.target.className === "userPwCheck") {
                 handleChange(e)
+                if (formState.userPwCheck && formState.userPw === formState.userPwCheck) {
+                    setFormState(true)
+                }
             }
         }
     }
@@ -135,6 +138,20 @@ export const SignUpForm = ({ state: prompt }) => {
                 />
             )}
             <SignUpMessage userPw={formState.userPw} userPwCheck={formState.userPwCheck} />
+            {isPwDuplicates && (
+                <TypingEffect
+                    text={` > Are you : `}
+                    element={
+                        <input
+                            type="text"
+                            className="submit"
+                            autoFocus
+                            onKeyDown={checkKeyCode}
+                            pattern="^[a-zA-Z0-9]+$"
+                        />
+                    }
+                />
+            )}
         </form>
     )
 }
