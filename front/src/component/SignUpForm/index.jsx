@@ -73,7 +73,6 @@ export const SignUpForm = ({ state: prompt }) => {
             }))
         }
     }
-    console.log(isIdDuplicates)
     return (
         <form
             onSubmit={(e) => {
