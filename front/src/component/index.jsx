@@ -1,2 +1,5 @@
 export * from "./button"
 export * from "./toggle"
+export * from "./SignUpForm"
+export * from "./Typing"
+export * from "./loading"

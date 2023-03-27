@@ -1,50 +1,53 @@
-import List from "../../../zdummy/dummy"
+import { memo } from "react"
+import { NavLink } from "react-router-dom"
+import { Nav, Ul } from "../styled"
 
-// const groupedCommands = List.reduce((acc, item) => {
-//     if (!acc[item.difficulty]) {
-//         acc[item.difficulty] = {
-//             difficulty: item.difficulty.toUpperCase(),
-//             list: {
-//                 title: item.title,
-//                 commands: [],
-//             },
-//         }
-//     }
-//     acc[item.difficulty].list.commands.push(item.command)
-//     return acc
-// }, {})
-// const htmlList = groupedCommands.map((group) => (<div key={group.command}><h2>{group.title}</h2><ul>{group.commands.map((command) =><li>{command}</li>)}</ul></div>)
-
-export const Navi = () => {
-    const B = List.reduce(
-        (acc, item) => {
-            acc.difficulty.add(item.difficulty)
-            acc.title.add(item.title)
-            acc.commands.add(item.command)
-
-            return acc
+export const Navi = memo(() => {
+    const List = [
+        {
+            difficulty: "easy",
+            command: [
+                { command: "1" },
+                { command: "2" },
+                { command: "3" },
+                { command: "4" },
+                { command: "5" },
+                { command: "6" },
+            ],
         },
         {
-            difficulty: new Set(),
-            title: new Set(),
-            commands: new Set(),
-        }
-    )
+            difficulty: "middle",
+            command: [
+                { command: "7" },
+                { command: "8" },
+                { command: "9" },
+                { command: "11" },
+                { command: "22" },
+                { command: "33" },
+            ],
+        },
+        {
+            difficulty: "hard",
+            command: [
+                { command: "44" },
+                { command: "55" },
+                { command: "66" },
+                { command: "77" },
+                { command: "tail" },
+                { command: "head" },
+            ],
+        },
+    ]
 
-    const A = {
-        difficulty: [...B.difficulty],
-        title: [...B.title],
-        commands: [...B.commands],
-    }
-    console.log(A, 123123)
-
-    const list = A.commands.map((v) => <li>{v}</li>)
-    const list2 = A.title.map((a) => (
-        <ul>
-            {a}
-            {list}
-        </ul>
+    const Li = List.map((v) => (
+        <Ul key={v.difficulty}>
+            <h2>{v.difficulty.toUpperCase()}</h2>
+            {v.command.map((v) => (
+                <li key={v.command}>
+                    <NavLink to={v.command}>{v.command}</NavLink>
+                </li>
+            ))}
+        </Ul>
     ))
-    console.log(list2)
-    return <>{list2}</>
-}
+    return <Nav>{Li}</Nav>
+})
