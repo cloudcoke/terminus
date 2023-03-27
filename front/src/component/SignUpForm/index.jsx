@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react"
 // import request from "../../utils/request"
 import { SignUpMessage } from "../message"
@@ -139,9 +138,9 @@ export const SignUpForm = ({ state: prompt }) => {
                 />
             )}
             <SignUpMessage userPw={formState.userPw} userPwCheck={formState.userPwCheck} />
-            {isPwDuplicates && (
+            {formState.userPwCheck && formState.userPw === formState.userPwCheck && (
                 <TypingEffect
-                    text={` > Are you : `}
+                    text={` > Are you Submit ?: `}
                     element={
                         <input
                             type="text"
