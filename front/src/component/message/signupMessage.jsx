@@ -18,7 +18,7 @@ export const SignUpMessage = ({ isIdDuplicates, userId, userPw, userPwCheck }) =
                 </dl>
             </>
         )
-    } else if (userPw === userPwCheck) {
+    } else if (userPwCheck && userPw === userPwCheck) {
         return (
             <>
                 <dl className="success">
@@ -27,7 +27,7 @@ export const SignUpMessage = ({ isIdDuplicates, userId, userPw, userPwCheck }) =
                 </dl>
             </>
         )
-    } else if (userPw !== userPwCheck) {
+    } else if (userPwCheck && userPw !== userPwCheck) {
         return (
             <>
                 <dl className="warning">
