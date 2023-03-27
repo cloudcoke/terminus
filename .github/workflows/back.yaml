@@ -1,0 +1,31 @@
+name: Deploy to Back EC2 instance
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "back/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        working-directory: back
+        run: |
+          npm install
+
+      - name: SCP
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_BACK_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_BACK_PRIVATE_KEY }}
+          source: "back"
+          target: "www"
+          strip_components: 1

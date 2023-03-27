@@ -1,0 +1,32 @@
+name: Deploy to Front EC2 instance
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "front/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies & Build
+        working-directory: front
+        run: |
+          npm install
+          npm run build
+
+      - name: SCP
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_FRONT_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_FRONT_PRIVATE_KEY }}
+          source: "front/build"
+          target: "www"
+          strip_components: 1
