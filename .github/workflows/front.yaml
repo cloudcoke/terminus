@@ -19,7 +19,7 @@ jobs:
         working-directory: front
         run: |
           npm install
-          NODE_ENV=development npm run build
+          npm run build
 
       - name: SCP
         uses: appleboy/scp-action@master
