@@ -17,11 +17,9 @@ jobs:
 
       - name: Install dependencies & Build
         working-directory: front
-        env:
-          NODE_ENV: development
         run: |
           npm install
-          npm run build
+          NODE_ENV=development npm run build
 
       - name: SCP
         uses: appleboy/scp-action@master
