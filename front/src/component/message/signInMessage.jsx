@@ -5,7 +5,7 @@ export const SignInMessage = ({ statusCode }) => {
             <>
                 <dl className="warning">
                     <dt>WARNING :</dt>
-                    <dd>UserId ‘sampleId’ is already exists.</dd>
+                    <dd>ID or PASSWORD is incorrect</dd>
                 </dl>
             </>
         )
