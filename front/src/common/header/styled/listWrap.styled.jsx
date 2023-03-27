@@ -7,7 +7,7 @@ export const Ul = styled.ul`
     justify-content: flex-start;
     padding: 4rem 0 0 10rem;
     & + & {
-        margin-bottom: 2rem;
+        margin-top: 2rem;
     }
     h2 {
         font-size: 2rem;
@@ -16,6 +16,9 @@ export const Ul = styled.ul`
     h2::before {
         content: "►";
         margin-right: 1rem;
+    }
+    .off {
+        display: none;
     }
     li {
         margin: 1rem 0 0 3rem;

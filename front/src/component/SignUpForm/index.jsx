@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 // import request from "../../utils/request"
 import { SignUpMessage } from "../message"
 import TypingEffect from "../Typing"
@@ -6,6 +7,7 @@ import TypingEffect from "../Typing"
 export const SignUpForm = ({ state: prompt }) => {
     const [isIdDuplicates, setIsIdDuplicates] = useState(false)
     const [isPwDuplicates, setIsPwDuplicates] = useState(false)
+    const navigator = useNavigate()
     const [formState, setFormState] = useState({
         mode: "",
         userId: "",
@@ -16,12 +18,16 @@ export const SignUpForm = ({ state: prompt }) => {
     console.log(formState)
     const checkKeyCode = async (e) => {
         if (e.key === "Enter") {
-            if (e.target.className === "mode") {
+            if (e.target.className === "mode" || e.target.className === "submit") {
                 switch (e.target.value.toUpperCase()) {
                     case "Y":
-                        return handleChange(e)
+                        handleChange(e)
+                        break
                     default:
                         break
+                }
+                if (e.target.className === "submit") {
+                    navigator("/")
                 }
             }
             if (e.target.className === "userId") {
@@ -37,7 +43,7 @@ export const SignUpForm = ({ state: prompt }) => {
                             setIsIdDuplicates(isDuplicates)
                             handleChange(e)
                         } catch (error) {
-                            return null
+                            return error
                         }
                         break
                     default:
@@ -140,7 +146,7 @@ export const SignUpForm = ({ state: prompt }) => {
             <SignUpMessage userPw={formState.userPw} userPwCheck={formState.userPwCheck} />
             {formState.userPwCheck && formState.userPw === formState.userPwCheck && (
                 <TypingEffect
-                    text={` > Are you Submit ?: `}
+                    text={` > Are you Submit ? [Y/N] :`}
                     element={
                         <input
                             type="text"

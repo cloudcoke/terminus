@@ -6,8 +6,4 @@ export const HeaderWrap = styled.div`
     height: 100%;
     margin-right: 17rem;
     background-color: #ddd;
-    .btnWrap {
-        position: absolute;
-        bottom: 2rem;
-    }
 `
