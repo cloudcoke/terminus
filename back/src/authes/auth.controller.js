@@ -3,7 +3,7 @@ class AuthController {
 
   getTest(req, res, next) {
     try {
-      res.send("auth test2")
+      res.send("auth test3")
     } catch (e) {}
   }
 }
