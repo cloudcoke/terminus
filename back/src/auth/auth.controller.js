@@ -5,7 +5,6 @@ class AuthContoller {
 
     async logIn(req, res, next) {
         try {
-            console.log(req.body);
             const { userId, userPw } = req.body;
             if (!userId || !userPw) throw "입력된 정보가 없습니다.";
             const token = await this.AuthService.getToken({ userId, userPw });

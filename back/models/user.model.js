@@ -3,15 +3,15 @@ module.exports = ({ sequelize, DataTypes, Model }) => {
         static initial() {
             return this.init(
                 {
-                    userid: {
+                    userId: {
                         type: DataTypes.STRING(30),
                         primaryKey: true,
                     },
-                    userpw: {
+                    userPw: {
                         type: DataTypes.STRING(64),
                         allowNull: false,
                     },
-                    nuckName: {
+                    nickName: {
                         type: DataTypes.STRING(30),
                         allowNull: false,
                     },
