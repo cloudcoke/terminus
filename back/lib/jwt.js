@@ -13,7 +13,7 @@ class JWT {
     }
 
     encode(value) {
-        return Buffer.from(JSON.tostring(value)).toString("base64Url");
+        return Buffer.from(JSON.stringify(value)).toString("base64Url");
     }
 
     decode(value) {
