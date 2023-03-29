@@ -17,7 +17,9 @@ export const Header = ({ List }) => {
     return (
         <>
             <HeaderWrap>
-                <Logo onClick={handleClick} />
+                <Logo onClick={handleClick}>
+                    <div />
+                </Logo>
                 <BtnArea>
                     <Button text="Sign Up" height="4" />
                     <Button text="Sign In" height="4" />
