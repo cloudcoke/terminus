@@ -6,18 +6,19 @@ const pty = require("node-pty")
 const os = require("os")
 const httpServer = createServer(app)
 const shell = os.platform() === "win32" ? "powershell.exe" : "bash"
+const { localPort } = require("./config")
 
 const ptyProcess = pty.spawn(shell, [], {
-    name: "xterm-color",
-    //   cwd: process.env.HOME,
-    env: process.env,
+  name: "xterm-color",
+  //   cwd: process.env.HOME,
+  env: process.env,
 })
 
 const io = new Server(httpServer, {
-    cors: {
-        origin: true,
-        credentials: true,
-    },
+  cors: {
+    origin: true,
+    credentials: true,
+  },
 })
 io.on("connection", (socket) => {
     console.log("new session")
@@ -34,6 +35,7 @@ io.on("connection", (socket) => {
         console.log("프로세스 종료", 111)
         ptyProcess.removeAllListeners("data")
     })
+
 })
 
 // wss.on("connection", (ws) => {
@@ -47,4 +49,7 @@ io.on("connection", (socket) => {
 //         console.log(data)
 //     })
 // })
-httpServer.listen(3005)
+
+httpServer.listen(localPort, () => {
+  console.log(`Back Start on ${localPort}`)
+})
