@@ -21,11 +21,14 @@ jobs:
           node-version: 18.15.0
       - run: |
           echo $(pwd)
+          echo $(node --version)
+          echo $(ls)
 
       - name: Install dependencies
         working-directory: back
         run: |
           echo $(pwd)
+          echo $(node --version)
           sudo apt-get install -y python make g++
           npm install
           echo -e $ENV > .env
