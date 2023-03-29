@@ -18,6 +18,7 @@ jobs:
       - name: Install dependencies
         working-directory: back
         run: |
+          npm install -g npm
           npm install
           echo $ENV > .env
         env:
