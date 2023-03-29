@@ -19,7 +19,7 @@ jobs:
         working-directory: back
         run: |
           npm install
-          echo $ENV
+          echo $ENV > .env
         env:
           ENV: ${{ secrets.EC2_BACK_ENV }}
 
