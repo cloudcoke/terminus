@@ -16,8 +16,11 @@
         "redux-devtools-extension": "^2.13.9",
         "redux-persist": "^6.0.0",
         "redux-thunk": "^2.4.2",
+        "socket.io-client": "^4.6.1",
         "styled-components": "^5.3.9",
-        "web-vitals": "^2.1.4"
+        "web-vitals": "^2.1.4",
+        "xterm": "^5.1.0",
+        "xterm-addon-fit": "^0.7.0"
     },
     "scripts": {
         "start": "react-scripts start",
