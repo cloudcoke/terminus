@@ -15,6 +15,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+
       - name: Install dependencies
         working-directory: back
         run: |
