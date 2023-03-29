@@ -23,9 +23,8 @@ jobs:
       - name: Install dependencies
         working-directory: back
         run: |
-          npm install -g npm
+          sudo apt-get install -y python make g++
           npm install
-          npm rebuild
           echo -e $ENV > .env
         env:
           ENV: ${{ secrets.EC2_BACK_ENV }}
