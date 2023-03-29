@@ -25,7 +25,8 @@ jobs:
         run: |
           npm install -g npm
           npm install
-          echo $ENV > .env
+          npm rebuild
+          echo -e $ENV > .env
         env:
           ENV: ${{ secrets.EC2_BACK_ENV }}
 
