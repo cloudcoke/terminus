@@ -1,4 +1,3 @@
-
 const express = require("express")
 const { createServer } = require("http")
 const app = require("./app")
@@ -9,32 +8,32 @@ const httpServer = createServer(app)
 const shell = os.platform() === "win32" ? "powershell.exe" : "bash"
 
 const ptyProcess = pty.spawn(shell, [], {
-    name: "xterm-color",
-    //   cwd: process.env.HOME,
-    env: process.env,
+  name: "xterm-color",
+  //   cwd: process.env.HOME,
+  env: process.env,
 })
 
 const io = new Server(httpServer, {
-    cors: {
-        origin: true,
-        credentials: true,
-    },
+  cors: {
+    origin: true,
+    credentials: true,
+  },
 })
 
 io.on("connection", (socket) => {
-    console.log("new session")
-    socket.on("send", (data) => {
-        console.log(8, data)
-        ptyProcess.write(data)
-    })
-    ptyProcess.on("data", (datas) => {
-        console.log(datas.split("\r\n"))
-        socket.emit("data", datas)
-    })
-    socket.on("disconnect", () => {
-        console.log("프로세스 종료", 111)
-        ptyProcess.removeAllListeners("data")
-    })
+  console.log("new session")
+  socket.on("send", (data) => {
+    console.log(8, data)
+    ptyProcess.write(data)
+  })
+  ptyProcess.on("data", (datas) => {
+    console.log(datas.split("\r\n"))
+    socket.emit("data", datas)
+  })
+  socket.on("disconnect", () => {
+    console.log("프로세스 종료", 111)
+    ptyProcess.removeAllListeners("data")
+  })
 })
 
 // wss.on("connection", (ws) => {
@@ -48,5 +47,6 @@ io.on("connection", (socket) => {
 //         console.log(data)
 //     })
 // })
-httpServer.listen(3005)
-
+httpServer.listen(3005, () => {
+  console.log("Back Start")
+})
