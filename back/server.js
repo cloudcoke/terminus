@@ -49,5 +49,5 @@ io.on("connection", (socket) => {
 //     })
 // })
 httpServer.listen(localPort, () => {
-  console.log(`Backend Start on ${localPort}`)
+  console.log(`Start on ${localPort}`)
 })
