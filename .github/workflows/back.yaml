@@ -23,7 +23,6 @@ jobs:
       - name: Install dependencies
         working-directory: back
         run: |
-          sudo apt-get install build-essential
           npm install
           echo -e $ENV > .env
         env:
