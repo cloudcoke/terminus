@@ -1,4 +1,3 @@
-
 const express = require("express")
 const { createServer } = require("http")
 const app = require("./app")
@@ -20,16 +19,16 @@ const io = new Server(httpServer, {
         credentials: true,
     },
 })
-
 io.on("connection", (socket) => {
     console.log("new session")
     socket.on("send", (data) => {
-        console.log(8, data)
-        ptyProcess.write(data)
+        a = data
+        ptyProcess.write(`${data}\r`)
+        // ptyProcess.resize(100, 40)
     })
+
     ptyProcess.on("data", (datas) => {
-        console.log(datas.split("\r\n"))
-        socket.emit("data", datas)
+        socket.emit("data", `${datas}`)
     })
     socket.on("disconnect", () => {
         console.log("프로세스 종료", 111)
@@ -49,4 +48,3 @@ io.on("connection", (socket) => {
 //     })
 // })
 httpServer.listen(3005)
-

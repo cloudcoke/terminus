@@ -3,32 +3,31 @@ import { Terminal } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
 import io from "socket.io-client"
 import "xterm/css/xterm.css"
+import { TermWrap } from "./styled"
 
 export const Termi = () => {
     const terms = useRef(null)
     const term = useRef(null)
     const hidden = useRef(null)
     const [command, setCommand] = useState("")
-    const [history, setHistory] = useState({ command: [], index: -1 })
+    const [history, setHistory] = useState({ command: [], index: 0 })
     let a = ""
 
     useEffect(() => {
         if (!term.current) {
             const socket = io("http://127.0.0.1:3005")
-
-            console.log(socket)
             const handleEmit = (prev) => {
-                console.log(prev)
-                socket.emit("send", prev + "\n")
+                socket.emit("send", prev)
             }
             socket.on("data", (datar) => {
-                console.log(datar, "============")
                 term.current.write(`${datar}`)
             })
             console.log(hidden.current.value)
             term.current = new Terminal({
-                fontSize: 40,
+                fontFamily: "D2Coding",
+                cursorBlink: true,
             })
+
             term.current.open(terms.current)
 
             const fitAddon = new FitAddon()
@@ -36,78 +35,35 @@ export const Termi = () => {
             fitAddon.fit()
 
             term.current.prompt = () => {
-                term.current.write("\r\n$ ")
+                term.current.write("\r$ ")
             }
             term.current.prompt()
             term.current.onData((data) => {
                 switch (data) {
                     case "\u0003": // Ctrl+C
-                        // const historyAr = JSON.parse(hidden.current.value).command
-                        // const pre = historyAr[historyAr.length - 1]
-                        // clearInput(pre.length)
-                        setCommand((prev) => {
-                            if (prev) {
-                                const str = prev.indexOf("undefined") >= 0 ? prev.replace(/^undefined/, "") : prev
-                                if (str) {
-                                    clearInput(str.length)
-                                }
-                            }
-                        })
+                        if (!a) return null
+                        clearInput(a.length)
+                        a = ""
                         break
                     case "\r": // Enter
-                        term.current.write("\n\n")
-                        term.current.prompt()
-                        clearInput(a.length + 2)
+                        if (a === "vi") break
+                        handleEnter(a)
                         handleEmit(a)
                         a = ""
-                        setCommand((command) => {
-                            if (command) {
-                                const str =
-                                    command.indexOf("undefined") >= 0 ? command.replace(/^undefined/, "") : command
-                                if (str) {
-                                    // handleEmit(str)
-                                    console.log(str)
-                                    setHistory((prev) => ({
-                                        command: [...prev.command, str],
-                                        index: -1,
-                                    }))
-                                    setCommand("")
-                                }
-                            }
-                        })
                         break
                     case "\u007F": // Backspace
                         term.current.write("\b \b")
-                        setCommand((prev) => prev.slice(0, -1))
+                        a = a.slice(0, -1)
                         break
 
                     case "\u001b[A": //ArrowUp
-                        setHistory((prev) => {
-                            if (!prev || !prev.command || prev.command.length === 0) {
-                                return prev
-                            }
-                            const { command, index } = prev
-                            const newIndex = index >= (command?.length || 0) - 1 ? 0 : index + 1
-                            const prevCommand = command && command[command.length - newIndex]
-                            const selectedCommand = command[command.length - 1 - newIndex]
-                            if (prevCommand) {
-                                const length = prevCommand.length
-                                clearInput(length)
-                            }
-                            term.current.write(selectedCommand)
-                            setCommand(selectedCommand)
-                            return {
-                                command,
-                                index: newIndex,
-                            }
-                        })
-
+                        setHistory((prev) => handleUp(prev))
                         break
-
+                    case "":
+                        break
                     default:
                         term.current.write(data)
                         a += data
-                    // setCommand((prev) => prev + data)
                 }
             })
         }
@@ -126,10 +82,41 @@ export const Termi = () => {
             term.current.write("\b \b")
         }
     }
+    const handleEnter = (a) => {
+        if (!a) return null
+        setHistory((prev) => ({
+            command: [...prev.command, a],
+            index: 0,
+        }))
+        clearInput(a.length)
+        // term.current.prompt()
+        // clearInput(a.length + 2)
+    }
+    const handleUp = (prev) => {
+        if (!prev || !prev.command || prev.command.length === 0) {
+            return { command: [], index: 0 }
+        }
+
+        const { command, index } = prev
+        const lastIndex = command.length - 1
+        const newIndex = index <= 0 ? lastIndex : index - 1
+        const selectedCommand = command[newIndex]
+        const prevCommand = command[newIndex + 1]
+        if (newIndex >= 0) {
+            if (prevCommand) {
+                clearInput(prevCommand.length)
+            }
+            term.current.write(selectedCommand)
+            return {
+                command: [...command],
+                index: newIndex,
+            }
+        }
+    }
 
     return (
-        <div ref={terms} onKeyDown={handleKeyDown} tabIndex={0}>
+        <TermWrap ref={terms} onKeyDown={handleKeyDown} tabIndex={0} className="termi">
             <input type="hidden" ref={hidden} />
-        </div>
+        </TermWrap>
     )
 }

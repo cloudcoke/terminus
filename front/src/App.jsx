@@ -50,7 +50,6 @@ const List = [
 const App = () => {
     const dispatch = useDispatch()
     const { userId } = useSelector((state) => state.user.data)
-    console.log(userId)
     return (
         <Wrap>
             <Header List={List} />

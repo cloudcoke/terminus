@@ -20,7 +20,8 @@
         "styled-components": "^5.3.9",
         "web-vitals": "^2.1.4",
         "xterm": "^5.1.0",
-        "xterm-addon-fit": "^0.7.0"
+        "xterm-addon-fit": "^0.7.0",
+        "xterm-pty": "^0.9.4"
     },
     "scripts": {
         "start": "react-scripts start",

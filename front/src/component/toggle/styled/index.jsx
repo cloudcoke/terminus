@@ -45,7 +45,8 @@ export const ToggleLabel = styled.label`
         justify-content: flex-end;
         align-items: center;
         font-size: 2.4rem;
-        content: "Linux\b\b\b";
+        content: "Linux";
+        padding-right: 2rem;
         top: 0;
         right: 0;
         width: 100%;
@@ -59,7 +60,8 @@ export const ToggleLabel = styled.label`
         justify-content: start;
         align-items: center;
         font-size: 2.2rem;
-        content: "\b\b\bMySQL";
+        content: "MySQL";
+        padding-left: 2rem;
         top: 0;
         left: 0;
         width: 100%;

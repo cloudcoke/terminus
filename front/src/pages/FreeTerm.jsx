@@ -1,10 +1,9 @@
-import { Loading } from "../component/loading"
+import { BodyWrap } from "../common/body"
 import { Termi } from "../component/Test/test"
 
-export const Main = () => {
+export const FreeTerm = () => {
     return (
         <>
-            {/* <Loading /> */}
             <Termi />
         </>
     )
