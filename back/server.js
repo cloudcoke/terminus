@@ -6,6 +6,7 @@ const pty = require("node-pty")
 const os = require("os")
 const httpServer = createServer(app)
 const shell = os.platform() === "win32" ? "powershell.exe" : "bash"
+const { localPort } = require("./config")
 
 const ptyProcess = pty.spawn(shell, [], {
   name: "xterm-color",
@@ -47,6 +48,6 @@ io.on("connection", (socket) => {
 //         console.log(data)
 //     })
 // })
-httpServer.listen(3005, () => {
-  console.log("Backend Server Start")
+httpServer.listen(localPort, () => {
+  console.log(`Backend Server Start on ${localPort}`)
 })
