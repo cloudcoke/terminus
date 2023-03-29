@@ -19,6 +19,9 @@ jobs:
         working-directory: back
         run: |
           npm install
+          echo $ENV
+        env:
+          ENV: ${{ secrets.EC2_BACK_ENV }}
 
       - name: SCP
         uses: appleboy/scp-action@master
