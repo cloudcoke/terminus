@@ -48,9 +48,11 @@
 
 #### rm -r 또는 rm -R : 디렉토리 및 하위 전체 삭제
 
-id
-difficulty
-command
+## id
+
+## difficulty
+
+## command
 
 # 도커
 
