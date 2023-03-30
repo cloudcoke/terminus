@@ -23,7 +23,7 @@ export const SignUpMessage = ({ isIdDuplicates, userId, userPw, userPwCheck }) =
             <>
                 <dl className="success">
                     <dt>SUCCESS :</dt>
-                    <dd>패스워드가 일치</dd>
+                    <dd>The passwords you entered match.</dd>
                 </dl>
             </>
         )
@@ -32,7 +32,7 @@ export const SignUpMessage = ({ isIdDuplicates, userId, userPw, userPwCheck }) =
             <>
                 <dl className="warning">
                     <dt>WARNING :</dt>
-                    <dd>패스워드가 일치하지 않음</dd>
+                    <dd>The passwords you entered do not match. Please try again.</dd>
                 </dl>
             </>
         )

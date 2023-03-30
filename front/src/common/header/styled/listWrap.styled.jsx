@@ -6,12 +6,15 @@ export const Ul = styled.ul`
     flex-direction: column;
     justify-content: flex-start;
     padding: 4rem 0 0 10rem;
+    font-weight: bold;
+    letter-spacing: 0.5rem;
     & + & {
         margin-top: 2rem;
     }
     h2 {
         font-size: 2rem;
         margin-bottom: 1rem;
+        cursor: pointer;
     }
     h2::before {
         content: "►";

@@ -15,7 +15,6 @@ export const SignUpForm = ({ state: prompt }) => {
         userPwCheck: "",
         submit: "",
     })
-    console.log(formState)
     const checkKeyCode = async (e) => {
         if (e.key === "Enter") {
             if (e.target.className === "mode" || e.target.className === "submit") {

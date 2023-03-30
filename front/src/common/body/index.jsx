@@ -3,12 +3,12 @@ import styled from "styled-components"
 export const BodyWrap = styled.div`
     width: 110rem;
     height: 100%;
+    padding: 5rem 0;
     color: #cccccc;
     .join {
         width: 100%;
-        margin-top: 5rem;
         padding: 13rem 30rem 10rem 4rem;
-        height: 79%;
+        height: 100%;
         background-color: #343541;
     }
     h1 {

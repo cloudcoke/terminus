@@ -5,6 +5,7 @@ const { Server } = require("socket.io")
 const pty = require("node-pty")
 const os = require("os")
 const httpServer = createServer(app)
+const { localPort } = require("./config")
 const shell = os.platform() === "win32" ? "powershell.exe" : "bash"
 const { localPort } = require("./config")
 
@@ -37,18 +38,6 @@ io.on("connection", (socket) => {
     })
 
 })
-
-// wss.on("connection", (ws) => {
-//     console.log("new session")
-//     ws.on("message", (command) => {
-//         ptyProcess.write(command)
-//     })
-
-//     ptyProcess.on("data", function (data) {
-//         ws.send(data)
-//         console.log(data)
-//     })
-// })
 
 httpServer.listen(localPort, () => {
   console.log(`Back Start on ${localPort}`)

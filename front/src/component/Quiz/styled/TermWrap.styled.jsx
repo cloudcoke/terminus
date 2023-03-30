@@ -1,11 +1,12 @@
 import styled from "styled-components"
 
 export const TermWrap = styled.div`
-    margin-top: 5rem;
     width: 110rem;
-    height: 89%;
+    height: ${(height) => (height ? height + "%" : "100%")};
     font-size: 2rem;
     font-family: "D2Coding";
+    .termi {
+    }
     .xterm-viewport {
         background-color: #343541 !important;
     }

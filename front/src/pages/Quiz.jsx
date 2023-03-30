@@ -1,3 +1,14 @@
+import { BodyWrap } from "../common/body"
+import { Termi } from "../component/Quiz"
+import { PromptWrap } from "../component/Quiz/styled"
+
 export const Quiz = () => {
-    return <>123123123123</>
+    return (
+        <>
+            <BodyWrap>
+                <PromptWrap />
+                <Termi height={70} />
+            </BodyWrap>
+        </>
+    )
 }
