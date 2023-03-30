@@ -1,18 +1,12 @@
 const express = require("express")
-const { createServer } = require("https")
+const { createServer } = require("http")
 const app = require("./app")
 const { Server } = require("socket.io")
 const pty = require("node-pty")
 const os = require("os")
 const { readFileSync } = require("fs")
 // test
-const httpServer = createServer(
-  {
-    key: readFileSync("./privkey.pem"),
-    cert: readFileSync("./fullchain.pem"),
-  },
-  app
-)
+const httpServer = createServer(app)
 const { localPort } = require("./config")
 const shell = os.platform() === "win32" ? "powershell.exe" : "bash"
 
