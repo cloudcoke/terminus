@@ -19,8 +19,8 @@ jobs:
         working-directory: front
         run: |
           npm install
-          echo -e $EC2_FRONT_ENV > .env
-          echo -e $EC2_FRONT_ENV
+          echo -e $ENV > .env
+          echo -e $ENV
           echo $(ls -a)
           npm run build
         env:
