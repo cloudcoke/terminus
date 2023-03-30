@@ -4,6 +4,7 @@ import { FitAddon } from "xterm-addon-fit"
 import io from "socket.io-client"
 import "xterm/css/xterm.css"
 import { TermWrap } from "./styled"
+import { readFileSync } from "fs"
 
 export const Termi = ({ height }) => {
   const terms = useRef(null)
@@ -55,7 +56,11 @@ export const Termi = ({ height }) => {
   }
   useEffect(() => {
     if (!term.current) {
-      const socket = io(backserver, { transports: ["websocket"] })
+      const socket = io(backserver, {
+        key: readFileSync("./client_key.pem"),
+        cert: readFileSync("./client_cert.pem"),
+        ca: [readFileSync("./back_cert.pem")],
+      })
       const handleEmit = (prev) => {
         socket.emit("send", prev)
       }
