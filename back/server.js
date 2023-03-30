@@ -5,12 +5,11 @@ const { Server } = require("socket.io")
 const pty = require("node-pty")
 const os = require("os")
 const { readFileSync } = require("fs")
-const httpServer = createServer(
-  {
-    key: readFileSync("./privkey.pem"),
-    cert: readFileSync("./fullchain.pem"),
-  app
-)
+const httpServer = createServer({
+  key: readFileSync("./privkey.pem"),
+  cert: readFileSync("./fullchain.pem"),
+  app,
+})
 const { localPort } = require("./config")
 const shell = os.platform() === "win32" ? "powershell.exe" : "bash"
 
