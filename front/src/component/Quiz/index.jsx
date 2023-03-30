@@ -4,8 +4,8 @@ import { FitAddon } from "xterm-addon-fit"
 import io from "socket.io-client"
 import "xterm/css/xterm.css"
 import { TermWrap } from "./styled"
-// import { readFileSync } from "fs"
 
+//test
 export const Termi = ({ height }) => {
     const terms = useRef(null)
     const term = useRef(null)
@@ -21,6 +21,7 @@ export const Termi = ({ height }) => {
         console.log(e.key)
         // e.preventDefault()
     }
+
     const clearInput = (length) => {
         for (let i = 0; i < length; i++) {
             term.current.write("\b \b")
