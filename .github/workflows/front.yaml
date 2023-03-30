@@ -21,14 +21,8 @@ jobs:
           npm install
           echo -e $ENV > .env
           npm run build
-          echo $FRONT_SSL_KEY > build/client_key.pem
-          echo $FRONT_SSL_CERT > build/client_cert.pem
-          echo $BACK_SSL_CERT > build/back_cert.pem
         env:
           ENV: ${{ secrets.EC2_FRONT_ENV }}
-          FRONT_SSL_KEY: ${{secrets.EC2_FRONT_SSL_KEY}}
-          FRONT_SSL_CERT: ${{secrets.EC2_FRONT_SSL_CERT}}
-          BACK_SSL_CERT: ${{secrets.EC2_BACK_SSL_CERT}}
 
       - name: SCP
         uses: appleboy/scp-action@master
