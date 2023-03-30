@@ -27,12 +27,10 @@ jobs:
           echo -e $ENV > .env
           echo $BACK_SSL_KEY > privkey.pem
           echo $BACK_SSL_CERT > fullchain.pem
-          echo $FRONT_SSLCERT > front_cert.pem
         env:
           ENV: ${{ secrets.EC2_BACK_ENV }}
           BACK_SSL_KEY: ${{secrets.EC2_BACK_SSL_KEY}}
           BACK_SSL_CERT: ${{secrets.EC2_BACK_SSL_CERT}}
-          FRONT_SSLCERT: ${{secrets.EC2_FRONT_SSL_CERT}}
 
       - name: SCP
         uses: appleboy/scp-action@master

@@ -1,5 +1,5 @@
 const express = require("express")
-const { createServer } = require("http")
+const { createServer } = require("https")
 const app = require("./app")
 const { Server } = require("socket.io")
 const pty = require("node-pty")
@@ -9,9 +9,6 @@ const httpServer = createServer(
   {
     key: readFileSync("./privkey.pem"),
     cert: readFileSync("./fullchain.pem"),
-    requestCert: true,
-    ca: [readFileSync("./front_cert.pem")],
-  },
   app
 )
 const { localPort } = require("./config")
