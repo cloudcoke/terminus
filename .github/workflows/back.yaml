@@ -25,8 +25,8 @@ jobs:
         run: |
           npm install
           echo -e $ENV > .env
-          echo $BACK_SSL_KEY > privkey.pem
-          echo $BACK_SSL_CERT > fullchain.pem
+          echo -e $BACK_SSL_KEY > privkey.pem
+          echo -e $BACK_SSL_CERT > fullchain.pem
         env:
           ENV: ${{ secrets.EC2_BACK_ENV }}
           BACK_SSL_KEY: ${{secrets.EC2_BACK_SSL_KEY}}
