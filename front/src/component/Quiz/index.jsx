@@ -53,7 +53,7 @@ export const Termi = ({ height }) => {
       }
     }
   }
-  // test
+
   useEffect(() => {
     if (!term.current) {
       const socket = io(backserver, { secure: true, withCredentials: true, transports: ["websocket"] })
