@@ -4,7 +4,14 @@ const app = require("./app")
 const { Server } = require("socket.io")
 const pty = require("node-pty")
 const os = require("os")
-const httpServer = createServer(app)
+const { readFileSync } = require("fs")
+const httpServer = createServer(
+  {
+    key: readFileSync("/etc/letsencrypt/live/api.terminus.run/privkey.pem"),
+    cert: readFileSync("/etc/letsencrypt/live/api.terminus.run/fullchain.pem"),
+  },
+  app
+)
 const { localPort } = require("./config")
 const shell = os.platform() === "win32" ? "powershell.exe" : "bash"
 
@@ -21,20 +28,21 @@ const io = new Server(httpServer, {
     },
 })
 io.on("connection", (socket) => {
-    console.log("new session")
-    socket.on("send", (data) => {
-        a = data
-        ptyProcess.write(`${data}\r`)
-        // ptyProcess.resize(100, 40)
-    })
+  console.log("new session")
+  socket.on("send", (data) => {
+    a = data
+    ptyProcess.write(`${data}\r`)
+    // ptyProcess.resize(100, 40)
+  })
 
-    ptyProcess.on("data", (datas) => {
-        socket.emit("data", `${datas}`)
-    })
-    socket.on("disconnect", () => {
-        console.log("프로세스 종료", 111)
-        ptyProcess.removeAllListeners("data")
-    })
+  ptyProcess.on("data", (datas) => {
+    socket.emit("data", `${datas}`)
+  })
+  socket.on("disconnect", () => {
+    console.log("프로세스 종료", 111)
+    ptyProcess.removeAllListeners("data")
+  })
+
 })
 
 httpServer.listen(localPort, () => {
