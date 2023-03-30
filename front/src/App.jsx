@@ -3,12 +3,12 @@ import styled from "styled-components"
 import { BodyWrap } from "./common/body"
 import { AppRouter } from "./routes"
 import { useDispatch, useSelector } from "react-redux"
-import { user, UserCheck } from "./store/user"
-import { useEffect } from "react"
+import { useState } from "react"
 
 const Wrap = styled.div`
     display: flex;
     justify-content: center;
+    margin: 0 auto;
     width: 192rem;
     height: 100vh;
 `
@@ -50,9 +50,14 @@ const List = [
 const App = () => {
     const dispatch = useDispatch()
     const { userId } = useSelector((state) => state.user.data)
+    const [mode, setMode] = useState(true)
+    console.log(mode)
+    const handleClick = () => {
+        setMode(!mode)
+    }
     return (
         <Wrap>
-            <Header List={List} />
+            <Header List={List} onClick={handleClick} />
             <BodyWrap>
                 <AppRouter List={List} />
             </BodyWrap>
