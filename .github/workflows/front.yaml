@@ -19,7 +19,10 @@ jobs:
         working-directory: front
         run: |
           npm install
+          echo -e $ENV > .env
           npm run build
+        env:
+          ENV: ${{ secrets.EC2_FRONT_ENV }}
 
       - name: SCP
         uses: appleboy/scp-action@master
