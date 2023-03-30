@@ -55,7 +55,7 @@ export const Termi = ({ height }) => {
   }
   useEffect(() => {
     if (!term.current) {
-      const socket = io(backserver, { secure: true, transports: ["websocket"] })
+      const socket = io(backserver, { transports: ["websocket"] })
       const handleEmit = (prev) => {
         socket.emit("send", prev)
       }
