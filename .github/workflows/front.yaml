@@ -19,9 +19,10 @@ jobs:
         working-directory: front
         run: |
           npm install
+          echo -e $EC2_FRONT_ENV > .env
+          echo -e $EC2_FRONT_ENV
+          echo $(ls -a)
           npm run build
-          echo $(pwd)
-          echo $(ls)
         env:
           ENV: ${{ secrets.EC2_FRONT_ENV }}
 

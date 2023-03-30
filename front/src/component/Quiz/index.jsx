@@ -5,6 +5,7 @@ import io from "socket.io-client"
 import "xterm/css/xterm.css"
 import { TermWrap } from "./styled"
 
+//test
 export const Termi = ({ height }) => {
   const terms = useRef(null)
   const term = useRef(null)
