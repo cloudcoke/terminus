@@ -115,7 +115,6 @@ export const Termi = ({ height }) => {
     useEffect(() => {
         hidden.current.value = JSON.stringify(history)
     }, [history])
-    console.log(height)
     return (
         <TermWrap ref={terms} onKeyDown={handleKeyDown} tabIndex={0} height={height}>
             <input type="hidden" ref={hidden} />
