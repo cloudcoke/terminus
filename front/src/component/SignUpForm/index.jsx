@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-// import request from "../../utils/request"
+import request from "../../utils/request"
 import { SignUpMessage } from "../message"
 import TypingEffect from "../Typing"
 
@@ -33,13 +33,15 @@ export const SignUpForm = ({ state: prompt }) => {
                 switch (/^[a-zA-Z0-9]*$/.test(e.target.value)) {
                     case true:
                         try {
-                            // const result = await request.post("/user/check", { userId: e.target.value })
+                            console.log(e.target.value)
+                            const result = await request.post("/user/check", { userId: e.target.value })
+                            console.log(result, 1231231121221123)
                             // const { isCheck } = result.data
 
                             // const stateCode = request.data.status
-                            const isDuplicates = true
+                            // const isDuplicates = true
 
-                            setIsIdDuplicates(isDuplicates)
+                            // setIsIdDuplicates(isDuplicates)
                             handleChange(e)
                         } catch (error) {
                             return error

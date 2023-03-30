@@ -8,6 +8,12 @@ export const BodyRoute = ({ list }) => {
             <Route path="easy/*">
                 <Route path=":command" element={<Quiz list={list} />} />
             </Route>
+            <Route path="middle/*">
+                <Route path=":command" element={<Quiz list={list} />} />
+            </Route>
+            <Route path="hard/*">
+                <Route path=":command" element={<Quiz list={list} />} />
+            </Route>
         </Routes>
     )
 }

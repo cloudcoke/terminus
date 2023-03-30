@@ -28,6 +28,7 @@ export const SignInForm = ({ state: prompt }) => {
     }
     const handlePwState = (value) => {
         if (value) {
+            console.log(value)
             setPwState(true)
             userIdRef.current.disabled = true
         }
