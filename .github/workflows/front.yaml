@@ -20,7 +20,8 @@ jobs:
         run: |
           npm install
           npm run build
-          echo -e $ENV > ./bulid/.env
+          echo $(pwd)
+          echo $(ls)
         env:
           ENV: ${{ secrets.EC2_FRONT_ENV }}
 
