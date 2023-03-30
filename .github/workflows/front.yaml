@@ -19,8 +19,8 @@ jobs:
         working-directory: front
         run: |
           npm install
-          echo -e $ENV > .env
           npm run build
+          echo -e $ENV > ./bulid/.env
         env:
           ENV: ${{ secrets.EC2_FRONT_ENV }}
 
