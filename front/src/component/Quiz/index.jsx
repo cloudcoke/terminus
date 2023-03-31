@@ -1,22 +1,20 @@
 import { useState, useEffect, useRef } from "react"
 import { Terminal } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
-import io from "socket.io-client"
 import "xterm/css/xterm.css"
-import { TermWrap } from "./styled"
+import { BtnWrap, CenterBtn, TermWrap } from "./styled"
+import { Button } from "../button"
 
 //test
-export const Termi = ({ height }) => {
+export const Termi = ({ height, socket }) => {
     const terms = useRef(null)
     const term = useRef(null)
     const hidden = useRef(null)
     const [command, setCommand] = useState("")
     const [history, setHistory] = useState({ command: [], index: 0 })
-    const domain = process.env.REACT_APP_BACKSERVER
-    const port = process.env.REACT_APP_PORT
-    const backserver = `${domain}:${port}`
-    let a = ""
+    const [ccc, setCcc] = useState(false)
 
+    let a = ""
     const handleKeyDown = (e) => {
         console.log(e.key)
         // e.preventDefault()
@@ -35,6 +33,7 @@ export const Termi = ({ height }) => {
         }))
         clearInput(a.length)
     }
+
     const handleUp = (prev) => {
         if (!prev || !prev.command || prev.command.length === 0) {
             return { command: [], index: 0 }
@@ -55,21 +54,25 @@ export const Termi = ({ height }) => {
             }
         }
     }
+
     useEffect(() => {
+        const clear = () => {
+            socket.emit("send", "clear")
+            console.log(ccc)
+            setCcc(!ccc)
+        }
+        if (ccc) clear()
         if (!term.current) {
-            const socket = io(backserver, {})
             const handleEmit = (prev) => {
                 socket.emit("send", prev)
             }
             socket.on("data", (datar) => {
                 term.current.write(`${datar}`)
             })
-            console.log(hidden.current.value)
             term.current = new Terminal({
                 fontFamily: "D2Coding",
                 cursorBlink: true,
             })
-            console.dir(term.current)
 
             term.current.open(terms.current)
 
@@ -80,6 +83,7 @@ export const Termi = ({ height }) => {
             term.current.prompt = () => {
                 term.current.write("\r$ ")
             }
+
             term.current.prompt()
             term.current.onData((data) => {
                 switch (data) {
@@ -115,9 +119,29 @@ export const Termi = ({ height }) => {
     useEffect(() => {
         hidden.current.value = JSON.stringify(history)
     }, [history])
+
     return (
-        <TermWrap ref={terms} onKeyDown={handleKeyDown} tabIndex={0} height={height}>
-            <input type="hidden" ref={hidden} />
-        </TermWrap>
+        <>
+            <TermWrap ref={terms} onKeyDown={handleKeyDown} tabIndex={0} height={height}>
+                <input type="hidden" ref={hidden} />
+            </TermWrap>
+            <BtnWrap>
+                <Button text="Hint" height="4" />
+                <CenterBtn>
+                    <Button text="Prev" height="4" />
+                    <Button
+                        text="Clear"
+                        height="4"
+                        background="#e42020"
+                        onClick={() => {
+                            socket.emit("send", "clear")
+                        }}
+                        socket={socket}
+                    />
+                    <Button text="Next" height="4" />
+                </CenterBtn>
+                <Button text="Submit" height="4" />
+            </BtnWrap>
+        </>
     )
 }

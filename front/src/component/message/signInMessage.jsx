@@ -1,5 +1,4 @@
 export const SignInMessage = ({ statusCode }) => {
-    console.log(statusCode)
     if (statusCode >= 400) {
         return (
             <>

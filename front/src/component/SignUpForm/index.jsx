@@ -1,12 +1,11 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-// import request from "../../utils/request"
+import request from "../../utils/request"
 import { SignUpMessage } from "../message"
 import TypingEffect from "../Typing"
 
 export const SignUpForm = ({ state: prompt }) => {
     const [isIdDuplicates, setIsIdDuplicates] = useState(false)
-    const [isPwDuplicates, setIsPwDuplicates] = useState(false)
     const navigator = useNavigate()
     const [formState, setFormState] = useState({
         mode: "",
@@ -15,72 +14,75 @@ export const SignUpForm = ({ state: prompt }) => {
         userPwCheck: "",
         submit: "",
     })
-    const checkKeyCode = async (e) => {
+    const { mode, userId, userPw, userPwCheck } = formState
+
+    const checkKeyCode = (e) => {
         if (e.key === "Enter") {
-            if (e.target.className === "mode" || e.target.className === "submit") {
-                switch (e.target.value.toUpperCase()) {
-                    case "Y":
-                        handleChange(e)
-                        break
-                    default:
-                        break
-                }
-                if (e.target.className === "submit") {
-                    navigator("/")
-                }
-            }
-            if (e.target.className === "userId") {
-                switch (/^[a-zA-Z0-9]*$/.test(e.target.value)) {
-                    case true:
-                        try {
-                            // const result = await request.post("/user/check", { userId: e.target.value })
-                            // const { isCheck } = result.data
-
-                            // const stateCode = request.data.status
-                            const isDuplicates = true
-
-                            setIsIdDuplicates(isDuplicates)
-                            handleChange(e)
-                        } catch (error) {
-                            return error
-                        }
-                        break
-                    default:
-                        break
-                }
-            }
-            if (e.target.className === "userPw") {
-                handleChange(e)
-            }
-            if (e.target.className === "userPwCheck") {
-                handleChange(e)
-                if (formState.userPwCheck && formState.userPw === formState.userPwCheck) {
-                    setFormState(true)
-                }
+            switch (e.target.className) {
+                case "mode":
+                case "submit":
+                    handleModeSubmit(e)
+                    break
+                case "userId":
+                    handleUserIdChange(e)
+                    break
+                case "userPw":
+                    handleUserPwChange(e)
+                    break
+                case "userPwCheck":
+                    handleUserPwCheckChange(e)
+                    break
+                default:
+                    break
             }
         }
     }
-    const handleChange = (e) => {
-        if (e.target.className === "userId") {
-            if (isIdDuplicates === true) {
-                setFormState((initial) => ({
-                    ...initial,
-                    [e.target.className]: e.target.value,
-                }))
-                e.target.disabled = true
-            } else {
-                setFormState((initial) => ({
-                    ...initial,
-                    [e.target.className]: e.target.value,
-                }))
-            }
-        } else {
-            setFormState((initial) => ({
-                ...initial,
-                [e.target.className]: e.target.value,
-            }))
+
+    const handleModeSubmit = (e) => {
+        const { value, className } = e.target
+
+        if (value.toUpperCase() === "Y") {
+            e.target.disabled = true
+            handleChange("mode", e)
+        }
+        if (className === "submit") {
+            navigator("/")
         }
     }
+
+    const handleUserIdChange = async (e) => {
+        const { value } = e.target
+
+        switch (/^[a-zA-Z0-9]*$/.test(value)) {
+            case true:
+                const result = await request.post("/user/check", { userId: value })
+                if (result.status === 200) {
+                    e.target.disabled = true
+                    setIsIdDuplicates(true)
+                }
+                handleChange("userId", e)
+                break
+            default:
+                break
+        }
+    }
+    const handleUserPwChange = (e) => {
+        handleChange("userPw", e)
+    }
+
+    const handleUserPwCheckChange = (e) => {
+        handleChange("userPwCheck", e)
+    }
+
+    const handleChange = (target, e) => {
+        setFormState((prev) => ({ ...prev, [target]: e.target.value }))
+    }
+
+    //
+    //
+    //
+
+    //리턴
     return (
         <form
             onSubmit={(e) => {
@@ -98,14 +100,13 @@ export const SignUpForm = ({ state: prompt }) => {
                     }
                 />
             )}
-            {(formState.mode === "Y" || formState.mode === "y") && (
+            {(mode === "Y" || mode === "y") && (
                 <TypingEffect
                     text={` > Enter Your UserId: `}
                     element={
                         <input
                             type="text"
                             className="userId"
-                            // value={formState.userId}
                             autoFocus
                             onKeyDown={checkKeyCode}
                             pattern="^[a-zA-Z0-9]+$"
@@ -113,8 +114,8 @@ export const SignUpForm = ({ state: prompt }) => {
                     }
                 />
             )}
-            <SignUpMessage isIdDuplicates={isIdDuplicates} userId={formState.userId} />
-            {formState.userId && isIdDuplicates && (
+            <SignUpMessage isIdDuplicates={isIdDuplicates} userId={userId} />
+            {userId && isIdDuplicates && (
                 <TypingEffect
                     text={` > Enter Your Password: `}
                     element={
@@ -124,11 +125,12 @@ export const SignUpForm = ({ state: prompt }) => {
                             autoFocus
                             onKeyDown={checkKeyCode}
                             pattern="^[a-zA-Z0-9]+$"
+                            disabled={userPwCheck && userPw === userPwCheck}
                         />
                     }
                 />
             )}
-            {formState.userPw && (
+            {userPw && (
                 <TypingEffect
                     text={` > Enter Your Password again: `}
                     element={
@@ -138,12 +140,13 @@ export const SignUpForm = ({ state: prompt }) => {
                             autoFocus
                             onKeyDown={checkKeyCode}
                             pattern="^[a-zA-Z0-9]+$"
+                            disabled={userPwCheck && userPw === userPwCheck}
                         />
                     }
                 />
             )}
-            <SignUpMessage userPw={formState.userPw} userPwCheck={formState.userPwCheck} />
-            {formState.userPwCheck && formState.userPw === formState.userPwCheck && (
+            <SignUpMessage userPw={userPw} userPwCheck={userPwCheck} />
+            {userPwCheck && userPw === userPwCheck && (
                 <TypingEffect
                     text={` > Are you Submit ? [Y/N] :`}
                     element={

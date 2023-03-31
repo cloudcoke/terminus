@@ -9,22 +9,27 @@ export const RequestSuccess = (payload) => ({
     type: USER_SUCCESS,
     payload,
 })
-export const UserLogin = () => {
+export const UserLogin = ({ userId, userPw }) => {
     return async (dispatch) => {
         dispatch({ type: USER_START })
         try {
-            const response = await request.post("/auth")
-            dispatch(RequestSuccess(response.data))
+            const response = await request.post("/auth", { userId, userPw })
+            console.log(response)
+            const { status } = response.data
+            if (status === 200) {
+                dispatch(RequestSuccess({ isLogin: true, data: { userId } }))
+            }
+            return status
         } catch (error) {
             dispatch(RequestError(error))
         }
     }
 }
-export const UserLogout = () => {
+export const UserLogout = ({ userId, userPw }) => {
     return async (dispatch) => {
         dispatch({ type: USER_START })
         try {
-            const response = await request.get("/auth")
+            const response = await request.get("/auth", { userId, userPw })
             console.log(response)
             dispatch(RequestSuccess(response.data))
         } catch (error) {

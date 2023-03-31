@@ -5,10 +5,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { Navi } from "./navigation"
 import { BtnArea, HeaderWrap, Logo, ToggleArea } from "./styled"
 
-export const Header = ({ List, onClick }) => {
+export const Header = ({ List }) => {
     const dispatch = useDispatch()
-    const userId = useSelector((state) => state.user).data
-    console.log(userId)
     const navigator = useNavigate()
     const handleClick = () => {
         navigator("/")
@@ -27,7 +25,7 @@ export const Header = ({ List, onClick }) => {
                     <Button text="Sign In" height="4" />
                 </BtnArea>
                 <ToggleArea>
-                    <Toggle height="6" onClick={onClick} />
+                    <Toggle height="6" />
                 </ToggleArea>
                 <Navi List={List} />
                 <ToggleArea className="btnWrap">
