@@ -5,6 +5,7 @@ import "xterm/css/xterm.css"
 import { BtnWrap, CenterBtn, TermWrap } from "./styled"
 import { Button } from "../button"
 import { useLocation } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 //test
 export const Termi = ({ height, socket }) => {
@@ -14,6 +15,7 @@ export const Termi = ({ height, socket }) => {
     const [command, setCommand] = useState("")
     const [history, setHistory] = useState({ command: [], index: 0 })
     const [ccc, setCcc] = useState(false)
+    const { userId } = useSelector((state) => state.user.data)
     const location = useLocation().pathname
 
     let a = ""
@@ -36,6 +38,10 @@ export const Termi = ({ height, socket }) => {
         clearInput(a.length)
     }
 
+    const clear = () => {
+        socket.emit("send", "clear")
+        setCcc(!ccc)
+    }
     const handleUp = (prev) => {
         if (!prev || !prev.command || prev.command.length === 0) {
             return { command: [], index: 0 }
@@ -58,11 +64,6 @@ export const Termi = ({ height, socket }) => {
     }
 
     useEffect(() => {
-        const clear = () => {
-            socket.emit("send", "clear")
-            console.log(ccc)
-            setCcc(!ccc)
-        }
         if (ccc) clear()
         if (!term.current) {
             const handleEmit = (prev) => {

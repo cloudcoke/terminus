@@ -9,7 +9,7 @@ export const BodyWrap = styled.div`
         width: 100%;
         padding: 13rem 30rem 10rem 4rem;
         height: 100%;
-        background-color: #343541;
+        background-color: #242424;
     }
     h1 {
         font-size: 2.4rem;

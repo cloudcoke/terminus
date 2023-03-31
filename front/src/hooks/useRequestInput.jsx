@@ -1,5 +1,5 @@
 export const RequestInput = (e) => {
-    if (e.key === "Enter") {
+    if (e.keyCode === 13) {
         if (e.target.className === "userId") {
             // const userId = e.target.value
             // const response = request.get("/check", {userId})
@@ -10,7 +10,8 @@ export const RequestInput = (e) => {
             const checkpw = true
             return { userPw: checkpw }
         } else if (e.target.className === "submit") {
-            e.preventDefault()
+            e.defaultPrevented = false
+            console.log(e)
             return e.target.value
         }
     }

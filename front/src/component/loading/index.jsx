@@ -18,7 +18,7 @@ const Ul = styled.ul`
     display: flex;
     margin: 0;
     padding: 0;
-    background-color: #343541;
+    background-color: #242424;
 `
 
 const Li = styled.li`

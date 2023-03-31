@@ -5,5 +5,5 @@ export const HeaderWrap = styled.div`
     width: 40rem;
     height: 100%;
     margin-right: 17rem;
-    background-color: #888888;
+    background-color: #c8c8c8;
 `

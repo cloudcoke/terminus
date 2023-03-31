@@ -8,13 +8,14 @@ export const Button = ({ text, height, long, background, socket }) => {
             case "Prev":
             case "Next":
             case "Submit":
-                return <div>{text}</div>
+                return <div className="NLink">{text}</div>
             case "Clear":
                 return (
                     <div
                         onClick={() => {
                             socket.emit("send", "clear")
                         }}
+                        className="NLink"
                     >
                         {text}
                     </div>

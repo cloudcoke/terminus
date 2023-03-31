@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import request from "../../utils/request"
 import { USER_ERROR, USER_START, USER_SUCCESS } from "./type"
 
@@ -11,7 +12,6 @@ export const RequestSuccess = (payload) => ({
 })
 export const UserLogin = ({ userId, userPw }) => {
     return async (dispatch) => {
-        dispatch({ type: USER_START })
         try {
             const response = await request.post("/auth", { userId, userPw })
             const { status } = response
@@ -24,13 +24,15 @@ export const UserLogin = ({ userId, userPw }) => {
         }
     }
 }
-export const UserLogout = ({ userId, userPw }) => {
+export const UserLogout = ({ userId }) => {
     return async (dispatch) => {
-        dispatch({ type: USER_START })
         try {
-            const response = await request.get("/auth", { userId, userPw })
-            console.log(response)
-            dispatch(RequestSuccess(response.data))
+            const response = await request.get("/auth", { userId })
+            const { status } = response
+            if (status === 200) {
+                dispatch(RequestSuccess({ isLogin: false, data: { userId } }))
+            }
+            return status
         } catch (error) {
             dispatch(RequestError(error))
         }
