@@ -8,7 +8,11 @@ export const TermWrap = styled.div`
     .termi {
     }
     .xterm-viewport {
-        background-color: #343541 !important;
+        background-color: #111111 !important;
+        overflow-y: scroll;
+    }
+    .xterm-dom-renderer-owner-1 .xterm-rows {
+        /* color: #029502 !important; */
     }
     & span {
         background-color: initial;

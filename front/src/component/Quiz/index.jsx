@@ -4,6 +4,7 @@ import { FitAddon } from "xterm-addon-fit"
 import "xterm/css/xterm.css"
 import { BtnWrap, CenterBtn, TermWrap } from "./styled"
 import { Button } from "../button"
+import { useLocation } from "react-router-dom"
 
 //test
 export const Termi = ({ height, socket }) => {
@@ -13,6 +14,7 @@ export const Termi = ({ height, socket }) => {
     const [command, setCommand] = useState("")
     const [history, setHistory] = useState({ command: [], index: 0 })
     const [ccc, setCcc] = useState(false)
+    const location = useLocation().pathname
 
     let a = ""
     const handleKeyDown = (e) => {
@@ -72,6 +74,9 @@ export const Termi = ({ height, socket }) => {
             term.current = new Terminal({
                 fontFamily: "D2Coding",
                 cursorBlink: true,
+                fontSize: 18,
+                letterSpacing: 2,
+                lineHeight: 1.3,
             })
 
             term.current.open(terms.current)
@@ -125,23 +130,25 @@ export const Termi = ({ height, socket }) => {
             <TermWrap ref={terms} onKeyDown={handleKeyDown} tabIndex={0} height={height}>
                 <input type="hidden" ref={hidden} />
             </TermWrap>
-            <BtnWrap>
-                <Button text="Hint" height="4" />
-                <CenterBtn>
-                    <Button text="Prev" height="4" />
-                    <Button
-                        text="Clear"
-                        height="4"
-                        background="#e42020"
-                        onClick={() => {
-                            socket.emit("send", "clear")
-                        }}
-                        socket={socket}
-                    />
-                    <Button text="Next" height="4" />
-                </CenterBtn>
-                <Button text="Submit" height="4" />
-            </BtnWrap>
+            {location !== "/freeterminal" && (
+                <BtnWrap>
+                    <Button text="Hint" height="4" />
+                    <CenterBtn>
+                        <Button text="Prev" height="4" />
+                        <Button
+                            text="Clear"
+                            height="4"
+                            background="#e42020"
+                            onClick={() => {
+                                socket.emit("send", "clear")
+                            }}
+                            socket={socket}
+                        />
+                        <Button text="Next" height="4" />
+                    </CenterBtn>
+                    <Button text="Submit" height="4" />
+                </BtnWrap>
+            )}
         </>
     )
 }

@@ -16,9 +16,8 @@ export const SignInForm = ({ state: prompt }) => {
     const submitFrm = useRef(null)
     const [idState, setIdState] = useState(false)
     const [pwState, setPwState] = useState(false)
-    const [submitState, setSubmitState] = useState(false)
     const [statusCode, setStatusCode] = useState(0)
-    const userDATA = useSelector((state) => state.user.data)
+    const [submitState, setSubmitState] = useState(false)
     const signInData = useInput("")
     const userIdData = useInput("")
     const userPwData = useInput("")
@@ -47,21 +46,19 @@ export const SignInForm = ({ state: prompt }) => {
         if (value === "Y" || value === "y") {
             const userId = userIdRef.current.value
             const userPw = userPwRef.current.value
-
-            console.log(userDATA)
-
-            // const response = { status: 200 }
-            // setStatusCode(response.status)
-            // if (response.status === 200) {
-            //     setTimeout(() => {
-            //         navigate("/")
-            //     }, 1000)
-            // } else if (response.status >= 400) {
-            //     setPwState("")
-            //     setSubmitState("")
-            //     userIdRef.current.disabled = false
-            //     userPwRef.current.disabled = false
-            // }
+            const status = await UserLogin({ userId, userPw })(dispatch)
+            setStatusCode(status)
+            if (status === 200) {
+                submit.current.disabled = true
+                setTimeout(() => {
+                    navigate("/")
+                }, 1000)
+            } else if (status >= 400) {
+                setPwState("")
+                setSubmitState("")
+                userIdRef.current.disabled = false
+                userPwRef.current.disabled = false
+            }
         }
     }
 
@@ -140,10 +137,10 @@ export const SignInForm = ({ state: prompt }) => {
                     }
                 />
             )}
-            <br />
-            <br />
-            <br />
             <SignInMessage statusCode={statusCode} />
+            <br />
+            <br />
+            <br />
         </form>
     )
 }
