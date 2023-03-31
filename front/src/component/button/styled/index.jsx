@@ -16,4 +16,8 @@ export const Btn = styled.div`
         height: 100%;
         color: #fff;
     }
+    .NLink:hover {
+        border-radius: 0.5rem;
+        background-color: #888888;
+    }
 `

@@ -1,4 +1,4 @@
-import { USER_ERROR, USER_START, USER_SUCCESS } from "./type"
+import { USER_ERROR, USER_START, USER_SUCCESS, USER_INIT } from "./type"
 
 const initialState = {
     loading: false,
@@ -10,6 +10,8 @@ const initialState = {
 }
 export const user = (state = initialState, action) => {
     switch (action.type) {
+        case USER_INIT:
+            return { ...state, error: null }
         case USER_START:
             return { ...state, loading: true, error: null }
         case USER_SUCCESS:

@@ -3,6 +3,9 @@ import styled from "styled-components"
 import { BodyWrap } from "./common/body"
 import { AppRouter } from "./routes"
 import { useDispatch, useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import { Loading } from "./component"
+import { USER_INIT } from "./store/user"
 
 const Wrap = styled.div`
     display: flex;
@@ -47,16 +50,19 @@ const List = [
     },
 ]
 const App = () => {
+    const [mode, setMode] = useState(true)
+
     const dispatch = useDispatch()
-    const state = useSelector((state) => state)
-    console.log(state)
+    const { loading, isLogin, error } = useSelector((state) => state.user)
+    // console.log(state)
     // const { userData } = useSelector((state) => state.user.data)
     // console.log(userData)
     // const userId = userData ? userData : ""
-
+    if (loading) return <Loading />
+    if (error) return <>{error.message}</>
     return (
         <Wrap>
-            <Header List={List} />
+            <Header List={List} Mode={{ mode, setMode }} />
             <BodyWrap>
                 <AppRouter List={List} />
             </BodyWrap>
