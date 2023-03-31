@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { BodyWrap } from "./common/body"
 import { AppRouter } from "./routes"
 import { useDispatch, useSelector } from "react-redux"
-import { useState } from "react"
 
 const Wrap = styled.div`
     display: flex;
@@ -49,15 +48,15 @@ const List = [
 ]
 const App = () => {
     const dispatch = useDispatch()
-    const { userId } = useSelector((state) => state.user.data)
-    const [mode, setMode] = useState(true)
-    console.log(mode)
-    const handleClick = () => {
-        setMode(!mode)
-    }
+    const state = useSelector((state) => state)
+    console.log(state)
+    // const { userData } = useSelector((state) => state.user.data)
+    // console.log(userData)
+    // const userId = userData ? userData : ""
+
     return (
         <Wrap>
-            <Header List={List} onClick={handleClick} />
+            <Header List={List} />
             <BodyWrap>
                 <AppRouter List={List} />
             </BodyWrap>
