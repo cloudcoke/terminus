@@ -5,7 +5,6 @@ import { Navi } from "./navigation"
 import { BtnArea, HeaderWrap, Logo, ToggleArea } from "./styled"
 
 export const Header = ({ List, Mode }) => {
-    console.log(Mode)
     const { isLogin } = useSelector((state) => state.user)
     const navigator = useNavigate()
     const handleClick = () => {

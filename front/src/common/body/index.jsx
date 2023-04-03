@@ -1,10 +1,15 @@
 import styled from "styled-components"
 
 export const BodyWrap = styled.div`
+    position: relative;
     width: 110rem;
     height: 100%;
-    padding: 5rem 0;
     color: #cccccc;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    & > * {
+        scroll-snap-align: center;
+    }
     .join {
         width: 100%;
         padding: 13rem 30rem 10rem 4rem;

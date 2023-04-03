@@ -11,7 +11,6 @@ export const RequestInput = (e) => {
             return { userPw: checkpw }
         } else if (e.target.className === "submit") {
             e.defaultPrevented = false
-            console.log(e)
             return e.target.value
         }
     }

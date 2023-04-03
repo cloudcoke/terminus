@@ -3,6 +3,11 @@
     padding: 0;
     box-sizing: border-box;
 }
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background-color: transparent;
+}
 html {
     font-family: "D2Coding";
     font-weight: 400;
@@ -20,12 +25,7 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
-color {
-    color: #118ab2;
-    color: #ff5a5f;
-    color: #ffd166;
-    color: #06d6a0;
-}
+
 input:focus {
     outline-style: none;
 }
