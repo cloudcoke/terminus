@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { BodyWrap } from "../common/body"
-import { Button } from "../component"
-import { Termi } from "../component/Quiz"
-import { PromptWrap } from "../component/Quiz/styled"
+import { BodyWrap } from "../common"
+import { Termi } from "../component/terminal"
+import { PromptWrap } from "../component/terminal/styled"
 import io from "socket.io-client"
+import { Submit } from "../component/submitCard"
 
 export const Quiz = () => {
     const domain = process.env.REACT_APP_BACKSERVER
@@ -16,6 +16,7 @@ export const Quiz = () => {
             <BodyWrap>
                 <PromptWrap />
                 <Termi height={65} socket={socket} />
+                <Submit />
             </BodyWrap>
         </>
     )

@@ -7,15 +7,16 @@ export const Toggle = ({ height }) => {
     const { isMode } = useSelector((state) => state.mode)
 
     return (
-        <div
-            onClick={async () => {
-                await dispatch(ModeList(!isMode))
-                await dispatch(ChangeMode(isMode))
-            }}
-        >
+        <div>
             <ToggleWrap height={height}>
                 <ToggleInput id="toggle_checkbox" type="checkbox" />
-                <ToggleLabel htmlFor="toggle_checkbox" />
+                <ToggleLabel
+                    htmlFor="toggle_checkbox"
+                    onClick={async () => {
+                        await dispatch(ModeList(!isMode))
+                        await dispatch(ChangeMode(isMode))
+                    }}
+                />
             </ToggleWrap>
         </div>
     )

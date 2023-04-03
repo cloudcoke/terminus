@@ -1,4 +1,4 @@
-import { Termi } from "../component/Quiz"
+import { Termi } from "../component/terminal"
 import io from "socket.io-client"
 
 export const FreeTerm = () => {

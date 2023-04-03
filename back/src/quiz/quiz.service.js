@@ -1,6 +1,6 @@
 class QuizService {
     constructor({ QuizRepository }) {
-        this.QuizRepository = QuizRepository;
+        this.QuizRepository = QuizRepository
     }
 
     async refacList({ kind }) {
@@ -11,7 +11,7 @@ class QuizService {
                 command: [{command:"ls"},{command:"cd"}]
             }]*/
             // const List = await this.QuizRepository.getList({ kind });
-            let list;
+            let list
             switch (kind) {
                 case "linux":
                     list = [
@@ -60,12 +60,12 @@ class QuizService {
                                 { command: "30" },
                             ],
                         },
-                    ];
-                    break;
+                    ]
+                    break
                 case "sql":
                     list = [
                         {
-                            difficulty: "sqleasy",
+                            difficulty: "easy",
                             command: [
                                 { command: "sql1" },
                                 { command: "sql2" },
@@ -109,22 +109,21 @@ class QuizService {
                                 { command: "30" },
                             ],
                         },
-                    ];
+                    ]
             }
-            return list;
+            return list
         } catch (error) {
-            new Error(error);
+            new Error(error)
         }
     }
     async refacPrompt({ kind, command }) {
         try {
-            const quiz = await this.QuizRepository.getQuiz({ kind, command });
-            return quiz;
+            const quiz = await this.QuizRepository.getQuiz({ kind, command })
+            return quiz
         } catch (error) {
-            new Error(error);
+            new Error(error)
         }
     }
 }
 
-module.exports = QuizService;
-
+module.exports = QuizService
