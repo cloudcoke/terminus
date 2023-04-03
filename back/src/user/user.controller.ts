@@ -38,7 +38,6 @@ class UserContoller {
     //     } catch (error) {
     //         next(error);
     //     }
-    // }
     async checkId(req: Request, res: Response, next: NextFunction) {
         try {
             const { userId } = req.body;
