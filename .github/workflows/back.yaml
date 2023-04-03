@@ -39,6 +39,6 @@ jobs:
           host: ${{ secrets.EC2_BACK_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_BACK_PRIVATE_KEY }}
-          source: "back/dist"
+          source: "back/dist,back/node_modules"
           target: "www"
-          strip_components: 2
+          strip_components: 1
