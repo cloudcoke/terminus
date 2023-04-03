@@ -1,18 +1,12 @@
-const {
-    sequelize: {
-        models: { Quiz },
-    },
-} = require("../../models");
+import sequelize from "../../models";
+import { Quiz } from "../../models";
 
-const repository = require("./quiz.repository");
-const service = require("./quiz.service");
-const controller = require("./quiz.controller");
+import repository from "./quiz.repository";
+import service from "./quiz.service";
+import controller from "./quiz.controller";
+import { ModelCtor } from "sequelize-typescript";
 
-const QuizRepository = new repository({ Quiz });
-const QuizService = new service({ QuizRepository });
-const QuizContoller = new controller({ QuizService });
-
-module.exports = {
-    QuizContoller,
-};
+const Repository = new repository(Quiz as ModelCtor<Quiz>);
+const QuizService = new service({ Repository });
+export const QuizContoller = new controller({ QuizService });
 

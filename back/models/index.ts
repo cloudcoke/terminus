@@ -1,24 +1,37 @@
-const fs = require("fs");
-const path = require("path");
-const config = require("../config");
-const db = config.db["development"];
+// import fs from "fs";
+import path from "path";
+import config from "../config";
+const db = config.db.development;
 
-const { Sequelize, DataTypes, Model } = require("sequelize");
+import { Sequelize } from "sequelize-typescript";
+import User from "./user.model";
+import Quiz from "./quiz.model";
+import PointDown from "./pointdown.model";
+import PointUp from "./pointup.model";
 
-const sequelize = new Sequelize(db.database, db.username, db.password, db);
+const sequelize: Sequelize = new Sequelize({
+    host: db.host,
+    username: db.username,
+    password: db.password,
+    database: db.database,
+    dialect: db.dialect,
+    models: [path.join(__dirname, "*.model.ts")],
+});
 
-fs.readdirSync(__dirname)
-    .filter((v) => v.indexOf("model") !== -1)
-    .forEach((filename) => {
-        require(path.join(__dirname, filename))({ sequelize, DataTypes, Model });
-    });
+sequelize.addModels([User, Quiz, PointDown, PointUp]);
 
-const { models } = sequelize;
+export { User, Quiz, PointDown, PointUp };
 
-for (const v in models) {
-    if (typeof models[v].associate !== "function") continue;
-    sequelize.models[v].associate(models);
-}
+export default sequelize;
 
-module.exports = { sequelize };
+// export const sequelize = new Sequelize(db.database!, db.username!, db.password, db);
+// //"Option에 string | undefind // string 강제로 넣어도 , Options 타입지정이 이미 string"
+
+// fs.readdirSync(__dirname)
+//     .filter((v) => v.indexOf("model") !== -1)
+//     .forEach((filename) => {
+//         require(path.join(__dirname, filename))({ sequelize, DataTypes, Model });
+//     });
+
+// const { models } = sequelize;
 

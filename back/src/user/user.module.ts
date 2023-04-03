@@ -5,7 +5,7 @@ import crypto from "crypto";
 import config from "../../config";
 const jwt = new JWT({ crypto, salt: config.salt });
 
-import repository from "./user.repository";
+import repository from "./user.repository.js";
 import service from "./user.service";
 import controller from "./user.controller";
 
