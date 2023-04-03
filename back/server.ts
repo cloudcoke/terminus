@@ -13,7 +13,7 @@
 import { createServer } from "http";
 import app from "./app";
 import { Server } from "socket.io";
-import pty from "node-pty";
+import * as pty from "node-pty";
 import os from "os";
 
 const httpServer = createServer(app);
@@ -31,6 +31,11 @@ const io = new Server(httpServer, {
 
 io.on("connection", (socket) => {
     console.log("new session");
+    console.log(
+        pty.spawn(shell, [], {
+            name: "xterm-color",
+        })
+    );
     const term = pty.spawn(shell, [], {
         name: "xterm-color",
     });
@@ -39,7 +44,7 @@ io.on("connection", (socket) => {
     term.write(`bash /home/ubuntu/user.sh\r`);
     term.write(`clear\r`);
 
-    term.on("data", (data) => {
+    term.on("data", (data: any) => {
         socket.emit("data", data);
     });
     socket.on("send", (data) => {
