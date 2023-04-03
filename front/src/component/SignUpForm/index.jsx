@@ -56,11 +56,15 @@ export const SignUpForm = ({ state: prompt }) => {
         switch (/^[a-zA-Z0-9]*$/.test(value)) {
             case true:
                 const result = await request.post("/user/check", { userId: value })
-                if (result.status === 200) {
+                console.log(result)
+                if (result.data === true) {
                     e.target.disabled = true
                     setIsIdDuplicates(true)
+                    handleChange("userId", e)
                 }
-                handleChange("userId", e)
+                // else if (result.response.data === false) {
+                //     setIsIdDuplicates(false)
+                // }
                 break
             default:
                 break

@@ -18,7 +18,7 @@ export const SlotWrap = styled.div`
             justify-content: end;
             flex-direction: column;
             width: fit-content;
-            height: 10rem;
+            height: 8rem;
             font-size: 3rem;
             margin: 0;
             background-color: initial;

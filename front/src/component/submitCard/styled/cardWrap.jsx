@@ -10,7 +10,7 @@ export const CardWrap = styled.div`
     width: 100%;
     height: 100%;
     z-index: 10;
-    background-color: #9c45452e;
+    background-color: #ffffff00;
 
     /* filter: blur(4px); */
 `
@@ -19,7 +19,7 @@ export const CardArea = styled.div`
     flex-direction: column;
     justify-content: space-between;
     width: 50rem;
-    height: 75rem;
+    height: 45rem;
     border-radius: 5rem;
     background-color: #1a5454;
     & > div:nth-child(2) {

@@ -1,20 +1,40 @@
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useLocation, useNavigate } from "react-router-dom"
 import { Btn } from "./styled"
 
-export const Button = ({ text, height, long, background, socket }) => {
+export const Button = (props) => {
+    const { text, height, long, background, socket, setSubmit, fontsize } = props
+
     const NAV = ({ text }) => {
         const navigator = useNavigate()
-        const handleNextBtn = () => {
-            navigator("/")
-        }
+        const location = useLocation()
         const handlePrevBtn = () => {
-            navigator("/")
+            const difficulty = location.pathname.slice(1).split("/")[1]
+            const command = parseInt(location.pathname.slice(1).split("/")[2])
+            const commandId = command <= 1 ? command : command - 1
+            navigator(`/quiz/${difficulty}/${commandId}`)
+        }
+        const handleNextBtn = () => {
+            const difficulty = location.pathname.slice(1).split("/")[1]
+            const command = parseInt(location.pathname.slice(1).split("/")[2])
+            console.log(command)
+            const commandId = command >= 10 ? command : command + 1
+            navigator(`/quiz/${difficulty}/${commandId}`)
         }
 
         switch (text) {
             case "Hint":
-            case "Submit":
                 return <div className="NLink">{text}</div>
+            case "Submit":
+                return (
+                    <div
+                        className="NLink"
+                        onClick={() => {
+                            setSubmit(true)
+                        }}
+                    >
+                        {text}
+                    </div>
+                )
             case "Prev":
                 return (
                     <div className="NLink" onClick={() => handlePrevBtn()}>
@@ -24,7 +44,13 @@ export const Button = ({ text, height, long, background, socket }) => {
             case "Next":
             case "Next Level":
                 return (
-                    <div className="NLink" onClick={() => handleNextBtn()}>
+                    <div
+                        className="NLink"
+                        onClick={() => {
+                            setSubmit && setSubmit(false)
+                            handleNextBtn()
+                        }}
+                    >
                         {text}
                     </div>
                 )
@@ -46,7 +72,7 @@ export const Button = ({ text, height, long, background, socket }) => {
     }
     return (
         <>
-            <Btn height={height} long={long} background={background}>
+            <Btn height={height} long={long} background={background} fontsize={fontsize}>
                 <NAV text={text} />
             </Btn>
         </>

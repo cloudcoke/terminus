@@ -5,8 +5,8 @@ export const BodyWrap = styled.div`
     width: 110rem;
     height: 100%;
     color: #cccccc;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
+    /* overflow-y: scroll; */
+    /* scroll-snap-type: y mandatory; */
     & > * {
         scroll-snap-align: center;
     }

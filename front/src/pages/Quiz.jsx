@@ -5,7 +5,9 @@ import { PromptWrap } from "../component/terminal/styled"
 import io from "socket.io-client"
 import { Submit } from "../component/submitCard"
 
-export const Quiz = () => {
+export const Quiz = ({ list }) => {
+    const [submit, setSubmit] = useState(false)
+    console.log(list)
     const domain = process.env.REACT_APP_BACKSERVER
     const port = process.env.REACT_APP_PORT
     const backserver = `${domain}:${port}`
@@ -15,8 +17,8 @@ export const Quiz = () => {
         <>
             <BodyWrap>
                 <PromptWrap />
-                <Termi height={65} socket={socket} />
-                <Submit />
+                <Termi height={65} socket={socket} setSubmit={setSubmit} />
+                {submit && <Submit setSubmit={setSubmit} />}
             </BodyWrap>
         </>
     )

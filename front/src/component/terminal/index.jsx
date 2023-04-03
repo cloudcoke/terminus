@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 //test
-export const Termi = ({ height, socket }) => {
+export const Termi = ({ height, socket, setSubmit }) => {
     const terms = useRef(null)
     const term = useRef(null)
     const hidden = useRef(null)
@@ -146,7 +146,7 @@ export const Termi = ({ height, socket }) => {
                         />
                         <Button text="Next" height="4" />
                     </CenterBtn>
-                    <Button text="Submit" height="4" />
+                    <Button text="Submit" height="4" setSubmit={setSubmit} />
                 </BtnWrap>
             )}
         </>

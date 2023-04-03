@@ -5,11 +5,11 @@ export const TermWrap = styled.div`
     height: ${(props) => (props.height ? props.height + "%" : "100%")};
     font-size: 2rem;
     font-family: "D2Coding";
-    .termi {
-    }
+
     .xterm-viewport {
         background-color: #242424 !important;
         overflow-y: scroll;
+        height: 100%;
     }
     .xterm-dom-renderer-owner-1 .xterm-rows {
         /* color: #029502 !important; */
@@ -20,6 +20,6 @@ export const TermWrap = styled.div`
         margin-left: 0.2rem;
     }
     & > div {
-        padding: 3rem;
+        padding: 4rem;
     }
 `
