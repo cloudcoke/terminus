@@ -8,6 +8,7 @@
 .pem
 */dummy
 */zdummy
+*/dist
 
 # testing
 /coverage
