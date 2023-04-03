@@ -1,14 +1,33 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { Btn } from "./styled"
 
 export const Button = ({ text, height, long, background, socket }) => {
     const NAV = ({ text }) => {
+        const navigator = useNavigate()
+        const handleNextBtn = () => {
+            navigator("/")
+        }
+        const handlePrevBtn = () => {
+            navigator("/")
+        }
+
         switch (text) {
             case "Hint":
-            case "Prev":
-            case "Next":
             case "Submit":
                 return <div className="NLink">{text}</div>
+            case "Prev":
+                return (
+                    <div className="NLink" onClick={() => handlePrevBtn()}>
+                        {text}
+                    </div>
+                )
+            case "Next":
+            case "Next Level":
+                return (
+                    <div className="NLink" onClick={() => handleNextBtn()}>
+                        {text}
+                    </div>
+                )
             case "Clear":
                 return (
                     <div
