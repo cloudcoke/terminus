@@ -22,7 +22,7 @@ export const Header = ({ List, Mode }) => {
                 </Logo>
                 {isLogin ? (
                     <BtnArea>
-                        <Button text="무슨버튼?" height="4" />
+                        <Button text="profile" height="4" />
                         <Button text="Sign out" height="4" />
                     </BtnArea>
                 ) : (

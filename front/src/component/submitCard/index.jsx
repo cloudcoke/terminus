@@ -1,7 +1,7 @@
 import { Button } from "../button"
 import { Slot } from "./slot"
 import { CardWrap, Card, CardArea } from "./styled"
-export const Submit = () => {
+export const Submit = ({ setSubmit }) => {
     return (
         <>
             <CardWrap>
@@ -12,7 +12,7 @@ export const Submit = () => {
                         <Slot />
                     </Card>
                     <div>
-                        <Button text="Next Level" long height="4"></Button>
+                        <Button text="Next Level" long height="4" setSubmit={setSubmit} />
                     </div>
                 </CardArea>
             </CardWrap>

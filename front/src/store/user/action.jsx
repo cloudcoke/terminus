@@ -14,6 +14,7 @@ export const UserLogin = ({ userId, userPw }) => {
     return async (dispatch) => {
         try {
             const response = await request.post("/auth", { userId, userPw })
+            console.log(response)
             const { status } = response
             if (status === 200) {
                 dispatch(RequestSuccess({ isLogin: true, data: { userId } }))

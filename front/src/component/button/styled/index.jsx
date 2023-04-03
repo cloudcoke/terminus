@@ -5,7 +5,7 @@ export const Btn = styled.div`
     height: ${(props) => props.height + "rem"};
     border-radius: 0.5rem;
     background-color: ${(props) => (props.background ? props.background : "#233041")};
-    font-size: 1.6rem;
+    font-size: ${(props) => (props.fontsize ? props.fontsize : "1.6")}rem;
     font-weight: bold;
     & > a,
     div {
