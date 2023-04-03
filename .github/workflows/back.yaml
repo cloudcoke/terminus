@@ -24,15 +24,15 @@ jobs:
         working-directory: back
         run: |
           npm install
-          echo -e $ENV > .env
-        env:
-          ENV: ${{ secrets.EC2_BACK_ENV }}
 
       - name: Install typescript & build
         working-directory: back
         run: |
           npm install -g typescript
           tsc
+          echo -e $ENV > dist/.env
+        env:
+          ENV: ${{ secrets.EC2_BACK_ENV }}
 
       - name: SCP
         uses: appleboy/scp-action@master
