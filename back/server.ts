@@ -31,11 +31,6 @@ const io = new Server(httpServer, {
 
 io.on("connection", (socket) => {
     console.log("new session");
-    console.log(
-        pty.spawn(shell, [], {
-            name: "xterm-color",
-        })
-    );
     const term = pty.spawn(shell, [], {
         name: "xterm-color",
     });
