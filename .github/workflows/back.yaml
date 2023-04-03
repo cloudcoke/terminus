@@ -27,6 +27,7 @@ jobs:
           tsc
 
       - name: Install dependencies
+        working-directory: back
         run: |
           npm install
           echo -e $ENV > .env
