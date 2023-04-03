@@ -20,12 +20,6 @@ jobs:
         with:
           node-version: 18.15.0
 
-      - name: Install typescript & build
-        working-directory: back
-        run: |
-          npm install -g typescript
-          tsc
-
       - name: Install dependencies
         working-directory: back
         run: |
@@ -34,12 +28,18 @@ jobs:
         env:
           ENV: ${{ secrets.EC2_BACK_ENV }}
 
+      - name: Install typescript & build
+        working-directory: back
+        run: |
+          npm install -g typescript
+          tsc
+
       - name: SCP
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.EC2_BACK_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_BACK_PRIVATE_KEY }}
-          source: "back/dist,back/node_modules"
+          source: "back/dist,back/node_modules,back/.env"
           target: "www"
           strip_components: 1
