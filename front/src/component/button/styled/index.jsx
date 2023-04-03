@@ -19,5 +19,6 @@ export const Btn = styled.div`
     .NLink:hover {
         border-radius: 0.5rem;
         background-color: #888888;
+        cursor: pointer;
     }
 `

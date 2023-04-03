@@ -1,14 +1,12 @@
 import { useState, useRef, memo } from "react"
 import { useNavigate } from "react-router-dom"
 import { RequestInput, useInput, UseKeyCheck } from "../../hooks"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { SignInMessage } from "../message"
 import TypingEffect from "../Typing"
 import { UserLogin } from "../../store/user/action"
-import { useEffect } from "react"
 
 export const SignInForm = ({ state: prompt }) => {
-    const { isLogin } = useSelector((state) => state.user)
     const dispatch = useDispatch()
     const signin = useRef(null)
     const userIdRef = useRef(null)
@@ -47,12 +45,9 @@ export const SignInForm = ({ state: prompt }) => {
         if (value === "Y" || value === "y") {
             const userId = userIdRef.current.value
             const userPw = userPwRef.current.value
-            console.log(1)
             const status = await dispatch(UserLogin({ userId, userPw }))
 
-            console.log(4)
             if (status === 200) {
-                console.log(5)
                 setTimeout(() => {
                     navigate("/")
                 }, 1000)
@@ -63,7 +58,6 @@ export const SignInForm = ({ state: prompt }) => {
                 userPwRef.current.disabled = false
             }
             setStatusCode(status)
-            console.log(status)
         }
     }
 

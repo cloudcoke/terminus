@@ -20,7 +20,6 @@ export const Termi = ({ height, socket }) => {
 
     let a = ""
     const handleKeyDown = (e) => {
-        console.log(e.key)
         // e.preventDefault()
     }
 

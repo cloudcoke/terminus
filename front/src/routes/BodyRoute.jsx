@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom"
 import { Quiz } from "../pages"
 
 export const BodyRoute = ({ list }) => {
-    console.log(list, 123)
     return (
         <Routes>
             <Route path="easy/*">
