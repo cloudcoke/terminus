@@ -14,7 +14,7 @@ interface Config {
 }
 
 const database: string = process.env.DB_DATABASE ? process.env.DB_DATABASE : "terminus";
-const localPort = process.env.LOCAL_PORT || "3000";
+const localPort = process.env.LOCAL_PORT || "3005";
 const port: number | undefined = process.env.DB_PORT ? parseInt(process.env.DB_PORT) : undefined;
 const username: string = process.env.DB_USER!;
 
