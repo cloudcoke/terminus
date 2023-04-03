@@ -136,6 +136,6 @@ export class QuizService {
     }
 }
 
-// export const Service = new UserService(UserRepository, jwt);
+//erService(UserRepository, jwt);
 export default QuizService;
 
