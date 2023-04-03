@@ -1,20 +1,31 @@
-class QuizService {
-    constructor({ QuizRepository }) {
-        this.QuizRepository = QuizRepository
+import repository, { Kind, Quizs } from "./quiz.repository";
+
+interface ServiceType {
+    Repository: repository;
+}
+
+interface CommandList {
+    idx?: number;
+    command: string;
+}
+
+interface Lists {
+    difficulty: "easy" | "middle" | "hard";
+    command: CommandList[];
+}
+
+export class QuizService {
+    public Repository: repository;
+    constructor({ Repository }: ServiceType) {
+        this.Repository = Repository;
     }
 
-    async refacList({ kind }) {
+    async refacList({ kind }: Kind) {
         try {
-            /*예시
-            list= [{
-                difficulty : "easy"
-                command: [{command:"ls"},{command:"cd"}]
-            }]*/
-            // const List = await this.QuizRepository.getList({ kind });
-            let list
+            let list: Lists[];
             switch (kind) {
                 case "linux":
-                    list = [
+                    return (list = [
                         {
                             difficulty: "easy",
                             command: [
@@ -33,7 +44,7 @@ class QuizService {
                         {
                             difficulty: "middle",
                             command: [
-                                { command: "11" },
+                                { idx: 1, command: "11" },
                                 { command: "12" },
                                 { command: "13" },
                                 { command: "14" },
@@ -60,10 +71,9 @@ class QuizService {
                                 { command: "30" },
                             ],
                         },
-                    ]
-                    break
+                    ]);
                 case "sql":
-                    list = [
+                    return (list = [
                         {
                             difficulty: "easy",
                             command: [
@@ -109,21 +119,23 @@ class QuizService {
                                 { command: "30" },
                             ],
                         },
-                    ]
+                    ]);
             }
-            return list
-        } catch (error) {
-            new Error(error)
+            return list!;
+        } catch (error: any) {
+            new Error(error);
         }
     }
-    async refacPrompt({ kind, command }) {
+    async refacPrompt({ kind, difficulty, idx }: Quizs) {
         try {
-            const quiz = await this.QuizRepository.getQuiz({ kind, command })
-            return quiz
-        } catch (error) {
-            new Error(error)
+            const quiz = await this.Repository.getQuiz({ kind, difficulty, idx });
+            return quiz;
+        } catch (error: any) {
+            new Error(error);
         }
     }
 }
 
-module.exports = QuizService
+// export const Service = new UserService(UserRepository, jwt);
+export default QuizService;
+
