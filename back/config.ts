@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import { Options } from "sequelize";
-dotenv.config({ path: "/home/chl/nodejs/2023/202303/prac2/practice/back/.env" });
+dotenv.config({ path: process.env.PATH });
 
 interface Db {
     development: Options;
