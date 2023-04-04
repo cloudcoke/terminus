@@ -46,7 +46,7 @@ class UserContoller {
             const { userId } = req.body;
             const checked = await this.UserService.check({ userId });
             if (!checked) {
-                res.json({ data: checked, status: 401, message: "중복된 아이디 입니다." });
+                res.status(601).json({ data: checked, status: 401, message: "중복된 아이디 입니다." });
             } else {
                 res.status(200).json(checked);
             }
