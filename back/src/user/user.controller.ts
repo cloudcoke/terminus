@@ -47,9 +47,9 @@ class UserContoller {
             const checked = await this.UserService.check({ userId });
             console.log(checked);
             if (!checked) {
-                res.status(203).json(checked);
+                res.json({ data: checked, status: 200 });
             } else {
-                res.status(200).json(checked);
+                res.status(201).json(checked);
             }
         } catch (error) {
             next(error);
