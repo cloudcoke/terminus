@@ -20,7 +20,8 @@ export class UserService {
     async inputUser({ userId, userPw, nickName }: Users) {
         try {
             if (typeof userId === "string" && typeof userPw === "string") {
-                const pw = crypto.createHmac("sha256", this.jwt.salt).update(userPw).digest("hex");
+                console.log(this.jwt.salt);
+                const pw = this.crypto.createHmac("sha256", this.jwt.salt).update(userPw).digest("hex");
                 const data = this.UserRepository.signUp({ userId, userPw: pw, nickName });
                 return data;
             }

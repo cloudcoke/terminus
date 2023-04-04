@@ -4,7 +4,7 @@ interface constructors {
     crypto: typeof crypto;
     salt: string;
 }
-interface values {
+export interface values {
     [key: string]: string;
 }
 

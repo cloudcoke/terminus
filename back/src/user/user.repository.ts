@@ -7,6 +7,11 @@ export interface Users {
     nickName?: string;
 }
 
+const user: Users = {
+    userId: "1234",
+    userPw: "1234",
+};
+
 export interface classModels<> {
     User: ModelCtor<User>;
     Quiz: ModelCtor<Quiz>;
@@ -31,9 +36,13 @@ class UserRepository {
     async signUp({ userId, userPw, nickName }: Users) {
         try {
             const data = await this.User.create({ userId, userPw, nickName });
-            return data.dataValues;
+            if (data) {
+                let datas = { userId: data.dataValues.userId, nickName: data.dataValues.nickName };
+                return datas;
+            }
+            return false;
         } catch (error: any) {
-            throw new Error();
+            throw new Error(error);
         }
     }
 

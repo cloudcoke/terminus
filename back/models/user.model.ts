@@ -1,6 +1,8 @@
-import { Model, Table, Column, AllowNull, DataType, PrimaryKey, HasMany, BelongsTo } from "sequelize-typescript";
+import { Model, Table, Column, AllowNull, DataType, PrimaryKey, HasMany, BelongsTo, ForeignKey } from "sequelize-typescript";
+import Comment from "./comment.model";
 import PointDown from "./pointdown.model";
 import PointUp from "./pointup.model";
+import Token from "./token.model";
 
 @Table({
     tableName: "User",
@@ -10,12 +12,19 @@ import PointUp from "./pointup.model";
     collate: "utf8mb4_general_ci",
 })
 class User extends Model {
-    @HasMany(() => PointUp, { foreignKey: "userId" })
+    @HasMany(() => PointUp)
     public PointUp!: PointUp[];
 
-    @HasMany(() => PointDown, { foreignKey: "userId" })
+    @HasMany(() => PointDown)
     public pointDowns!: PointDown[];
 
+    @HasMany(() => Token)
+    public token!: Token[];
+
+    @HasMany(() => Comment)
+    public comment!: Comment[];
+
+    @ForeignKey(() => User)
     @PrimaryKey
     @AllowNull(false)
     @Column({

@@ -54,8 +54,8 @@ io.on("connection", (socket) => {
 });
 
 httpServer.listen(localPort, async () => {
-    await sequelize.sync({ force: true });
-    await new User({ userId: "admin1", userPw: "1234qwer!", nickName: "admin1" }).save();
+    await sequelize.sync({ force: false });
+    // await new User({ userId: "admin1", userPw: "1234qwer!", nickName: "admin1" }).save();
     console.log(`Back Start on ${localPort}`);
 });
 
