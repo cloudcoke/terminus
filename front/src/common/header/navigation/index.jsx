@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom"
 import { Nav, Ul } from "../styled"
 
 export const Navi = memo(({ List }) => {
-    console.log(List)
     const [isView, setIsView] = useState({
         easy: { id: "easy", isOpen: false },
         middle: { id: "middle", isOpen: false },

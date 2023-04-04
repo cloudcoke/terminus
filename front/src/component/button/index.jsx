@@ -1,67 +1,71 @@
+import { useMemo } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { NavLink, useLocation, useNavigate } from "react-router-dom"
+import { changeExamMode } from "../../store/examMode"
 import { Btn } from "./styled"
 
 export const Button = (props) => {
+    const dispatch = useDispatch()
+    const navigator = useNavigate()
+    const location = useLocation()
     const { text, height, long, background, socket, setSubmit, fontsize } = props
-
     const NAV = ({ text }) => {
-        const navigator = useNavigate()
-        const location = useLocation()
+        const level = {
+            easy: 0,
+            middle: 1,
+            hard: 2,
+        }
+        const list = useSelector((state) => state)
+        const difficulty = useMemo(() => location.pathname.slice(1).split("/")[1])
+        const currentCommand = useMemo(() => location.pathname.slice(1).split("/")[2])
+
         const handlePrevBtn = () => {
-            const difficulty = location.pathname.slice(1).split("/")[1]
-            const command = parseInt(location.pathname.slice(1).split("/")[2])
-            const commandId = command <= 1 ? command : command - 1
-            navigator(`/quiz/${difficulty}/${commandId}`)
+            const presentIndex = list.mode.list[level[difficulty]].command.map((v) => v.command).indexOf(currentCommand)
+            const prevObj = list.mode.list[level[difficulty]].command[presentIndex - 1]
+            if (prevObj) navigator(`/quiz/${difficulty}/${prevObj.command}`)
         }
         const handleNextBtn = () => {
-            const difficulty = location.pathname.slice(1).split("/")[1]
-            const command = parseInt(location.pathname.slice(1).split("/")[2])
-            console.log(command)
-            const commandId = command >= 10 ? command : command + 1
-            navigator(`/quiz/${difficulty}/${commandId}`)
+            setSubmit && setSubmit(false)
+            const presentIndex = list.mode.list[level[difficulty]].command.map((v) => v.command).indexOf(currentCommand)
+            const nextObj = list.mode.list[level[difficulty]].command[presentIndex + 1]
+            if (nextObj) navigator(`/quiz/${difficulty}/${nextObj.command}`)
+        }
+        const handleSocket = () => {
+            socket.emit("send", "clear")
+        }
+        const hadleSubmit = () => {
+            setSubmit(true)
         }
 
         switch (text) {
-            case "Hint":
-                return <div className="NLink">{text}</div>
+            case "Exam":
+                return (
+                    <div className="NLink" onClick={() => dispatch(changeExamMode())}>
+                        {text}
+                    </div>
+                )
             case "Submit":
                 return (
-                    <div
-                        className="NLink"
-                        onClick={() => {
-                            setSubmit(true)
-                        }}
-                    >
+                    <div className="NLink" onClick={hadleSubmit}>
                         {text}
                     </div>
                 )
             case "Prev":
                 return (
-                    <div className="NLink" onClick={() => handlePrevBtn()}>
+                    <div className="NLink" onClick={handlePrevBtn}>
                         {text}
                     </div>
                 )
             case "Next":
             case "Next Level":
                 return (
-                    <div
-                        className="NLink"
-                        onClick={() => {
-                            setSubmit && setSubmit(false)
-                            handleNextBtn()
-                        }}
-                    >
+                    <div className="NLink" onClick={handleNextBtn}>
                         {text}
                     </div>
                 )
             case "Clear":
                 return (
-                    <div
-                        onClick={() => {
-                            socket.emit("send", "clear")
-                        }}
-                        className="NLink"
-                    >
+                    <div className="NLink" onClick={handleSocket}>
                         {text}
                     </div>
                 )
