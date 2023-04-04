@@ -4,15 +4,23 @@ const List = [
         command: "ls",
         prompt: "디렉토리 내에 파일 목록을 확인할 수 있는 명령어입니다.",
         option: [
-            { command: "-a", prompt: "-a에 대한 설명을 쓰면 된다." },
-            { command: "-l", prompt: "-l에 대한 설명을 쓰면 된다." },
+            {
+                command: "ls -a",
+                prompt: "-a에 대한 설명을 쓰면 된다.",
+            },
+            {
+                command: "ls -l",
+                prompt: "-l에 대한 설명을 쓰면 된다.",
+            },
         ],
     },
+
     {
         idx: 2,
         command: "pwd",
         prompt: "현재 경로를 확인할 수 있는 명령어 입니다.",
     },
+
     {
         idx: 3,
         command: "cd",

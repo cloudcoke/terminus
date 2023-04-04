@@ -1,0 +1,1 @@
+export const CHANGE_EXAM_MODE = "CHANGE_EXAM_MODE"

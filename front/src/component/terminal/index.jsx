@@ -8,13 +8,13 @@ import { useLocation } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 //test
-export const Termi = ({ height, socket, setSubmit }) => {
+export const Termi = ({ height, socket, setSubmit, examMode }) => {
     const terms = useRef(null)
     const term = useRef(null)
     const hidden = useRef(null)
     const [command, setCommand] = useState("")
     const [history, setHistory] = useState({ command: [], index: 0 })
-    const [ccc, setCcc] = useState(false)
+    const [cleanCommand, setCleanCommand] = useState(false)
     const { userId } = useSelector((state) => state.user.data)
     const location = useLocation().pathname
 
@@ -39,7 +39,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
 
     const clear = () => {
         socket.emit("send", "clear")
-        setCcc(!ccc)
+        setCleanCommand(!cleanCommand)
     }
     const handleUp = (prev) => {
         if (!prev || !prev.command || prev.command.length === 0) {
@@ -63,7 +63,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
     }
 
     useEffect(() => {
-        if (ccc) clear()
+        if (cleanCommand) clear()
         if (!term.current) {
             const handleEmit = (prev) => {
                 socket.emit("send", prev)
@@ -132,7 +132,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
             </TermWrap>
             {location !== "/freeterminal" && (
                 <BtnWrap>
-                    <Button text="Hint" height="4" />
+                    <Button text="Exam" height="4" />
                     <CenterBtn>
                         <Button text="Prev" height="4" />
                         <Button

@@ -1,13 +1,12 @@
 import { useState } from "react"
 import { BodyWrap } from "../common"
 import { Termi } from "../component/terminal"
-import { PromptWrap } from "../component/terminal/styled"
+import { Prompt } from "../component/prompt"
 import io from "socket.io-client"
 import { Submit } from "../component/submitCard"
 
-export const Quiz = ({ list }) => {
+export const Quiz = () => {
     const [submit, setSubmit] = useState(false)
-    console.log(list)
     const domain = process.env.REACT_APP_BACKSERVER
     const port = process.env.REACT_APP_PORT
     const backserver = `${domain}:${port}`
@@ -16,7 +15,7 @@ export const Quiz = ({ list }) => {
     return (
         <>
             <BodyWrap>
-                <PromptWrap />
+                <Prompt />
                 <Termi height={65} socket={socket} setSubmit={setSubmit} />
                 {submit && <Submit setSubmit={setSubmit} />}
             </BodyWrap>
