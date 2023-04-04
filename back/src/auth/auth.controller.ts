@@ -15,14 +15,14 @@ export const logIn = async (req: Request, res: Response, next: NextFunction): Pr
         const { userId, userPw }: Users = req.body;
         if (!userId && !userPw) throw "입력값이 없습니다";
         const response = await User.findOne({ where: { userId, userPw } });
-        if (true) res.status(200).json(response);
+        if (true) res.status(200).cookie("token", response).json(response);
     } catch (error) {
         next(error);
     }
 };
 export const logOut = (req: Request, res: Response, next: NextFunction): void => {
     try {
-        console.log("logout");
+        res.cookie("token", "", { expires: new Date(0) });
     } catch (error) {
         next(error);
     }

@@ -16,9 +16,9 @@ class UserContoller {
             if (!userId && !userPw && !nickName) throw "입력값이 없습니다.";
             const data = await this.UserService.inputUser({ userId, userPw, nickName });
             if (data) {
-                res.status(200).json(data);
+                res.json({ data, status: 200 });
             }
-            res.status(400).json(data);
+            res.json({ data, status: 403, message: "회원가입이 완료되지 않았습니다" });
         } catch (error) {
             next(error);
         }
@@ -45,9 +45,8 @@ class UserContoller {
         try {
             const { userId } = req.body;
             const checked = await this.UserService.check({ userId });
-            console.log(checked);
             if (!checked) {
-                res.status(401).json(checked);
+                res.json({ data: checked, status: 401, message: "중복된 아이디 입니다." });
             } else {
                 res.status(200).json(checked);
             }
