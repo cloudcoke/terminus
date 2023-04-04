@@ -1,5 +1,5 @@
-import { Model, Table, Column, AllowNull, DataType, PrimaryKey, HasMany, BelongsTo, Default } from "sequelize-typescript";
-import PointDown from "./pointdown.model";
+import { Model, Table, Column, AllowNull, DataType, PrimaryKey, HasMany, BelongsTo, Default, AutoIncrement } from "sequelize-typescript";
+import Options from "./option.model";
 
 @Table({
     tableName: "Quiz",
@@ -9,9 +9,19 @@ import PointDown from "./pointdown.model";
     collate: "utf8mb4_general_ci",
 })
 class Quiz extends Model {
+    @HasMany(() => Options, { sourceKey: "command" })
+    public options!: Options[];
+
+    @AllowNull(true)
+    @Column({
+        type: DataType.STRING,
+    })
+    public exam!: string;
+
     @AllowNull(false)
     @Column({
         type: DataType.STRING,
+        unique: true,
     })
     public command!: string;
 
@@ -21,7 +31,7 @@ class Quiz extends Model {
     })
     public prompt!: string;
 
-    @AllowNull(false)
+    @AllowNull(true)
     @Column({
         type: DataType.STRING,
     })
@@ -33,7 +43,7 @@ class Quiz extends Model {
     })
     public setting!: string;
 
-    @AllowNull(false)
+    @AllowNull(true)
     @Column({
         type: DataType.STRING,
     })
@@ -51,6 +61,13 @@ class Quiz extends Model {
         type: DataType.ENUM("linux", "sql"),
     })
     public category!: string;
+
+    @PrimaryKey
+    @AutoIncrement
+    @Column({
+        type: DataType.INTEGER,
+    })
+    public id!: number;
 }
 
 export default Quiz;

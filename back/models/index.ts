@@ -8,6 +8,9 @@ import User from "./user.model";
 import Quiz from "./quiz.model";
 import PointDown from "./pointdown.model";
 import PointUp from "./pointup.model";
+import Options from "./option.model";
+import Token from "./token.model";
+import Comment from "./comment.model";
 
 const sequelize: Sequelize = new Sequelize({
     host: db.host,
@@ -18,7 +21,7 @@ const sequelize: Sequelize = new Sequelize({
     models: [path.join(__dirname, "*.model.ts")],
 });
 
-sequelize.addModels([User, Quiz, PointDown, PointUp]);
+sequelize.addModels([User, Quiz, PointDown, PointUp, Options, Token, Comment]);
 
 export { User, Quiz, PointDown, PointUp };
 

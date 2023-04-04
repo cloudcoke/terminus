@@ -15,7 +15,10 @@ class UserContoller {
             const { userId, userPw, nickName } = req.body;
             if (!userId && !userPw && !nickName) throw "입력값이 없습니다.";
             const data = await this.UserService.inputUser({ userId, userPw, nickName });
-            res.status(200).json(data);
+            if (data) {
+                res.status(200).json(data);
+            }
+            res.status(400).json(data);
         } catch (error) {
             next(error);
         }
@@ -42,8 +45,9 @@ class UserContoller {
         try {
             const { userId } = req.body;
             const checked = await this.UserService.check({ userId });
+            console.log(checked);
             if (!checked) {
-                res.status(400).json(checked);
+                res.status(401).json(checked);
             } else {
                 res.status(200).json(checked);
             }

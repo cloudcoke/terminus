@@ -14,7 +14,7 @@ class PointDown extends Model {
     @Column({
         type: DataType.INTEGER,
     })
-    public quizId!: number;
+    public quizcommand!: number;
 
     @Column({
         type: DataType.INTEGER,
