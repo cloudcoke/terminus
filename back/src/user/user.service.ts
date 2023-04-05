@@ -17,12 +17,11 @@ export class UserService {
         this.crypto = jwt.crypto;
     }
 
-    async inputUser({ userId, userPw, nickName }: Users) {
+    async inputUser({ userId, userPw }: Users) {
         try {
             if (typeof userId === "string" && typeof userPw === "string") {
-                console.log(this.jwt.salt);
                 const pw = this.crypto.createHmac("sha256", this.jwt.salt).update(userPw).digest("hex");
-                const data = this.UserRepository.signUp({ userId, userPw: pw, nickName });
+                const data = this.UserRepository.signUp({ userId, userPw: pw });
                 return data;
             }
         } catch (error: any) {

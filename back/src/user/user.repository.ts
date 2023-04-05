@@ -33,11 +33,11 @@ class UserRepository {
         this.PointDown = PointDown;
     }
 
-    async signUp({ userId, userPw, nickName }: Users) {
+    async signUp({ userId, userPw }: Users) {
         try {
-            const data = await this.User.create({ userId, userPw, nickName });
+            const data = await this.User.create({ userId, userPw });
             if (data) {
-                let datas = { userId: data.dataValues.userId, nickName: data.dataValues.nickName };
+                let datas = { userId: data.dataValues.userId };
                 return datas;
             }
             return false;

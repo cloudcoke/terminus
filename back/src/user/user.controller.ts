@@ -12,9 +12,9 @@ class UserContoller {
     }
     async signUp(req: Request, res: Response, next: NextFunction) {
         try {
-            const { userId, userPw, nickName } = req.body;
-            if (!userId && !userPw && !nickName) throw "입력값이 없습니다.";
-            const data = await this.UserService.inputUser({ userId, userPw, nickName });
+            const { userId, userPw } = req.body;
+            if (!userId && !userPw) throw "입력값이 없습니다.";
+            const data = await this.UserService.inputUser({ userId, userPw });
             if (data) {
                 res.json({ data, status: 200 });
             }
