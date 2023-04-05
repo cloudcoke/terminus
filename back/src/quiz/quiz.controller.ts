@@ -36,6 +36,17 @@ class QuizContoller implements QuizContollerMethods {
             next(error);
         }
     }
+
+    async answer(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { command, userId, answer } = req.body;
+            const check = await this.QuizService.answerCheck({ command, userId, answer });
+            if (check) res.json({ data: check, status: 200 });
+            else res.json({ data: check, status: 401, messege: "정답이 아닙니다" });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default QuizContoller;

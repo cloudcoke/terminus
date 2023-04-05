@@ -36,8 +36,6 @@ export class UserService {
                 userId,
                 point: data,
             };
-            const a = Date.parse(point.point[0].createdAt);
-            console.log(a);
             return point;
         } catch (error: any) {
             new Error(error);

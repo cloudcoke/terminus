@@ -1,15 +1,19 @@
-import sequelize from "../../models";
+import sequelize, { PointUp } from "../../models";
 import { ClassModels, Users } from "../user/user.repository";
 
 export interface Kind {
-    kind: string;
+    kind?: string;
 }
 
 export interface Quizs extends Kind {
+    userId?: string;
     command: string;
+    answer?: string;
 }
 
-export interface PointType extends Quizs, Users {}
+interface Points extends Users {
+    quizId: number;
+}
 
 export interface Optiontype {
     command: string;
@@ -21,9 +25,9 @@ class QuizRepository {
     public PointUp;
     public PointDown;
     constructor({ Quiz, PointUp, PointDown }: ClassModels) {
-        this.Quiz = Quiz!;
-        this.PointUp = PointUp!;
-        this.PointDown = PointDown!;
+        this.Quiz = Quiz;
+        this.PointUp = PointUp;
+        this.PointDown = PointDown;
     }
 
     async getList({ kind }: Kind) {
@@ -34,7 +38,7 @@ class QuizRepository {
             new Error(error);
         }
     }
-    async getQuiz({ kind, command }: Quizs): Promise<any> {
+    async getQuiz({ command }: Quizs): Promise<any> {
         try {
             const [[questions]] = await sequelize.query(
                 `SELECT 
@@ -73,8 +77,10 @@ class QuizRepository {
         }
     }
 
-    async pointUp({ userId }: PointType) {
+    async pointUp({ userId, quizId }: Points) {
         try {
+            const succeeds = await this.PointUp.findOrCreate({ where: { userId, quizId, point: 10 } });
+            return succeeds[1];
         } catch (error: any) {
             throw new Error(error);
         }
