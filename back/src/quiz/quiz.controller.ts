@@ -29,8 +29,8 @@ class QuizContoller implements QuizContollerMethods {
 
     async getQuiz(req: Request, res: Response, next: NextFunction) {
         try {
-            const { kind, difficulty, idx } = req.params;
-            const Quiz = await this.QuizService.refacPrompt({ kind, difficulty, idx });
+            const { kind, command } = req.params;
+            const Quiz = await this.QuizService.refacPrompt({ kind, command });
             res.json(Quiz);
         } catch (error) {
             next(error);
