@@ -15,7 +15,8 @@ export const Termi = ({ height, socket, setSubmit, examMode }) => {
     const [command, setCommand] = useState("")
     const [history, setHistory] = useState({ command: [], index: 0 })
     const [cleanCommand, setCleanCommand] = useState(false)
-    const { userId } = useSelector((state) => state.user.data)
+    const userId = useSelector((state) => state.user)
+    console.log(userId)
     const location = useLocation().pathname
 
     let a = ""

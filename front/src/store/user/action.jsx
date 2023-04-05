@@ -32,7 +32,7 @@ export const UserLogout = () => {
             console.log(response)
             const { status } = response.data
             if (status === 200) {
-                dispatch(RequestSuccess({ isLogin: false, userId: "" }))
+                dispatch(RequestSuccess({ isLogin: false, data: { userId: "" } }))
             }
             return status
         } catch (error) {

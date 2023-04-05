@@ -9,7 +9,6 @@ const initialState = {
     },
 }
 export const user = (state = initialState, action) => {
-    console.log(action.payload)
     switch (action.type) {
         case USER_INIT:
             return { ...state, error: null }
