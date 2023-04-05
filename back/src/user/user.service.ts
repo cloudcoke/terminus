@@ -30,7 +30,8 @@ export class UserService {
     }
     async getProfile({ token }: Token) {
         try {
-            const data = this.UserRepository.profile({ token });
+            const { userId } = this.jwt.verifyToken(token);
+            const data = this.UserRepository.profile({ userId });
             return data;
         } catch (error: any) {
             new Error(error);

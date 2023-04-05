@@ -37,10 +37,10 @@ class JWT implements constructors {
         return this.crypto.createHmac("sha256", salt).update(value).digest("base64url");
     }
 
-    verifyToken(token: string, salt: string = this.salt): {} {
+    verifyToken(token: string, salt = this.salt) {
         const [header, middle, signature] = token.split(".");
         const checksignature = this.createSignature([header, middle]);
-        if (signature !== checksignature) return new Error("토큰값이 다릅니다");
+        if (signature !== checksignature) return "토큰값이 다릅니다";
 
         return this.decode(middle);
     }
