@@ -1,22 +1,23 @@
-import dotenv from "dotenv";
-import { Options } from "sequelize";
-dotenv.config({ path: process.env.ENVPATH });
+import dotenv from "dotenv"
+import { Options } from "sequelize"
+dotenv.config({ path: process.env.ENVPATH })
+console.log(process.env.ENVPATH)
 
 interface Db {
-    development: Options;
-    test: Options;
+    development: Options
+    test: Options
 }
 
 interface Config {
-    localPort: string;
-    salt: string;
-    db: Db;
+    localPort: string
+    salt: string
+    db: Db
 }
 
-const database: string = process.env.DB_DATABASE ? process.env.DB_DATABASE : "terminus";
-const localPort = process.env.LOCAL_PORT || "3005";
-const port: number | undefined = process.env.DB_PORT ? parseInt(process.env.DB_PORT) : undefined;
-const username: string = process.env.DB_USER!;
+const database: string = process.env.DB_DATABASE ? process.env.DB_DATABASE : "terminus"
+const localPort = process.env.LOCAL_PORT || "3005"
+const port: number | undefined = process.env.DB_PORT ? parseInt(process.env.DB_PORT) : undefined
+const username: string = process.env.DB_USER!
 
 const config: Config = {
     localPort,
@@ -41,7 +42,6 @@ const config: Config = {
         },
         test: {},
     },
-};
+}
 
-export default config;
-
+export default config
