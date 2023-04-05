@@ -28,6 +28,7 @@ class UserContoller {
         try {
             const { token } = req.params;
             const profile = await this.UserService.getProfile({ token });
+            console.log(profile!.point[0]!.createdAt!);
             res.json(profile);
         } catch (error) {
             next(error);

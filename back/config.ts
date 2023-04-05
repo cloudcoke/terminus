@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import { Options } from "sequelize";
 dotenv.config({ path: process.env.ENVPATH });
-console.log(process.env.ENVPATH);
 
 interface Db {
     development: Options;

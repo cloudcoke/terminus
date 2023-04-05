@@ -31,12 +31,13 @@ export class UserService {
     async getProfile({ token }: Token) {
         try {
             const { userId } = this.jwt.verifyToken(token);
-            const data = this.UserRepository.profilePoint({ userId });
-            console.log(data, "asdasd");
+            const data = await this.UserRepository.profilePoint({ userId });
             const point = {
                 userId,
                 point: data,
             };
+            const a = Date.parse(point.point[0].createdAt);
+            console.log(a);
             return point;
         } catch (error: any) {
             new Error(error);
