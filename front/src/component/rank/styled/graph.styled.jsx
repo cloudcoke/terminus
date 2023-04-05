@@ -19,8 +19,8 @@ export const Rank = styled.div`
         height: calc(100% / 3);
         justify-content: center;
         align-items: center;
-        padding: 3rem;
-        font-size: 3rem;
+        padding: 1.5rem 3rem;
+        font-size: 2rem;
     }
     & > div > div {
         display: flex;
@@ -57,7 +57,7 @@ export const Bar = styled.div`
     width: calc((${(props) => props.point} / 600) * 100%);
     padding: 0.7rem 1.4rem;
     border-radius: 2rem;
-    font-size: 2rem;
+    font-size: 1.6rem;
     animation: ${(props) => (props.rank === true ? barAni : "")} 2s ease-in-out;
     animation-fill-mode: both;
     background-color: #454343;

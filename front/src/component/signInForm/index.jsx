@@ -46,18 +46,17 @@ export const SignInForm = ({ state: prompt }) => {
             const userId = userIdRef.current.value
             const userPw = userPwRef.current.value
             const status = await dispatch(UserLogin({ userId, userPw }))
-            console.log(status)
-            // if (status === 200) {
-            //     setTimeout(() => {
-            //         navigate("/")
-            //     }, 1000)
-            // } else if (status >= 400) {
-            //     setPwState("")
-            //     setSubmitState("")
-            //     userIdRef.current.disabled = false
-            //     userPwRef.current.disabled = false
-            // }
-            // setStatusCode(status)
+            if (status === 200) {
+                setTimeout(() => {
+                    navigate("/")
+                }, 1000)
+            } else if (status >= 400) {
+                setPwState("")
+                setSubmitState("")
+                userIdRef.current.disabled = false
+                userPwRef.current.disabled = false
+            }
+            setStatusCode(status)
         }
     }
 

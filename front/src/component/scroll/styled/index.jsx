@@ -38,21 +38,21 @@ export const ScrollSt = styled.div`
         position: absolute;
         top: 0;
         left: 50%;
-        width: 30px;
-        height: 50px;
-        margin-left: -15px;
+        width: 3rem;
+        height: 5rem;
+        margin-left: -1.5rem;
         border: 2px solid #fff;
         border-radius: 50px;
         box-sizing: border-box;
     }
     ul span::before {
         position: absolute;
-        top: 10px;
+        top: 1rem;
         left: 50%;
         content: "";
-        width: 6px;
-        height: 6px;
-        margin-left: -3px;
+        width: 0.6rem;
+        height: 0.6rem;
+        margin-left: -0.3rem;
         background-color: #fff;
         border-radius: 100%;
         animation: ${wheel} 2s infinite;

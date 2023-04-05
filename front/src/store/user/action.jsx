@@ -14,7 +14,7 @@ export const UserLogin = ({ userId, userPw }) => {
     return async (dispatch) => {
         try {
             const response = await request.post("/auth", { userId, userPw })
-            console.log(response)
+            console.log(response, 123123)
             const { status } = response
             if (status === 200) {
                 dispatch(RequestSuccess({ isLogin: true, data: { userId } }))
@@ -25,18 +25,27 @@ export const UserLogin = ({ userId, userPw }) => {
         }
     }
 }
-export const UserLogout = ({ userId }) => {
+export const UserLogout = () => {
     return async (dispatch) => {
         try {
-            const response = await request.get("/auth", { userId })
-            const { status } = response
+            const response = await request.get("/auth")
+            console.log(response)
+            const { status } = response.data
             if (status === 200) {
-                dispatch(RequestSuccess({ isLogin: false, data: { userId } }))
+                dispatch(RequestSuccess({ isLogin: false, userId: "" }))
             }
             return status
         } catch (error) {
             dispatch(RequestError(error))
         }
+    }
+}
+export const UserSignUp = ({ userId, userPw }) => {
+    return async (dispatch) => {
+        try {
+            const response = await request.post("/user", { userId, userPw })
+            return response.data.status
+        } catch (error) {}
     }
 }
 export const UserCheck = () => {

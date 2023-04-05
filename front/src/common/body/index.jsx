@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const BodyWrap = styled.div`
     position: relative;
-    width: 110rem;
+    width: 57%;
     height: 100%;
     color: #cccccc;
     /* overflow-y: scroll; */
@@ -12,7 +12,7 @@ export const BodyWrap = styled.div`
     }
     .join {
         width: 100%;
-        padding: 13rem 30rem 10rem 4rem;
+        padding: 14.5% 20% 20% 4.5%;
         height: 100%;
         background-color: #242424;
     }

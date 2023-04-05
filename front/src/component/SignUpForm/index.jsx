@@ -1,11 +1,14 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { UserSignUp } from "../../store/user/action"
 import request from "../../utils/request"
 import { SignUpMessage } from "../message"
 import TypingEffect from "../Typing"
 
 export const SignUpForm = ({ state: prompt }) => {
     const [isIdDuplicates, setIsIdDuplicates] = useState(false)
+    const dispatch = useDispatch()
     const navigator = useNavigate()
     const [formState, setFormState] = useState({
         mode: "",
@@ -40,13 +43,21 @@ export const SignUpForm = ({ state: prompt }) => {
 
     const handleModeSubmit = (e) => {
         const { value, className } = e.target
-
         if (value.toUpperCase() === "Y") {
             e.target.disabled = true
             handleChange("mode", e)
         }
         if (className === "submit") {
-            navigator("/")
+            dispatch(
+                UserSignUp({
+                    userId: formState.userId,
+                    userPw: formState.userPw,
+                })
+            ).then((status) => {
+                if (status === 200) {
+                    navigator("/")
+                }
+            })
         }
     }
 

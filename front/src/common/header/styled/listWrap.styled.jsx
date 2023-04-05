@@ -1,11 +1,11 @@
 import styled from "styled-components"
 
 export const Ul = styled.ul`
-    width: 100%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 4rem 0 0 10rem;
+    /* padding: 4rem 0 0 5rem; */
     font-weight: bold;
     letter-spacing: 0.5rem;
     & + & {

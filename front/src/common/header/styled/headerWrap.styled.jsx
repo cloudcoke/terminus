@@ -2,8 +2,8 @@ import styled from "styled-components"
 
 export const HeaderWrap = styled.div`
     position: relative;
-    width: 40rem;
+    width: 19%;
     height: 100%;
-    margin-right: 17rem;
+    margin-right: 8%;
     background-color: #c8c8c8;
 `
