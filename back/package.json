@@ -44,9 +44,7 @@
 
     "sequelize-typescript": "^2.1.5",
 
-    "socket.io": "^4.6.1",
-
-    "typescript": "^5.0.3"
+    "socket.io": "^4.6.1"
 
   },
 
@@ -58,7 +56,9 @@
 
     "@types/node": "^18.15.11",
 
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+
+    "typescript": "^5.0.3"
 
   }
 
