@@ -23,7 +23,7 @@ const sequelize: Sequelize = new Sequelize({
 
 sequelize.addModels([User, Quiz, PointDown, PointUp, Options, Token, Comment]);
 
-export { User, Quiz, PointDown, PointUp };
+export { User, Quiz, PointDown, PointUp, Options, Token, Comment };
 
 export default sequelize;
 

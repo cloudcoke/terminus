@@ -12,11 +12,11 @@ const user: Users = {
     userPw: "1234",
 };
 
-export interface classModels<> {
-    User: ModelCtor<User>;
-    Quiz: ModelCtor<Quiz>;
-    PointUp: ModelCtor<PointUp>;
-    PointDown: ModelCtor<PointDown>;
+export interface ClassModels {
+    User?: ModelCtor<User>;
+    Quiz?: ModelCtor<Quiz>;
+    PointUp?: ModelCtor<PointUp>;
+    PointDown?: ModelCtor<PointDown>;
 }
 
 export interface Token {
@@ -27,10 +27,10 @@ class UserRepository {
     public User;
     public PointUp;
     public PointDown;
-    constructor({ User, Quiz, PointUp, PointDown }: classModels) {
-        this.User = User;
-        this.PointUp = PointUp;
-        this.PointDown = PointDown;
+    constructor({ User, PointUp, PointDown }: ClassModels) {
+        this.User = User!;
+        this.PointUp = PointUp!;
+        this.PointDown = PointDown!;
     }
 
     async signUp({ userId, userPw }: Users) {

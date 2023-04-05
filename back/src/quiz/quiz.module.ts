@@ -6,7 +6,7 @@ import service from "./quiz.service";
 import controller from "./quiz.controller";
 import { ModelCtor } from "sequelize-typescript";
 
-const Repository = new repository(Quiz as ModelCtor<Quiz>);
+const Repository = new repository({ Quiz });
 const QuizService = new service({ Repository });
 export const QuizContoller = new controller({ QuizService });
 
