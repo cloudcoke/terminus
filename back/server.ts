@@ -4,7 +4,7 @@ import sequelize, { PointDown, PointUp } from "./models";
 import User from "./models/user.model";
 import Quiz from "./models/quiz.model";
 const { quizData } = require("./quiz/linux");
-const { quiz } = require("./quiz/linux");
+const { option } = require("./quiz/options");
 import { UserService } from "./src/user/user.module";
 // const { localPort } = config;
 
@@ -64,7 +64,7 @@ httpServer.listen(localPort, async () => {
     await quizData.map((v: any) => {
         new Quiz(v).save();
     });
-    await quiz.map((v: any) => {
+    await option.map((v: any) => {
         new Options(v).save();
     });
     await new PointUp({ userId: "admin1", quizId: 3, point: 10 }).save();
