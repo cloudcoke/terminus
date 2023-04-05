@@ -50,7 +50,7 @@ class QuizRepository {
         GROUP_CONCAT(B.optioncommand,".", B.prompt SEPARATOR ', ') AS options
     FROM Quiz AS A
     LEFT JOIN Options AS B ON A.command = B.command
-    WHERE A.command = "${command}"
+    WHERE A.command = "ls"
     GROUP BY A.command;
 `,
                 { logging: false }
