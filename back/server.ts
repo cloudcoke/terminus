@@ -63,9 +63,9 @@ httpServer.listen(localPort, async () => {
     // await quizData.map((v: any) => {
     //     new Quiz(v).save();
     // });
-    // await quiz.map((v: any) => {
-    //     new Options(v).save();
-    // });
+    await quiz.map((v: any) => {
+        new Options(v).save();
+    });
 
     console.log(`Back Start on ${localPort}`);
 });
