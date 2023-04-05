@@ -100,6 +100,7 @@ export const Termi = ({ height, socket, setSubmit, examMode }) => {
                         break
                     case "\r": // Enter
                         if (a.indexOf("vi") >= 0) break
+                        if (a.indexOf("exit") >= 0) break
                         handleEnter(a)
                         handleEmit(a)
                         a = ""
