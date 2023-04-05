@@ -12,14 +12,7 @@ import Options from "./option.model";
 import Token from "./token.model";
 import Comment from "./comment.model";
 
-const sequelize: Sequelize = new Sequelize({
-    host: db.host,
-    username: db.username,
-    password: db.password,
-    database: db.database,
-    dialect: db.dialect,
-    models: [path.join(__dirname, "*.model.ts")],
-});
+const sequelize: Sequelize = new Sequelize(db.database!, db.username!, db.password!, db);
 
 sequelize.addModels([User, Quiz, PointDown, PointUp, Options, Token, Comment]);
 

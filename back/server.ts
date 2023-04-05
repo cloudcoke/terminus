@@ -1,6 +1,6 @@
 // import app from "./app";
 // import config from "./config";
-import sequelize, { PointUp } from "./models";
+import sequelize, { PointDown, PointUp } from "./models";
 import User from "./models/user.model";
 import Quiz from "./models/quiz.model";
 const { quizData } = require("./quiz/linux");
@@ -67,13 +67,8 @@ httpServer.listen(localPort, async () => {
     await quiz.map((v: any) => {
         new Options(v).save();
     });
-    await new PointUp({ userId: "admin1", quizId: 1, point: 10 }).save();
-    await new PointUp({ userId: "admin1", quizId: 2, point: 10 }).save();
-    await new PointUp({ userId: "admin1", quizId: 4, point: 10 }).save();
-    await new PointUp({ userId: "admin1", quizId: 4, point: 10 }).save();
-    await new PointUp({ userId: "admin1", quizId: 5, point: 10 }).save();
-    await new PointUp({ userId: "admin1", quizId: 6, point: 10 }).save();
-    await new PointUp({ userId: "admin1", quizId: 7, point: 10 }).save();
+    await new PointUp({ userId: "admin1", quizId: 3, point: 10 }).save();
+    await new PointDown({ userId: "admin1", point: 10 }).save();
     console.log(`Back Start on ${localPort}`);
 });
 

@@ -1,5 +1,5 @@
 import { ModelCtor } from "sequelize-typescript";
-import { PointDown, PointUp, Quiz, User } from "../../models";
+import sequelize, { PointDown, PointUp, Quiz, User } from "../../models";
 
 export interface Users {
     userId: string;
@@ -46,19 +46,40 @@ class UserRepository {
         }
     }
 
-    async profile({ userId }: Users) {
+    async profilePoint({ userId }: Users) {
         try {
-            const profiledata = await this.User.findOne({ raw: true, where: { userId } });
-            console.log(profiledata, "rerere");
-            return profiledata;
+            const [data] = await sequelize.query(`SELECT
+'PointUp' AS SourceTable,
+PointUp.Point,
+PointUp.quizid,
+Quiz.command,
+PointUp.userId,
+PointUp.createdAt
+FROM User
+LEFT JOIN PointUp ON User.userId = PointUp.userId
+LEFT JOIN Quiz ON PointUp.quizid = Quiz.id
+WHERE User.userId = "${userId}"
+UNION
+SELECT
+'PointDown' AS SourceTable,
+PointDown.Point,
+NULL AS quizid,
+NULL AS command,
+PointDown.userId,
+PointDown.createdAt
+FROM User
+LEFT JOIN PointDown ON User.userId = PointDown.userId
+WHERE User.userId = "${userId}"
+ORDER BY createdAt ASC;`);
+            return data;
         } catch (error: any) {
-            throw new Error();
+            throw new Error(error);
         }
     }
 
     async checkValue({ userId }: Users): Promise<boolean> {
         try {
-            const [data] = await this.User.findAll({ where: { userId }, include: [PointDown, PointUp] });
+            const [data] = await this.User.findAll({ where: { userId } });
             const response = data ? false : true;
             return response;
         } catch (error: any) {

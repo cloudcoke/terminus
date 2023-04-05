@@ -10,12 +10,6 @@ import Quiz from "./quiz.model";
     collate: "utf8mb4_general_ci",
 })
 class PointDown extends Model {
-    @ForeignKey(() => Quiz)
-    @Column({
-        type: DataType.INTEGER,
-    })
-    public quizcommand!: number;
-
     @Column({
         type: DataType.INTEGER,
     })
@@ -26,9 +20,6 @@ class PointDown extends Model {
         type: DataType.STRING,
     })
     public userId!: string;
-
-    @BelongsTo(() => Quiz, { foreignKey: "quizId" })
-    public quiz!: Quiz;
 
     @BelongsTo(() => User)
     // @Column({
