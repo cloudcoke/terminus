@@ -51,6 +51,8 @@ export class QuizService {
                     const [command, prompt] = v.split(".");
                     return { command, prompt };
                 });
+            } else {
+                delete quiz.options;
             }
             return quiz;
         } catch (error: any) {
