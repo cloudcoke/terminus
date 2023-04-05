@@ -42,6 +42,7 @@ class QuizRepository {
         A.exam, 
         A.command, 
         A.answer,
+        A.prompt,
         A.setting, 
         A.hint,
         A.difficulty,
