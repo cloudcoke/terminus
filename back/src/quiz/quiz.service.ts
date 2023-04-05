@@ -1,5 +1,5 @@
 import { response } from "express";
-import repository, { Kind, Quizs, Optiontype } from "./quiz.repository";
+import repository, { Kind, Quizs, Optiontype, PointType } from "./quiz.repository";
 
 interface ServiceType {
     Repository: repository;
@@ -57,6 +57,13 @@ export class QuizService {
             return quiz;
         } catch (error: any) {
             new Error(error);
+        }
+    }
+    async point({ kind, command, userId }: PointType) {
+        try {
+            this.Repository.pointUp({ kind, command, userId });
+        } catch (error: any) {
+            throw new Error(error);
         }
     }
 }

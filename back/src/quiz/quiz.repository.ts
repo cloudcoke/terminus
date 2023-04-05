@@ -1,6 +1,6 @@
-import { Model, ModelCtor } from "sequelize-typescript";
-import sequelize, { PointDown, PointUp, Quiz, User } from "../../models";
-import Options from "../../models/option.model";
+import sequelize from "../../models";
+import { ClassModels, Users } from "../user/user.repository";
+
 export interface Kind {
     kind: string;
 }
@@ -9,27 +9,21 @@ export interface Quizs extends Kind {
     command: string;
 }
 
+export interface PointType extends Quizs, Users {}
+
 export interface Optiontype {
     command: string;
     prompt: string;
 }
 
-interface Quiztype {
-    id: number;
-    exam: string;
-    command: string;
-    answer: string | undefined;
-    setting: string | undefined;
-    hint: string | undefined;
-    difficulty: "easy" | "middle" | "hard";
-    category: "linux" | "mysql";
-    options: Optiontype[] | undefined;
-}
-
 class QuizRepository {
-    public Quiz: ModelCtor<Quiz>;
-    constructor(Quiz: ModelCtor<Quiz>) {
-        this.Quiz = Quiz;
+    public Quiz;
+    public PointUp;
+    public PointDown;
+    constructor({ Quiz, PointUp, PointDown }: ClassModels) {
+        this.Quiz = Quiz!;
+        this.PointUp = PointUp!;
+        this.PointDown = PointDown!;
     }
 
     async getList({ kind }: Kind) {
@@ -73,6 +67,13 @@ class QuizRepository {
             //     ],
             // });
             return questions;
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
+
+    async pointUp({ userId }: PointType) {
+        try {
         } catch (error: any) {
             throw new Error(error);
         }
