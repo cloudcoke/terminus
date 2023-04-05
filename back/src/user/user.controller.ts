@@ -16,7 +16,7 @@ class UserContoller {
             if (!userId && !userPw) throw "입력값이 없습니다.";
             const data = await this.UserService.inputUser({ userId, userPw });
             if (data) {
-                res.json({ data, status: 200 });
+                return res.json({ data, status: 200 });
             }
             res.json({ data, status: 403, message: "회원가입이 완료되지 않았습니다" });
         } catch (error) {
