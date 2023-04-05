@@ -8,17 +8,17 @@ import { useLocation } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 //test
-export const Termi = ({ height, socket, setSubmit, examMode }) => {
+export const Termi = ({ height, socket, setSubmit }) => {
     const terms = useRef(null)
     const term = useRef(null)
     const hidden = useRef(null)
     const [command, setCommand] = useState("")
     const [history, setHistory] = useState({ command: [], index: 0 })
     const [cleanCommand, setCleanCommand] = useState(false)
-    const userId = useSelector((state) => state.user)
-    console.log(userId)
     const location = useLocation().pathname
-
+    const { userId } = useSelector((state) => state.user.data)
+    const { examMode } = useSelector((state) => state.examMode)
+    console.log(examMode)
     let a = ""
     const handleKeyDown = (e) => {
         // e.preventDefault()
@@ -69,6 +69,7 @@ export const Termi = ({ height, socket, setSubmit, examMode }) => {
             const handleEmit = (prev) => {
                 socket.emit("send", prev)
             }
+            socket.emit("user", userId)
             socket.on("data", (datar) => {
                 term.current.write(`${datar}`)
             })
@@ -148,7 +149,11 @@ export const Termi = ({ height, socket, setSubmit, examMode }) => {
                         />
                         <Button text="Next" height="4" />
                     </CenterBtn>
-                    <Button text="Submit" height="4" setSubmit={setSubmit} />
+                    {examMode ? (
+                        <Button text="Submit" height="4" setSubmit={setSubmit} />
+                    ) : (
+                        <div style={{ width: "10rem", height: "4rem" }}></div>
+                    )}
                 </BtnWrap>
             )}
         </>

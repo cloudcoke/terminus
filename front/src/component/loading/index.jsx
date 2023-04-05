@@ -26,6 +26,7 @@ const Li = styled.li`
     width: 4rem;
     height: 9rem;
     animation: ${pulsate} 1.8s ease-in-out infinite;
+
     & + & {
         margin-left: 3rem;
     }

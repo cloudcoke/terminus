@@ -15,7 +15,7 @@ export const Quiz = () => {
     return (
         <>
             <Prompt />
-            <Termi height={65} socket={socket} setSubmit={setSubmit} />
+            <Termi height={60} socket={socket} setSubmit={setSubmit} />
             {submit && <Submit setSubmit={setSubmit} />}
         </>
     )

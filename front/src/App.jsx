@@ -14,6 +14,8 @@ const Wrap = styled.div`
     height: 100vh;
 `
 const App = () => {
+    const Landscape = window.innerWidth > window.innerHeight && window.innerWidth > 767
+    console.log(Landscape)
     const dispatch = useDispatch()
     const { isMode, list } = useSelector((state) => state.mode)
     const Liist = Array.from(list)
@@ -21,13 +23,15 @@ const App = () => {
         dispatch(ModeList(isMode))
     }, [])
 
-    return (
+    return Landscape ? (
         <Wrap>
             <Header List={Liist} />
             <BodyWrap>
                 <AppRouter List={Liist} />
             </BodyWrap>
         </Wrap>
+    ) : (
+        <Wrap>지원 준비중입니다.</Wrap>
     )
 }
 

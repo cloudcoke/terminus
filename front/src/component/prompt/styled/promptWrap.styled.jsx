@@ -2,17 +2,22 @@ import styled from "styled-components"
 
 export const PromptWrap = styled.div`
     width: 100%;
-    height: 25%;
+    height: 30%;
     background-color: #242424;
     font-size: 1.6rem;
     padding: 5rem 5rem 5rem 10rem;
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
+    overflow-y: scroll;
 
     & > .option {
         display: flex;
+        flex-direction: column;
         justify-content: flex-start;
-        align-items: center;
+        align-items: flex-start;
+        & > div + div {
+            margin-top: 1rem;
+        }
     }
 `

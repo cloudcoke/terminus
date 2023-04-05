@@ -16,7 +16,7 @@ export const ModeList = (mode) => {
         try {
             const kind = mode ? "linux" : "sql"
             const response = await request.get(`/quiz/${kind}`)
-            dispatch(ChangeList(response.data))
+            dispatch(ChangeList({ list: response.data, kind }))
             return response
         } catch (error) {}
     }

@@ -4,15 +4,15 @@ import { Quiz } from "../pages"
 export const BodyRoute = ({ list }) => {
     return (
         <Routes>
-            <Route path="easy/*">
+            <Route path="linux/*">
                 <Route path=":command" element={<Quiz list={list} />} />
             </Route>
-            <Route path="middle/*">
+            <Route path="mysql/*">
                 <Route path=":command" element={<Quiz list={list} />} />
             </Route>
-            <Route path="hard/*">
+            {/* <Route path="hard/*">
                 <Route path=":command" element={<Quiz list={list} />} />
-            </Route>
+            </Route> */}
         </Routes>
     )
 }

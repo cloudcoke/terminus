@@ -9,7 +9,7 @@ export const TermWrap = styled.div`
     .xterm-viewport {
         background-color: #242424 !important;
         overflow-y: scroll;
-        height: 100%;
+        height: 95%;
     }
     .xterm-dom-renderer-owner-1 .xterm-rows {
         /* color: #029502 !important; */
