@@ -1,10 +1,11 @@
 // import app from "./app";
 // import config from "./config";
-import sequelize from "./models";
+import sequelize, { PointUp } from "./models";
 import User from "./models/user.model";
 import Quiz from "./models/quiz.model";
 const { quizData } = require("./quiz/linux");
 const { quiz } = require("./quiz/linux");
+import { UserService } from "./src/user/user.module";
 // const { localPort } = config;
 
 // app.listen(localPort, async () => {
@@ -59,14 +60,20 @@ io.on("connection", (socket) => {
 
 httpServer.listen(localPort, async () => {
     await sequelize.sync({ force: true });
-    await new User({ userId: "admin1", userPw: "1234qwer!", nickName: "admin1" }).save();
+    await UserService.inputUser({ userId: "admin1", userPw: "admin1" });
     await quizData.map((v: any) => {
         new Quiz(v).save();
     });
     await quiz.map((v: any) => {
         new Options(v).save();
     });
-
+    await new PointUp({ userId: "admin1", quizId: 1, point: 10 }).save();
+    await new PointUp({ userId: "admin1", quizId: 2, point: 10 }).save();
+    await new PointUp({ userId: "admin1", quizId: 4, point: 10 }).save();
+    await new PointUp({ userId: "admin1", quizId: 4, point: 10 }).save();
+    await new PointUp({ userId: "admin1", quizId: 5, point: 10 }).save();
+    await new PointUp({ userId: "admin1", quizId: 6, point: 10 }).save();
+    await new PointUp({ userId: "admin1", quizId: 7, point: 10 }).save();
     console.log(`Back Start on ${localPort}`);
 });
 

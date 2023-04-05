@@ -46,9 +46,10 @@ class UserRepository {
         }
     }
 
-    async profile({ token }: Token) {
+    async profile({ userId }: Users) {
         try {
-            const profiledata = await this.User.findOne({ raw: true, where: { token } });
+            const profiledata = await this.User.findOne({ raw: true, where: { userId } });
+            console.log(profiledata, "rerere");
             return profiledata;
         } catch (error: any) {
             throw new Error();
@@ -57,7 +58,7 @@ class UserRepository {
 
     async checkValue({ userId }: Users): Promise<boolean> {
         try {
-            const [data] = await this.User.findAll({ where: { userId } });
+            const [data] = await this.User.findAll({ where: { userId }, include: [PointDown, PointUp] });
             const response = data ? false : true;
             return response;
         } catch (error: any) {

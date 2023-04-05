@@ -10,6 +10,6 @@ import service from "./user.service";
 import controller from "./user.controller";
 
 const UserRepository = new repository({ User, PointUp, PointDown, Quiz });
-const UserService = new service({ UserRepository, jwt });
+export const UserService = new service({ UserRepository, jwt });
 export const UserContoller = new controller({ UserService });
 
