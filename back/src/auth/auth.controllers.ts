@@ -16,14 +16,15 @@ class AuthContoller {
             const { userId, userPw } = req.body;
             if (!userId || !userPw) throw "입력된 정보가 없습니다.";
             const token = await this.authService.getToken({ userId, userPw });
-            res.json(token);
+            console.log(token);
+            if (true) res.status(200).cookie("token", token).json(token);
         } catch (error) {
             next(error);
         }
     }
     logOut(req: Request, res: Response, next: NextFunction) {
         try {
-            console.log("logout");
+            res.cookie("token", "", { expires: new Date(0) });
         } catch (error) {
             next(error);
         }

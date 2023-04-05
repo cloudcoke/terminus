@@ -38,11 +38,11 @@ class User extends Model {
     })
     public userPw!: string;
 
-    @AllowNull(false)
-    @Column({
-        type: DataType.STRING(32),
-    })
-    public nickName!: string;
+    // @AllowNull(false)
+    // @Column({
+    //     type: DataType.STRING(32),
+    // })
+    // public nickName!: string;
 }
 
 export default User;
