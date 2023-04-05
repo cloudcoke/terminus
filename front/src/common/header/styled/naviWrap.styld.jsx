@@ -5,6 +5,10 @@ export const Nav = styled.div`
     overflow-y: scroll;
     width: 100%;
     height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
     ::-webkit-scrollbar {
         width: 0;
         height: 0;

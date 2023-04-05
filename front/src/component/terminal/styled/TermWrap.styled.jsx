@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const TermWrap = styled.div`
-    width: 110rem;
+    width: 100%;
     height: ${(props) => (props.height ? props.height + "%" : "100%")};
     font-size: 2rem;
     font-family: "D2Coding";

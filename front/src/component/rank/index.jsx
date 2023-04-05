@@ -6,7 +6,7 @@ export const Card = ({ rank }) => {
     return (
         <>
             <CardWrapSt>
-                <GraphWrap height={30} flex>
+                <GraphWrap height={26} flex>
                     <Rank>
                         <Ranking />
                     </Rank>
