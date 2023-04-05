@@ -1,9 +1,11 @@
 import { useState } from "react"
 import { memo } from "react"
+import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 import { Nav, Ul } from "../styled"
 
 export const Navi = memo(({ List }) => {
+    const { kind } = useSelector((state) => state.mode)
     const [isView, setIsView] = useState({
         easy: { id: "easy", isOpen: false },
         middle: { id: "middle", isOpen: false },
@@ -26,7 +28,7 @@ export const Navi = memo(({ List }) => {
                 <>
                     {v.command.map((item) => (
                         <li key={item.command}>
-                            <NavLink to={`/quiz/${v.difficulty}/${item.command}`}>{item.command}</NavLink>
+                            <NavLink to={`/quiz/${kind}/${item.command}`}>{item.command}</NavLink>
                         </li>
                     ))}
                 </>

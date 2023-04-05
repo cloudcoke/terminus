@@ -33,6 +33,9 @@ export const Button = (props) => {
         const handleSocket = () => {
             socket.emit("send", "clear")
         }
+        const handleClose = () => {
+            navigator("/")
+        }
         const hadleSubmit = () => {
             setSubmit(true)
         }
@@ -66,6 +69,12 @@ export const Button = (props) => {
             case "Clear":
                 return (
                     <div className="NLink" onClick={handleSocket}>
+                        {text}
+                    </div>
+                )
+            case "닫기":
+                return (
+                    <div className="NLink" onClick={handleClose}>
                         {text}
                     </div>
                 )

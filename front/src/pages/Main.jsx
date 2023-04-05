@@ -25,8 +25,18 @@ export const Main = () => {
     return (
         <>
             <Div ref={mainWrap} onScroll={handleScroll}>
-                <Loading />
-                <Scroll />
+                <div
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "pink",
+                        backgroundAttachment: "fixed",
+                        backgroundPosition: "50%",
+                    }}
+                >
+                    <Loading />
+                    <Scroll />
+                </div>
                 <Card rank={rank} />
             </Div>
         </>
