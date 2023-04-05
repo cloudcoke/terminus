@@ -58,11 +58,11 @@ io.on("connection", (socket) => {
 });
 
 httpServer.listen(localPort, async () => {
-    await sequelize.sync({ force: false });
-    //   await new User({ userId: "admin1", userPw: "1234qwer!", nickName: "admin1" }).save()
-    // await quizData.map((v: any) => {
-    //     new Quiz(v).save();
-    // });
+    await sequelize.sync({ force: true });
+    await new User({ userId: "admin1", userPw: "1234qwer!", nickName: "admin1" }).save();
+    await quizData.map((v: any) => {
+        new Quiz(v).save();
+    });
     await quiz.map((v: any) => {
         new Options(v).save();
     });
