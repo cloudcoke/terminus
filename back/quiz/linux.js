@@ -346,4 +346,4 @@ const quizData = [
   },
 ]
 
-module.exports = quizData
+module.exports = { quizData }
