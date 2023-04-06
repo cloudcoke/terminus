@@ -13,10 +13,10 @@ const user: Users = {
 };
 
 export interface ClassModels {
-    User?: ModelCtor<User>;
-    Quiz?: ModelCtor<Quiz>;
-    PointUp?: ModelCtor<PointUp>;
-    PointDown?: ModelCtor<PointDown>;
+    User: ModelCtor<User>;
+    Quiz: ModelCtor<Quiz>;
+    PointUp: ModelCtor<PointUp>;
+    PointDown: ModelCtor<PointDown>;
 }
 
 export interface Token {
@@ -28,9 +28,9 @@ class UserRepository {
     public PointUp;
     public PointDown;
     constructor({ User, PointUp, PointDown }: ClassModels) {
-        this.User = User!;
-        this.PointUp = PointUp!;
-        this.PointDown = PointDown!;
+        this.User = User;
+        this.PointUp = PointUp;
+        this.PointDown = PointDown;
     }
 
     async signUp({ userId, userPw }: Users) {

@@ -1,5 +1,4 @@
-import { response } from "express";
-import repository, { Kind, Quizs, Optiontype, PointType } from "./quiz.repository";
+import repository, { Kind, Quizs } from "./quiz.repository";
 
 interface ServiceType {
     Repository: repository;
@@ -8,6 +7,12 @@ interface ServiceType {
 interface CommandList {
     idx?: number;
     command: string;
+}
+
+interface Checks {
+    answer: string;
+    quizAnswer: string;
+    userId: string | undefined;
 }
 
 interface Lists {
@@ -21,13 +26,20 @@ export class QuizService {
         this.Repository = Repository;
     }
 
+    // async checkid({ answer, quizAnswer, userId }: Checks) {
+    //     if (answer === quizAnswer) {
+    //         if (userId) await this.Repository.pointUp({ userId });
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
     async refacList({ kind }: Kind) {
         try {
             const response = await this.Repository.getList({ kind });
             if (response) {
                 const CommandList = (difficulty: string) => {
                     let a: CommandList[] = [];
-
                     response.filter((v) => v.difficulty === difficulty).map((v) => a.push({ command: v.command }));
                     return a;
                 };
@@ -56,12 +68,22 @@ export class QuizService {
             }
             return quiz;
         } catch (error: any) {
-            new Error(error);
+            throw new Error(error);
         }
     }
-    async point({ kind, command, userId }: PointType) {
+
+    async answerCheck({ command, userId, answer }: Quizs) {
         try {
-            this.Repository.pointUp({ kind, command, userId });
+            const quiz = await this.Repository.getQuiz({ command });
+            if (answer === quiz.answer) {
+                let secceced;
+                if (userId) {
+                    secceced = await this.Repository.pointUp({ userId, quizId: quiz.id });
+                    return secceced ? true : "이미 처리된 정답입니다.";
+                }
+                return true;
+            }
+            return false;
         } catch (error: any) {
             throw new Error(error);
         }

@@ -26,9 +26,10 @@ class UserContoller {
 
     async profile(req: Request, res: Response, next: NextFunction) {
         try {
+            const cookie = req.cookies;
+            console.log(cookie);
             const { token } = req.params;
             const profile = await this.UserService.getProfile({ token });
-            console.log(profile!.point[0]!.createdAt!);
             res.json(profile);
         } catch (error) {
             next(error);

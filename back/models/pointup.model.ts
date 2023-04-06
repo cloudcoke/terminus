@@ -1,4 +1,4 @@
-import { Model, Table, Column, AllowNull, DataType, BelongsTo, ForeignKey } from "sequelize-typescript";
+import { Model, Table, Column, AllowNull, DataType, BelongsTo, ForeignKey, PrimaryKey } from "sequelize-typescript";
 import User from "./user.model";
 import Quiz from "./quiz.model";
 
@@ -10,6 +10,7 @@ import Quiz from "./quiz.model";
     collate: "utf8mb4_general_ci",
 })
 class PointUp extends Model {
+    @PrimaryKey
     @ForeignKey(() => Quiz)
     @Column({
         type: DataType.INTEGER,
@@ -21,6 +22,7 @@ class PointUp extends Model {
     })
     public point!: number;
 
+    @PrimaryKey
     @ForeignKey(() => User)
     @Column({
         type: DataType.STRING,
