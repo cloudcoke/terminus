@@ -345,3 +345,5 @@ const quizData = [
     category: "linux",
   },
 ]
+
+module.exports = quizData
