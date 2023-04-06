@@ -1,12 +1,19 @@
+import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { Logo } from "../common/header/styled"
 import { Button } from "../component"
 import BashLogo from "../component/bashlogo"
 import { ProfileCard, ProfileLogo, ProfileWrap, USER } from "../component/profile"
+import request from "../utils/request"
 
 export const Profile = () => {
     const { userId } = useSelector((state) => state.user.data)
-    console.log(userId)
+
+    const handleProfile = async () => {
+        const response = await request.get(`/user/profile/${userId}`)
+        console.log(response)
+    }
+    useEffect(() => {}, [])
     return (
         <>
             <ProfileWrap>

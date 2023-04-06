@@ -4,7 +4,7 @@ import { BodyWrap } from "./common/body"
 import { AppRouter } from "./routes"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { ModeList } from "./store"
+import { ChangeEnv, ModeList } from "./store"
 
 const Wrap = styled.div`
     display: flex;
@@ -15,12 +15,13 @@ const Wrap = styled.div`
 `
 const App = () => {
     const Landscape = window.innerWidth > window.innerHeight && window.innerWidth > 767
-    console.log(Landscape)
+    const connectEnv = window.innerWidth < 767 ? "null" : window.innerWidth < 1250 ? "mobile" : "desctop"
     const dispatch = useDispatch()
-    const { isMode, list } = useSelector((state) => state.mode)
+    const { isMode, list, env } = useSelector((state) => state.mode)
     const Liist = Array.from(list)
     useEffect(() => {
         dispatch(ModeList(isMode))
+        dispatch(ChangeEnv({ env: connectEnv }))
     }, [])
 
     return Landscape ? (

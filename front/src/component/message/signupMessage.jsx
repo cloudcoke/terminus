@@ -1,5 +1,4 @@
 export const SignUpMessage = ({ isIdDuplicates, userId, userPw, userPwCheck }) => {
-    console.log(isIdDuplicates)
     if (userId && isIdDuplicates) {
         return (
             <>

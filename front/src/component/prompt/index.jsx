@@ -11,11 +11,9 @@ export const Prompt = () => {
     const { examMode } = useSelector((state) => state.examMode)
     const [kind, command] = location.pathname.slice(1).split("quiz/")[1].split("/")
 
-    let List
-    console.log(command)
+    // 커맨드가 바뀔 때마다 요청
     const quest = async () => {
         const response = await request.get(`/quiz/${kind}/${command}`)
-        console.log(response.data, 111111222222)
         setQuiz(response.data)
     }
 

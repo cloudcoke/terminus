@@ -1,34 +1,39 @@
+import { useEffect } from "react"
 import { useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink, useLocation, useNavigate } from "react-router-dom"
 import { changeExamMode } from "../../store/examMode"
+import request from "../../utils/request"
 import { Btn } from "./styled"
 
 export const Button = (props) => {
+    //
+    //
     const dispatch = useDispatch()
     const navigator = useNavigate()
     const location = useLocation()
-    const { text, height, long, background, socket, setSubmit, fontsize } = props
+    const { text, height, long, background, socket, answerSubmit, fontsize } = props
+    //
+    //
     const NAV = ({ text }) => {
-        const level = {
-            easy: 0,
-            middle: 1,
-            hard: 2,
-        }
-        const list = useSelector((state) => state)
-        const difficulty = useMemo(() => location.pathname.slice(1).split("/")[1])
+        const { kind, list: naviList } = useSelector((state) => state.mode)
         const currentCommand = useMemo(() => location.pathname.slice(1).split("/")[2])
 
-        const handlePrevBtn = () => {
-            const presentIndex = list.mode.list[level[difficulty]].command.map((v) => v.command).indexOf(currentCommand)
-            const prevObj = list.mode.list[level[difficulty]].command[presentIndex - 1]
-            if (prevObj) navigator(`/quiz/${difficulty}/${prevObj.command}`)
-        }
-        const handleNextBtn = () => {
-            setSubmit && setSubmit(false)
-            const presentIndex = list.mode.list[level[difficulty]].command.map((v) => v.command).indexOf(currentCommand)
-            const nextObj = list.mode.list[level[difficulty]].command[presentIndex + 1]
-            if (nextObj) navigator(`/quiz/${difficulty}/${nextObj.command}`)
+        const handleBtn = (e) => {
+            const cases = e.target.innerHTML
+            const includesArray = naviList
+                .map((v) => v.command)
+                .find((array) => array.some((obj) => obj.command === currentCommand))
+                .map((v) => v.command)
+            const presentIndex = includesArray.indexOf(currentCommand)
+            if (cases === "Next" || cases === "Next Level") {
+                // setSubmit && setSubmit(false)
+                const nextCommand = includesArray[presentIndex + 1]
+                if (nextCommand) navigator(`/quiz/${kind}/${nextCommand}`)
+            } else if (cases === "Prev") {
+                const prevCommand = includesArray[presentIndex - 1]
+                if (prevCommand) navigator(`/quiz/${kind}/${prevCommand}`)
+            }
         }
         const handleSocket = () => {
             socket.emit("send", "clear")
@@ -36,8 +41,12 @@ export const Button = (props) => {
         const handleClose = () => {
             navigator("/")
         }
-        const hadleSubmit = () => {
-            setSubmit(true)
+        const hadleSubmit = async () => {
+            const { answer, setSubmit } = answerSubmit
+            if (answer) {
+                const response = await request.post("/quiz/exam")
+                setSubmit(true)
+            }
         }
 
         switch (text) {
@@ -54,15 +63,10 @@ export const Button = (props) => {
                     </div>
                 )
             case "Prev":
-                return (
-                    <div className="NLink" onClick={handlePrevBtn}>
-                        {text}
-                    </div>
-                )
             case "Next":
             case "Next Level":
                 return (
-                    <div className="NLink" onClick={handleNextBtn}>
+                    <div className="NLink" onClick={handleBtn}>
                         {text}
                     </div>
                 )
@@ -86,7 +90,7 @@ export const Button = (props) => {
     return (
         <>
             <Btn height={height} long={long} background={background} fontsize={fontsize}>
-                <NAV text={text} />
+                <NAV text={text} answerSubmit={answerSubmit} />
             </Btn>
         </>
     )
