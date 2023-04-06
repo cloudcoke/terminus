@@ -68,7 +68,6 @@ export const SignUpForm = ({ state: prompt }) => {
             case true:
                 const result = await request.post("/user/check", { userId: value })
                 const data = result.data.data
-                console.log(data)
                 if (data === true) {
                     e.target.disabled = true
                     setIsIdDuplicates(true)

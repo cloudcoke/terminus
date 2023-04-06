@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux"
 import request from "../../utils/request"
-import { CHANGE_MODE, CHANGE_LIST } from "./type"
+import { CHANGE_MODE, CHANGE_LIST, CHANGE_ENV } from "./type"
 
 export const ChangeMode = (payload) => ({
     type: CHANGE_MODE,
@@ -8,6 +7,10 @@ export const ChangeMode = (payload) => ({
 })
 export const ChangeList = (payload) => ({
     type: CHANGE_LIST,
+    payload,
+})
+export const ChangeEnv = (payload) => ({
+    type: CHANGE_ENV,
     payload,
 })
 

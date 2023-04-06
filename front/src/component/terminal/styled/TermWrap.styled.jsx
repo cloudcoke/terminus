@@ -9,7 +9,7 @@ export const TermWrap = styled.div`
     .xterm-viewport {
         background-color: #242424 !important;
         overflow-y: scroll;
-        height: 95%;
+        height: 100%;
     }
     .xterm-dom-renderer-owner-1 .xterm-rows {
         /* color: #029502 !important; */
@@ -20,6 +20,6 @@ export const TermWrap = styled.div`
         margin-left: 0.2rem;
     }
     & > div {
-        padding: 4rem;
+        padding: 7rem 5rem;
     }
 `
