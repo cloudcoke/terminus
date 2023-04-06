@@ -46,9 +46,10 @@ class UserRepository {
         }
     }
 
-    async profilePoint({ userId }: Users) {
+    async profilePoint({ userId }: Users): Promise<any> {
         try {
-            const [data] = await sequelize.query(`SELECT
+            const [data] = await sequelize.query(
+                `SELECT
 'PointUp' AS SourceTable,
 PointUp.Point,
 PointUp.quizid,
@@ -70,7 +71,9 @@ PointDown.createdAt
 FROM User
 LEFT JOIN PointDown ON User.userId = PointDown.userId
 WHERE User.userId = "${userId}"
-ORDER BY createdAt ASC;`);
+ORDER BY createdAt ASC;`,
+                { logging: false }
+            );
             return data;
         } catch (error: any) {
             throw new Error(error);
