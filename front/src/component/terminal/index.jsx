@@ -79,7 +79,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
                 fontFamily: "D2Coding",
                 cursorBlink: true,
                 fontSize: 18,
-                letterSpacing: env === "mobile" ? 6 : 2,
+                letterSpacing: env === "mobile" ? 8 : 2,
                 lineHeight: 1.3,
                 padding: {
                     // top: 10,
