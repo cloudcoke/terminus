@@ -28,9 +28,8 @@ export class UserService {
             new Error(error);
         }
     }
-    async getProfile({ token }: Token) {
+    async getProfile({ userId }: Users) {
         try {
-            const { userId } = this.jwt.verifyToken(token);
             const data = await this.UserRepository.profilePoint({ userId });
             const point = {
                 userId,
@@ -48,6 +47,15 @@ export class UserService {
             return response;
         } catch (error: any) {
             new Error(error);
+        }
+    }
+
+    async ranked() {
+        try {
+            const response = this.UserRepository.getRank();
+            return response;
+        } catch (error: any) {
+            throw new Error(error);
         }
     }
 }

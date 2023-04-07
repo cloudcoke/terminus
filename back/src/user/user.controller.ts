@@ -26,10 +26,8 @@ class UserContoller {
 
     async profile(req: Request, res: Response, next: NextFunction) {
         try {
-            const cookie = req.cookies;
-            console.log(cookie);
-            const { token } = req.params;
-            const profile = await this.UserService.getProfile({ token });
+            const { userId } = req.params;
+            const profile = await this.UserService.getProfile({ userId });
             res.json(profile);
         } catch (error) {
             next(error);
@@ -52,6 +50,15 @@ class UserContoller {
             } else {
                 res.json({ data: checked, status: 200 });
             }
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async ranking(req: Request, res: Response, next: NextFunction) {
+        try {
+            const data = await this.UserService.ranked();
+            res.json(data);
         } catch (error) {
             next(error);
         }

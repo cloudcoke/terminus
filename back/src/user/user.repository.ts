@@ -89,7 +89,16 @@ ORDER BY createdAt ASC;`,
             throw new Error(error);
         }
     }
-}
 
+    async getRank() {
+        try {
+            const data = await this.PointUp.findAll({ attributes: ["userId", [sequelize.fn("sum", sequelize.col("point")), "totalPoints"]], group: ["userId"] });
+            return data;
+            console.log(data);
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
+}
 export default UserRepository;
 
