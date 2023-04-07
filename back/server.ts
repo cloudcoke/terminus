@@ -27,6 +27,7 @@ const { localPort } = config
 const shell = os.platform() === "win32" ? "powershell.exe" : "bash"
 
 const terminals = new Map()
+const userName = new Map()
 const io = new Server(httpServer, {
   cors: {
     origin: true,
@@ -42,6 +43,7 @@ io.on("connection", (socket) => {
 
   terminals.set(socket, term)
   socket.on("user", (userId: string) => {
+    userName.set(socket, userId)
     term.write(`bash /home/ubuntu/user.sh -u ${userId}\r`)
     term.write(`clear\r`)
   })
@@ -59,6 +61,9 @@ io.on("connection", (socket) => {
   })
 
   socket.on("disconnect", () => {
+    const users = userName.get(socket)
+    term.write(`logout\r`)
+    term.write(`sudo userdel -r ${users}\r`)
     console.log("프로세스 종료", 111)
     term.kill()
   })
