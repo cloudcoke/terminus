@@ -25,7 +25,7 @@ class App {
 
     errorHandler() {
         this.app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-            res.status(400).send(err.message);
+            res.send(err.message);
         });
     }
 }
