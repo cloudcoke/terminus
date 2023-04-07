@@ -20,9 +20,11 @@ export const Termi = ({ height, socket, setSubmit }) => {
     const { env } = useSelector((state) => state.mode)
     const command = location.split("/").pop()
     let commandInput = ""
-    const handleKeyDown = (e) => {
-        e.preventDefault()
-    }
+    // const handleKeyDown = (e) => {
+    //     if (e.keyCode !== 32) {
+    //         e.preventDefault()
+    //     }
+    // }
     const clearInput = (length) => {
         for (let i = 0; i < length; i++) {
             term.current.write("\b \b")
@@ -111,20 +113,17 @@ export const Termi = ({ height, socket, setSubmit }) => {
                         case "\u001b[A": //ArrowUp
                             setHistory((prev) => handleUp(prev))
                             break
-
                         case "\u0009":
-                            console.log(1)
-                            socket.emit("vi", term.buffer.cursorX)
+                            socket.emit("vi", "\t")
                             break
                         default:
+                            console.log(data, 123123)
                             term.current.write(data)
                             commandInput += data
                     }
                 }
                 if (viMode === true) {
                     const code = data.charCodeAt(0)
-                    console.dir(data)
-                    console.dir(code)
                     if (code === 3) {
                         handleEmit("SIGINT")
                         return
@@ -210,7 +209,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
     const answer = history.command[history.command.length - 1]
     return (
         <>
-            <TermWrap ref={terms} onKeyDown={handleKeyDown} tabIndex={0} height={height}>
+            <TermWrap ref={terms} tabIndex={0} height={height}>
                 <input type="hidden" ref={hidden} />
             </TermWrap>
             {location !== "/freeterminal" && (

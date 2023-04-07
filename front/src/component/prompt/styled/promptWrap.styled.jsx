@@ -9,15 +9,20 @@ export const PromptWrap = styled.div`
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
-    overflow-y: scroll;
-
+    & > .wwwrap {
+        overflow-y: scroll;
+        width: 100%;
+    }
+    .option + .option {
+        margin-top: 2rem;
+    }
     & > .option {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        & > div + div {
-            margin-top: 1rem;
-        }
+    }
+    .option > div + div {
+        margin-top: 1rem;
     }
 `

@@ -12,5 +12,5 @@ export const CommandST = styled.div`
     color: orange;
     padding: 0.3rem 0.6rem;
     margin-right: 0.3rem;
-    border-radius: 10%;
+    border-radius: 0.5rem;
 `
