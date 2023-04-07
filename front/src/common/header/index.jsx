@@ -11,9 +11,6 @@ export const Header = ({ List, Mode }) => {
         navigator("/")
     }
 
-    // const handleLogout = () => {
-    //     dispatch(UserLogout())
-    // }
     return (
         <>
             <HeaderWrap>

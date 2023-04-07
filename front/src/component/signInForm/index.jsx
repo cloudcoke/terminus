@@ -46,7 +46,6 @@ export const SignInForm = ({ state: prompt }) => {
             const userId = userIdRef.current.value
             const userPw = userPwRef.current.value
             const status = await dispatch(UserLogin({ userId, userPw }))
-            console.log(status)
             if (status === 200) {
                 setTimeout(() => {
                     navigate("/")

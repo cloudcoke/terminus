@@ -37,11 +37,13 @@ export const Prompt = () => {
 
     return !examMode ? (
         <PromptWrap>
-            <div className="option">
-                <CommandST>{quiz.command}</CommandST>
-                <div>: {quiz.prompt}</div>
+            <div className="wwwrap">
+                <div className="option">
+                    <CommandST>{quiz.command}</CommandST>
+                    <div>: {quiz.prompt}</div>
+                </div>
+                {quiz.options && option(quiz.options)}
             </div>
-            {quiz.options && option(quiz.options)}
         </PromptWrap>
     ) : (
         <PromptWrap>

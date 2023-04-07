@@ -11,4 +11,8 @@ export const ProfileCard = styled.div`
     align-items: center;
     background: #a4a4a4;
     background: linear-gradient(180deg, #e3e3e3 30%, #a4a4a4 100%);
+    .PointList {
+        padding: 2rem;
+        overflow-y: scroll;
+    }
 `
