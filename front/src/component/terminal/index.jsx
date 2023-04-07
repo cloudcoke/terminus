@@ -17,7 +17,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
     const location = useLocation().pathname
     const { userId } = useSelector((state) => state.user.data)
     const { examMode } = useSelector((state) => state.examMode)
-    const { env } = useSelector((state) => state.mode)
+    const { env, kind } = useSelector((state) => state.mode)
     const command = location.split("/").pop()
     let commandInput = ""
     // const handleKeyDown = (e) => {
@@ -199,7 +199,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
     }, [env])
     useEffect(() => {
         socket.emit("send", "clear")
-        socket.emit("command", command)
+        socket.emit("command", `${command}/${kind}`)
     }, [command])
 
     useEffect(() => {

@@ -8,11 +8,12 @@ export const USER = styled.div`
     height: 10%;
     font-size: 1.6rem;
     padding: 0 5rem;
-    color: #434343;
+    color: #444;
     & > div + div {
         margin-left: 2rem;
     }
     & > div {
+        margin-left: 5rem;
         height: 80%;
         display: flex;
         align-items: flex-end;
