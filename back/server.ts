@@ -42,7 +42,7 @@ io.on("connection", (socket) => {
 
   terminals.set(socket, term)
   socket.on("user", (userId: string) => {
-    term.write(`bash /home/ubuntu/user.sh\r -u ${userId}`)
+    term.write(`bash /home/ubuntu/user.sh -u ${userId}\r`)
     term.write(`clear\r`)
   })
 
