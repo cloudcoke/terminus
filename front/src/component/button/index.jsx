@@ -12,13 +12,13 @@ export const Button = (props) => {
     const dispatch = useDispatch()
     const navigator = useNavigate()
     const location = useLocation()
-    const { text, height, long, background, socket, answerSubmit, fontsize } = props
+    const { text, height, long, background, socket, answerSubmit, setSubmit, fontsize } = props
     //
     //
     const NAV = ({ text }) => {
         const { kind, list: naviList } = useSelector((state) => state.mode)
         const currentCommand = useMemo(() => location.pathname.slice(1).split("/")[2])
-
+        const { userId } = useSelector((state) => state.user.data)
         const handleBtn = (e) => {
             const cases = e.target.innerHTML
             const includesArray = naviList
@@ -27,13 +27,14 @@ export const Button = (props) => {
                 .map((v) => v.command)
             const presentIndex = includesArray.indexOf(currentCommand)
             if (cases === "Next" || cases === "Next Level") {
-                // setSubmit && setSubmit(false)
+                setSubmit && setSubmit(false)
                 const nextCommand = includesArray[presentIndex + 1]
                 if (nextCommand) navigator(`/quiz/${kind}/${nextCommand}`)
             } else if (cases === "Prev") {
                 const prevCommand = includesArray[presentIndex - 1]
                 if (prevCommand) navigator(`/quiz/${kind}/${prevCommand}`)
             }
+            socket.emit("send", "clear")
         }
         const handleSocket = () => {
             socket.emit("send", "clear")
@@ -44,8 +45,9 @@ export const Button = (props) => {
         const hadleSubmit = async () => {
             const { answer, setSubmit } = answerSubmit
             if (answer) {
-                const response = await request.post("/quiz/exam")
-                setSubmit(true)
+                const response = await request.post("/quiz/exam", { userId, command: currentCommand, answer })
+                const { data } = response.data
+                data && setSubmit(true)
             }
         }
 

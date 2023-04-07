@@ -9,7 +9,7 @@ const Div = styled.div`
     width: 100%;
     height: 100%;
     overflow-y: scroll;
-    scroll-snap-type: y mandatory;
+    background-attachment: fixed;
     position: relative;
 `
 export const Main = () => {
@@ -29,9 +29,6 @@ export const Main = () => {
                     style={{
                         width: "100%",
                         height: "100%",
-                        backgroundColor: "pink",
-                        backgroundAttachment: "fixed",
-                        backgroundPosition: "50%",
                     }}
                 >
                     <Loading />

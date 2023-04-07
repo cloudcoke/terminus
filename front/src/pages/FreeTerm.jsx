@@ -1,15 +1,10 @@
 import { Termi } from "../component/terminal"
-import io from "socket.io-client"
+import { memo, useEffect } from "react"
 
-export const FreeTerm = () => {
-    const domain = process.env.REACT_APP_BACKSERVER
-    const port = process.env.REACT_APP_PORT
-    const backserver = `${domain}:${port}`
-    const socket = io(backserver)
-
+export const FreeTerm = memo(({ socket }) => {
     return (
         <>
             <Termi socket={socket} />
         </>
     )
-}
+})

@@ -22,7 +22,7 @@ export const Profile = () => {
                         <BashLogo NoneTyping />
                     </ProfileLogo>
                     <USER>
-                        <div>{userId}</div>
+                        <div onClick={handleProfile}>{userId}</div>
                         <div>님의 정보</div>
                     </USER>
                     <div className="PointList"></div>
