@@ -16,7 +16,7 @@ class AuthContoller {
             const { userId, userPw } = req.body;
             if (!userId || !userPw) throw "입력된 정보가 없습니다.";
             const token = await this.authService.getToken({ userId, userPw });
-            if (true) res.status(200).cookie("token", token, { path: "/", secure: true, domain: "terminus.run" }).json(token);
+            if (true) res.cookie("token", token, { path: "/", secure: true, domain: "terminus.run" }).json({ data: token, status: 200 });
         } catch (error) {
             next(error);
         }

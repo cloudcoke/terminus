@@ -59,8 +59,8 @@ export class QuizService {
         try {
             const quiz = await this.Repository.getQuiz({ kind, command });
             if (quiz && quiz.options) {
-                quiz.options = quiz.options.split(",").map((v: any) => {
-                    const [command, prompt] = v.split(".");
+                quiz.options = quiz.options.split("!@#").map((v: any) => {
+                    const [command, prompt] = v.split("#@");
                     return { command, prompt };
                 });
             } else {
