@@ -5,7 +5,7 @@ export const Ul = styled.ul`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* padding: 4rem 0 0 5rem; */
+    font-family: "Youth";
     font-weight: bold;
     letter-spacing: 0.5rem;
     & + & {

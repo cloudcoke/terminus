@@ -1,12 +1,14 @@
 import { useState } from "react"
 import { useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
+import { changeExamMode } from "../../store"
 import request from "../../utils/request"
 import { PromptWrap, CommandST } from "./styled"
 
 export const Prompt = () => {
     const location = useLocation()
+    const dispatch = useDispatch()
     const [quiz, setQuiz] = useState({})
     const { examMode } = useSelector((state) => state.examMode)
     const [kind, command] = location.pathname.slice(1).split("quiz/")[1].split("/")
@@ -19,6 +21,9 @@ export const Prompt = () => {
 
     useEffect(() => {
         quest()
+        if (examMode === true) {
+            dispatch(changeExamMode())
+        }
     }, [command])
 
     const option = (options) => {

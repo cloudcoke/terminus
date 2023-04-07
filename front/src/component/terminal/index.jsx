@@ -13,24 +13,23 @@ export const Termi = ({ height, socket, setSubmit }) => {
     const terms = useRef(null)
     const term = useRef(null)
     const hidden = useRef(null)
-    const [command, setCommand] = useState("")
     const [history, setHistory] = useState({ command: [], index: 0 })
-    const [cleanCommand, setCleanCommand] = useState(false)
     const location = useLocation().pathname
     const { userId } = useSelector((state) => state.user.data)
     const { examMode } = useSelector((state) => state.examMode)
     const { env } = useSelector((state) => state.mode)
-    let a = ""
+    const command = location.split("/").pop()
+    let commandInput = ""
     const handleKeyDown = (e) => {
-        // e.preventDefault()
+        e.preventDefault()
     }
-
     const clearInput = (length) => {
         for (let i = 0; i < length; i++) {
             term.current.write("\b \b")
         }
     }
     const handleEnter = (a) => {
+        console.log(a)
         if (!a) return null
         setHistory((prev) => ({
             command: [...prev.command, a],
@@ -39,10 +38,6 @@ export const Termi = ({ height, socket, setSubmit }) => {
         clearInput(a.length)
     }
 
-    const clear = () => {
-        socket.emit("send", "clear")
-        setCleanCommand(!cleanCommand)
-    }
     const handleUp = (prev) => {
         if (!prev || !prev.command || prev.command.length === 0) {
             return { command: [], index: 0 }
@@ -53,6 +48,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
         const selectedCommand = command[newIndex]
         const prevCommand = command[newIndex + 1]
         if (newIndex >= 0) {
+            console.log(prevCommand)
             if (prevCommand) {
                 clearInput(prevCommand.length)
             }
@@ -63,9 +59,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
             }
         }
     }
-    const examSubmit = () => {}
     useEffect(() => {
-        if (cleanCommand) clear()
         if (!term.current && env) {
             const handleEmit = (prev) => {
                 socket.emit("send", prev)
@@ -79,16 +73,9 @@ export const Termi = ({ height, socket, setSubmit }) => {
                 fontFamily: "D2Coding",
                 cursorBlink: true,
                 fontSize: 18,
-                letterSpacing: env === "mobile" ? 8 : 2,
+                letterSpacing: env === "mobile" ? 6 : 2,
                 lineHeight: 1.3,
-                padding: {
-                    // top: 10,
-                    // right: 10,
-                    bottom: 10,
-                    // left: 10,
-                },
             })
-            console.log(term.current)
 
             term.current.open(terms.current)
             const fitAddon = new FitAddon()
@@ -102,24 +89,23 @@ export const Termi = ({ height, socket, setSubmit }) => {
             term.current.prompt()
             term.current.onData((data) => {
                 if (viMode === false) {
-                    const code = data.charCodeAt(0)
                     switch (data) {
                         case "\u0003": // Ctrl+C
-                            if (!a) return null
-                            clearInput(a.length)
-                            a = ""
+                            if (!commandInput) return null
+                            clearInput(commandInput.length)
+                            commandInput = ""
                             break
                         case "\r": // Enter
-                            if (a.indexOf("vi") >= 0) viMode = true
-                            if (a.indexOf("exit") >= 0) break
-                            handleEnter(a)
-                            handleEmit(a)
-                            a = ""
+                            if (commandInput.indexOf("vi") >= 0) viMode = true
+                            if (commandInput.indexOf("exit") >= 0) break
+                            handleEnter(commandInput)
+                            handleEmit(commandInput)
+                            commandInput = ""
                             break
                         case "\u007F": // Backspace
-                            if (a.length === 0) break
+                            if (commandInput.length === 0) break
                             term.current.write("\b \b")
-                            a = a.slice(0, -1)
+                            commandInput = commandInput.slice(0, -1)
                             break
 
                         case "\u001b[A": //ArrowUp
@@ -132,7 +118,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
                             break
                         default:
                             term.current.write(data)
-                            a += data
+                            commandInput += data
                     }
                 }
                 if (viMode === true) {
@@ -212,13 +198,16 @@ export const Termi = ({ height, socket, setSubmit }) => {
             })
         }
     }, [env])
+    useEffect(() => {
+        socket.emit("send", "clear")
+        socket.emit("command", command)
+    }, [command])
 
     useEffect(() => {
         hidden.current.value = JSON.stringify(history)
     }, [history])
 
-    const answer = history.command.pop()
-
+    const answer = history.command[history.command.length - 1]
     return (
         <>
             <TermWrap ref={terms} onKeyDown={handleKeyDown} tabIndex={0} height={height}>
@@ -230,7 +219,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
                     <CenterBtn>
                         <Button text="Prev" height="4" />
                         <Button text="Clear" height="4" background="#e42020" socket={socket} />
-                        <Button text="Next" height="4" socket={socket} />
+                        <Button text="Next" height="4" socket={socket} setSubmit={setSubmit} />
                     </CenterBtn>
                     {examMode ? (
                         <Button text="Submit" height="4" answerSubmit={{ answer, setSubmit }} />
