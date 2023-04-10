@@ -204,15 +204,13 @@ export const Termi = ({ height, socket, setSubmit }) => {
         }
     }, [env])
     useEffect(() => {
-        kind === "linux" ? socket.emit("send", "clear") : socket.emit("send", "system clear")
-    }, [command])
-    useEffect(() => {
         if (kind === "linux") {
             socket.emit("send", "exit")
             socket.emit("user", userId)
             socket.emit("command", `${command}/${kind}`)
         }
-    }, [kind])
+        kind === "linux" ? socket.emit("send", "clear") : socket.emit("send", "system clear")
+    }, [command, kind])
 
     useEffect(() => {
         hidden.current.value = JSON.stringify(history)
