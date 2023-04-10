@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const Ul = styled.ul`
-    width: 50%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

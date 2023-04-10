@@ -31,7 +31,6 @@ const App = () => {
         dispatch(ModeList(isMode))
         dispatch(ChangeEnv({ env: connectEnv }))
     }, [])
-
     return Landscape ? (
         <Wrap>
             <Header List={Liist} />
