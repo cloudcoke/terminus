@@ -31,7 +31,6 @@ export const Termi = ({ height, socket, setSubmit }) => {
         }
     }
     const handleEnter = (a) => {
-        console.log(a)
         if (!a) return null
         setHistory((prev) => ({
             command: [...prev.command, a],
@@ -50,7 +49,6 @@ export const Termi = ({ height, socket, setSubmit }) => {
         const selectedCommand = command[newIndex]
         const prevCommand = command[newIndex + 1]
         if (newIndex >= 0) {
-            console.log(prevCommand)
             if (prevCommand) {
                 clearInput(prevCommand.length)
             }
@@ -117,7 +115,6 @@ export const Termi = ({ height, socket, setSubmit }) => {
                             socket.emit("vi", "\t")
                             break
                         default:
-                            console.log(data, 123123)
                             term.current.write(data)
                             commandInput += data
                     }

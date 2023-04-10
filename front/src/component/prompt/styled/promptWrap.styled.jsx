@@ -5,10 +5,11 @@ export const PromptWrap = styled.div`
     height: 30%;
     background-color: #242424;
     font-size: 1.8rem;
-    padding: 4rem;
+    padding: 3rem;
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
+    position: relative;
     & > .wwwrap {
         overflow-y: scroll;
         width: 100%;
