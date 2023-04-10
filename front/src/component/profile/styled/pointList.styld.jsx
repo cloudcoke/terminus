@@ -28,26 +28,36 @@ export const PointListSC = styled.li`
     &:nth-child(1) {
         margin: 0 10rem 0 0;
         justify-content: center;
-        width: fit-content;
+        width: 17.2rem;
         height: 100%;
     }
     &:nth-child(2) {
         margin-top: 0;
         justify-content: flex-end;
         padding-right: 2rem;
-        width: 20%;
-        ${(props) => (props.color === "PointUp" ? "color : #1a5454" : "color : #d49114")};
+        width: 11.7rem;
+        ${(props) =>
+            props.color === "PointUp"
+                ? "color : #1a5454"
+                : props.color === "PointDouwn"
+                ? "color : #d6450c"
+                : props.color};
         height: 100%;
         letter-spacing: 0.2rem;
     }
     &:nth-child(3) {
         margin-top: 0;
-        width: fit-content;
+        width: 11.7rem;
         height: 100%;
-        ${(props) => (props.color === "PointUp" ? "color : #1a5454" : "color : #d49114")};
+        justify-content: center;
+        ${(props) =>
+            props.color === "PointUp"
+                ? "color : #1a5454"
+                : props.color === "PointDown"
+                ? "color : #d6450c"
+                : props.color};
     }
     & > p {
-        margin-left: 5rem;
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 `

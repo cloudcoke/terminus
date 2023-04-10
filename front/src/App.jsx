@@ -7,6 +7,7 @@ import { useEffect } from "react"
 import { ChangeEnv, ModeList } from "./store"
 import io from "socket.io-client"
 import { AA } from "./hooks/useState"
+import { NoAccess } from "./pages/NoAccess"
 
 const Wrap = styled.div`
     display: flex;
@@ -21,7 +22,6 @@ const backserver = `${domain}:${port}`
 const socket = io(backserver)
 const App = () => {
     const testState = AA(false)
-    console.log(testState.test)
     const Landscape = window.innerWidth > window.innerHeight && window.innerWidth > 767
     const connectEnv = window.innerWidth < 767 ? "null" : window.innerWidth < 1250 ? "mobile" : "desctop"
     const dispatch = useDispatch()
@@ -40,7 +40,9 @@ const App = () => {
             </BodyWrap>
         </Wrap>
     ) : (
-        <Wrap>지원 준비중입니다.</Wrap>
+        <Wrap>
+            <NoAccess />
+        </Wrap>
     )
 }
 

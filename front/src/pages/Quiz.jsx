@@ -7,8 +7,6 @@ import { Submit } from "../component/submitCard"
 
 export const Quiz = memo(({ socket }) => {
     const [submit, setSubmit] = useState(false)
-    console.log(socket)
-    console.log(1)
     return (
         <>
             <Prompt />

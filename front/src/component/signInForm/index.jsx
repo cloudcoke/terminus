@@ -58,6 +58,12 @@ export const SignInForm = ({ state: prompt }) => {
             }
             setStatusCode(status)
         }
+        if (value === "N" || value === "n") {
+            setPwState("")
+            setSubmitState("")
+            userIdRef.current.disabled = false
+            userPwRef.current.disabled = false
+        }
     }
 
     return (
