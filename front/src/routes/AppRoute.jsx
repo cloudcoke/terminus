@@ -11,7 +11,6 @@ export const AppRouter = ({ List, socket }) => {
                 <Route path="/signup" element={<SignUp />}></Route>
                 <Route path="/signout" element={<Signout />}></Route>
                 <Route path="/profile" element={<Profile />}></Route>
-                <Route path="/freeterminal" element={<FreeTerm socket={socket} />}></Route>
                 <Route path="/contributors" element={<Contributors />} />
                 <Route path="/quiz/*" element={<BodyRoute list={List} socket={socket} />} />
             </Routes>
