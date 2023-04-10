@@ -204,7 +204,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
         }
     }, [env])
     useEffect(() => {
-        socket.emit("send", "clear")
+        kind === "linux" ? socket.emit("send", "clear") : socket.emit("send", "system clear")
     }, [command])
 
     useEffect(() => {
