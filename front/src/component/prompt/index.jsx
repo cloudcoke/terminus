@@ -13,7 +13,6 @@ export const Prompt = () => {
     const [isBottom, setIsBottom] = useState(false)
     const [quiz, setQuiz] = useState({})
     const { examMode } = useSelector((state) => state.examMode)
-    const scrollRef = useRef(null)
     const [kind, command] = location.pathname.slice(1).split("quiz/")[1].split("/")
 
     // 커맨드가 바뀔 때마다 요청
@@ -21,23 +20,13 @@ export const Prompt = () => {
         const response = await request.get(`/quiz/${kind}/${command}`)
         setQuiz(response.data)
     }
-    // bottom 감지
-    const handleScroll = (e) => {
-        const { scrollHeight, scrollTop, clientHeight } = e.target
-        const isAtBottom = scrollTop + clientHeight > scrollHeight - 0.5
-        setIsBottom(isAtBottom)
-    }
+
     useEffect(() => {
         quest()
         if (examMode === true) {
             dispatch(changeExamMode())
         }
-    }, [command, isBottom])
-    useEffect(() => {
-        console.log(scrollRef.current.clientHeight < scrollRef.current.scrollHeight)
-        const isAtBottom = scrollRef.current.clientHeight < scrollRef.current.scrollHeight
-        setIsBottom(isAtBottom)
-    }, [quiz])
+    }, [command])
 
     const option = (options) => {
         return options.map((v, i) => (
@@ -47,16 +36,14 @@ export const Prompt = () => {
             </div>
         ))
     }
-
     return !examMode ? (
         <PromptWrap>
-            <div className="wwwrap" onScroll={handleScroll} ref={scrollRef}>
+            <div className="wwwrap">
                 <div className="option">
                     <CommandST>{quiz.command}</CommandST>
                     <div>: {quiz.prompt}</div>
                 </div>
                 {quiz.options && option(quiz.options)}
-                {!isBottom && <BottomEffectSC />}
             </div>
         </PromptWrap>
     ) : (

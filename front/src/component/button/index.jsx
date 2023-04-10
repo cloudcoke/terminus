@@ -15,7 +15,7 @@ export const Button = (props) => {
     const { text, height, long, background, socket, answerSubmit, setSubmit, fontsize } = props
     //
     //
-    const NAV = ({ text }) => {
+    const NAV = ({ text, socket }) => {
         const { kind, list: naviList } = useSelector((state) => state.mode)
         const currentCommand = useMemo(() => location.pathname.slice(1).split("/")[2])
         const { userId } = useSelector((state) => state.user.data)
@@ -34,10 +34,13 @@ export const Button = (props) => {
                 const prevCommand = includesArray[presentIndex - 1]
                 if (prevCommand) navigator(`/quiz/${kind}/${prevCommand}`)
             }
-            socket.emit("send", "clear")
         }
         const handleSocket = () => {
             socket.emit("send", "clear")
+        }
+        const handleExam = () => {
+            dispatch(changeExamMode())
+            handleSocket()
         }
         const handleClose = () => {
             navigator("/")
@@ -45,16 +48,21 @@ export const Button = (props) => {
         const hadleSubmit = async () => {
             const { answer, setSubmit } = answerSubmit
             if (answer) {
+                console.log(answer)
                 const response = await request.post("/quiz/exam", { userId, command: currentCommand, answer })
                 const { data } = response.data
-                data && setSubmit(true)
+                if (!data) {
+                    alert("오답입니다. 다시 시도하여 주세요!")
+                } else {
+                    data && setSubmit(true)
+                }
             }
         }
 
         switch (text) {
             case "Exam":
                 return (
-                    <div className="NLink" onClick={() => dispatch(changeExamMode())}>
+                    <div className="NLink" onClick={handleExam}>
                         {text}
                     </div>
                 )
@@ -92,7 +100,7 @@ export const Button = (props) => {
     return (
         <>
             <Btn height={height} long={long} background={background} fontsize={fontsize}>
-                <NAV text={text} answerSubmit={answerSubmit} />
+                <NAV text={text} answerSubmit={answerSubmit} socket={socket} />
             </Btn>
         </>
     )

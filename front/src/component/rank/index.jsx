@@ -1,8 +1,14 @@
+import { useState } from "react"
+import { useEffect } from "react"
 import { Button } from "../button"
-import { Graphy, Ranking } from "./rank"
+import { Graphy, Ranking, ranklists } from "./rank"
 import { CardSt, CardWrapSt, Graph, Rank, GraphWrap } from "./styled"
 
 export const Card = ({ rank }) => {
+    const [rankState, setRankState] = useState()
+    useEffect(() => {
+        ranklists()
+    }, [])
     return (
         <>
             <CardWrapSt>

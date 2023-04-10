@@ -1,3 +1,4 @@
+import request from "../../../utils/request"
 import { Bar } from "../styled"
 
 const ranklist = [
@@ -5,6 +6,11 @@ const ranklist = [
     { id: 2, userId: "userId2", point: 240 },
     { id: 3, userId: "userId3", point: 140 },
 ]
+
+export const ranklists = async () => {
+    const response = await request.get("/user/ranking")
+    console.log(response)
+}
 
 export const Ranking = () => {
     const Div = ranklist.map((v) => (
