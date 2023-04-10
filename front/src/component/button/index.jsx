@@ -16,6 +16,7 @@ export const Button = (props) => {
     //
     //
     const NAV = ({ text, socket }) => {
+        const path = text.toLowerCase().replace(" ", "")
         const { kind, list: naviList } = useSelector((state) => state.mode)
         const currentCommand = useMemo(() => location.pathname.slice(1).split("/")[2])
         const { userId } = useSelector((state) => state.user.data)
@@ -93,8 +94,9 @@ export const Button = (props) => {
                         {text}
                     </div>
                 )
+            case "Free Terminal":
+                return <NavLink to={`/quiz/${kind}/${path}`}>{text}</NavLink>
             default:
-                const path = text.toLowerCase().replace(" ", "")
                 return <NavLink to={path}>{text}</NavLink>
         }
     }
