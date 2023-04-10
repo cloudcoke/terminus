@@ -77,6 +77,10 @@ export const SignUpForm = ({ state: prompt }) => {
                     handleChange("userId", e)
                 }
                 break
+            case false:
+                setIsIdDuplicates(false)
+                handleChange("userId", e)
+                break
             default:
                 break
         }

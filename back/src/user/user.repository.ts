@@ -1,48 +1,48 @@
-import { ModelCtor } from "sequelize-typescript";
-import sequelize, { PointDown, PointUp, Quiz, User } from "../../models";
+import { ModelCtor } from "sequelize-typescript"
+import sequelize, { PointDown, PointUp, Quiz, User } from "../../models"
 
 export interface Users {
-    userId: string;
-    userPw?: string;
-    nickName?: string;
+    userId: string
+    userPw?: string
+    nickName?: string
 }
 
 const user: Users = {
     userId: "1234",
     userPw: "1234",
-};
+}
 
 export interface ClassModels {
-    User: ModelCtor<User>;
-    Quiz: ModelCtor<Quiz>;
-    PointUp: ModelCtor<PointUp>;
-    PointDown: ModelCtor<PointDown>;
+    User: ModelCtor<User>
+    Quiz: ModelCtor<Quiz>
+    PointUp: ModelCtor<PointUp>
+    PointDown: ModelCtor<PointDown>
 }
 
 export interface Token {
-    token: string;
+    token: string
 }
 
 class UserRepository {
-    public User;
-    public PointUp;
-    public PointDown;
+    public User
+    public PointUp
+    public PointDown
     constructor({ User, PointUp, PointDown }: ClassModels) {
-        this.User = User;
-        this.PointUp = PointUp;
-        this.PointDown = PointDown;
+        this.User = User
+        this.PointUp = PointUp
+        this.PointDown = PointDown
     }
 
     async signUp({ userId, userPw }: Users) {
         try {
-            const data = await this.User.create({ userId, userPw });
+            const data = await this.User.create({ userId, userPw })
             if (data) {
-                let datas = { userId: data.dataValues.userId };
-                return datas;
+                let datas = { userId: data.dataValues.userId }
+                return datas
             }
-            return false;
+            return false
         } catch (error: any) {
-            throw new Error(error);
+            throw new Error(error)
         }
     }
 
@@ -73,32 +73,34 @@ LEFT JOIN PointDown ON User.userId = PointDown.userId
 WHERE User.userId = "${userId}"
 ORDER BY createdAt ASC;`,
                 { logging: false }
-            );
-            return data;
+            )
+            return data
         } catch (error: any) {
-            throw new Error(error);
+            throw new Error(error)
         }
     }
 
     async checkValue({ userId }: Users): Promise<boolean> {
         try {
-            const [data] = await this.User.findAll({ where: { userId } });
-            const response = data ? false : true;
-            return response;
+            const [data] = await this.User.findAll({ where: { userId } })
+            const response = data ? false : true
+            return response
         } catch (error: any) {
-            throw new Error(error);
+            throw new Error(error)
         }
     }
 
     async getRank() {
         try {
-            const data = await this.PointUp.findAll({ attributes: ["userId", [sequelize.fn("sum", sequelize.col("point")), "totalPoints"]], group: ["userId"] });
-            return data;
-            console.log(data);
+            const data = await this.PointUp.findAll({
+                attributes: ["userId", [sequelize.fn("sum", sequelize.col("point")), "totalPoints"]],
+                group: ["userId"],
+            })
+            return data
+            console.log(data)
         } catch (error: any) {
-            throw new Error(error);
+            throw new Error(error)
         }
     }
 }
-export default UserRepository;
-
+export default UserRepository

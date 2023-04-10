@@ -53,6 +53,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
                 clearInput(prevCommand.length)
             }
             term.current.write(selectedCommand)
+            commandInput = selectedCommand
             return {
                 command: [...command],
                 index: newIndex,
@@ -60,11 +61,14 @@ export const Termi = ({ height, socket, setSubmit }) => {
         }
     }
     useEffect(() => {
+        socket.emit("user", userId)
+        socket.emit("command", `${command}/${kind}`)
+    }, [])
+    useEffect(() => {
         if (!term.current && env) {
             const handleEmit = (prev) => {
                 socket.emit("send", prev)
             }
-            socket.emit("user", userId)
             socket.on("data", (datar) => {
                 term.current.write(`${datar}`)
             })
@@ -100,6 +104,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
                             if (commandInput.indexOf("exit") >= 0) break
                             handleEnter(commandInput)
                             handleEmit(commandInput)
+                            console.log(commandInput)
                             commandInput = ""
                             break
                         case "\u007F": // Backspace
@@ -113,6 +118,10 @@ export const Termi = ({ height, socket, setSubmit }) => {
                             break
                         case "\u0009":
                             socket.emit("vi", "\t")
+                            break
+                        case "\u001b[B":
+                        case "\u001b[C":
+                        case "\u001b[D":
                             break
                         default:
                             term.current.write(data)
@@ -196,7 +205,6 @@ export const Termi = ({ height, socket, setSubmit }) => {
     }, [env])
     useEffect(() => {
         socket.emit("send", "clear")
-        socket.emit("command", `${command}/${kind}`)
     }, [command])
 
     useEffect(() => {
