@@ -17,8 +17,9 @@ export const Termi = ({ height, socket, setSubmit }) => {
     const location = useLocation().pathname
     const { userId } = useSelector((state) => state.user.data)
     const { examMode } = useSelector((state) => state.examMode)
-    const { env, kind } = useSelector((state) => state.mode)
-    const command = location.split("/").pop()
+    const { env } = useSelector((state) => state.mode)
+    const kind = location.split("/")[2]
+    const command = location.split("/")[3]
     let commandInput = ""
     // const handleKeyDown = (e) => {
     //     if (e.keyCode !== 32) {
@@ -62,7 +63,6 @@ export const Termi = ({ height, socket, setSubmit }) => {
     }
     useEffect(() => {
         socket.emit("user", userId)
-        console.log(userId)
         socket.emit("command", `${command}/${kind}`)
     }, [])
     useEffect(() => {
@@ -105,7 +105,6 @@ export const Termi = ({ height, socket, setSubmit }) => {
                             if (commandInput.indexOf("exit") >= 0) break
                             handleEnter(commandInput)
                             handleEmit(commandInput)
-                            console.log(commandInput)
                             commandInput = ""
                             break
                         case "\u007F": // Backspace
