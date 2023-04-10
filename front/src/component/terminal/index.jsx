@@ -18,8 +18,14 @@ export const Termi = ({ height, socket, setSubmit }) => {
     const { userId } = useSelector((state) => state.user.data)
     const { examMode } = useSelector((state) => state.examMode)
     const { env } = useSelector((state) => state.mode)
-    const kind = location.split("/")[2]
-    const command = location.split("/")[3]
+    let kind
+    let command
+    if (location !== "/freeterminal") {
+        kind = location.split("/")[2]
+        command = location.split("/")[3]
+    } else {
+        kind = "linux"
+    }
     let commandInput = ""
     // const handleKeyDown = (e) => {
     //     if (e.keyCode !== 32) {
@@ -204,14 +210,12 @@ export const Termi = ({ height, socket, setSubmit }) => {
         }
     }, [env])
     useEffect(() => {
+        console.log(kind)
         if (kind === "linux") {
             socket.emit("send", "exit")
         }
-
         socket.emit("user", userId)
-
         socket.emit("command", `${command}/${kind}`)
-
         kind === "linux" ? socket.emit("send", "clear") : socket.emit("send", "system clear;")
     }, [command])
 
