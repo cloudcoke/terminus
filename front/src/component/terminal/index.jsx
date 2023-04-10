@@ -206,9 +206,9 @@ export const Termi = ({ height, socket, setSubmit }) => {
     useEffect(() => {
         if (kind === "linux") {
             socket.emit("send", "exit")
-            socket.emit("user", userId)
-            socket.emit("command", `${command}/${kind}`)
         }
+        socket.emit("user", userId)
+        socket.emit("command", `${command}/${kind}`)
         kind === "linux" ? socket.emit("send", "clear") : socket.emit("send", "system clear")
     }, [command, kind])
 
