@@ -61,10 +61,10 @@ export const Termi = ({ height, socket, setSubmit }) => {
             }
         }
     }
-    useEffect(() => {
-        socket.emit("user", userId)
-        socket.emit("command", `${command}/${kind}`)
-    }, [])
+    // useEffect(() => {
+    //     socket.emit("user", userId)
+    //     socket.emit("command", `${command}/${kind}`)
+    // }, [])
     useEffect(() => {
         if (!term.current && env) {
             const handleEmit = (prev) => {
@@ -207,6 +207,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
         }
     }, [env])
     useEffect(() => {
+        console.log(kind)
         if (kind === "linux") {
             socket.emit("send", "exit")
         }
