@@ -62,6 +62,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
     }
     useEffect(() => {
         socket.emit("user", userId)
+        console.log(userId)
         socket.emit("command", `${command}/${kind}`)
     }, [])
     useEffect(() => {
