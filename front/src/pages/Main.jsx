@@ -1,9 +1,10 @@
-import { Card } from "../component/rank"
-import { Loading } from "../component/loading"
-import { Scroll } from "../component/scroll"
-import styled from "styled-components"
-import { useRef } from "react"
-import { useState } from "react"
+import { Card } from "../component/rank";
+import { Loading } from "../component/loading";
+import { Scroll } from "../component/scroll";
+import styled from "styled-components";
+import { useRef } from "react";
+import { useState } from "react";
+import { Forum } from "../component/forum";
 
 const Div = styled.div`
     width: 100%;
@@ -11,17 +12,17 @@ const Div = styled.div`
     overflow-y: scroll;
     background-attachment: fixed;
     position: relative;
-`
+`;
 export const Main = () => {
-    const mainWrap = useRef(null)
-    const [rank, setRank] = useState(false)
+    const mainWrap = useRef(null);
+    const [rank, setRank] = useState(false);
     const handleScroll = (e) => {
         if (e.target.scrollTop > 400) {
-            setRank(true)
+            setRank(true);
         } else if (e.target.scrollTop < 300) {
-            setRank(false)
+            setRank(false);
         }
-    }
+    };
     return (
         <>
             <Div ref={mainWrap} onScroll={handleScroll}>
@@ -35,7 +36,9 @@ export const Main = () => {
                     <Scroll />
                 </div>
                 <Card rank={rank} />
+                <Forum />
             </Div>
         </>
-    )
-}
+    );
+};
+
