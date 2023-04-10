@@ -36,6 +36,12 @@ const io = new Server(httpServer, {
   },
 })
 
+const userHandler = (userId: string) => {
+  if (userId === "") {
+    userId = "test"
+  }
+}
+
 io.on("connection", (socket) => {
   console.log("new session")
   const term = pty.spawn(shell, [], {
@@ -43,15 +49,17 @@ io.on("connection", (socket) => {
   })
 
   terminals.set(socket, term)
-  socket.on("user", (userId: string) => {
-    if (userId === "") {
-      userId = "test"
+  let userId: string
+  socket.on("user", userHandler)
+  socket.off("user", userHandler)
+  socket.on("command", (cmd) => {
+    const kind = cmd.split("/")[1]
+    term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+    if (kind === "linux") {
+      term.write("clear\r")
+    } else {
+      term.write(`system clear;\r`)
     }
-    socket.on("command", (cmd) => {
-      const kind = cmd.split("/")[1]
-      term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
-      term.write(`clear\r`)
-    })
   })
 
   term.on("data", (data: any) => {
