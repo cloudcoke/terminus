@@ -8,7 +8,7 @@ const barAni = keyframes`
     width: calc((${(props) => props.point} / 600) * 100%);
     }
 `
-export const Rank = styled.div`
+export const RankWarp = styled.div`
     display: flex;
     flex-direction: column;
     width: 30%;

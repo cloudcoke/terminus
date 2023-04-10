@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Navi } from "./navigation"
 import { BtnArea, HeaderWrap, Logo, ToggleArea } from "./styled"
 
-export const Header = ({ List, Mode }) => {
+export const Header = ({ List }) => {
     const { isLogin } = useSelector((state) => state.user)
     const navigator = useNavigate()
     const handleClick = () => {
@@ -30,7 +30,7 @@ export const Header = ({ List, Mode }) => {
                 )}
 
                 <ToggleArea>
-                    <Toggle height="6" onClick={Mode} />
+                    <Toggle height="6" />
                 </ToggleArea>
                 <Navi List={List} />
                 <ToggleArea className="btnWrap">

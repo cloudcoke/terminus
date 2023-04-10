@@ -19,6 +19,7 @@ export const Button = (props) => {
         const { kind, list: naviList } = useSelector((state) => state.mode)
         const currentCommand = useMemo(() => location.pathname.slice(1).split("/")[2])
         const { userId } = useSelector((state) => state.user.data)
+
         const handleBtn = (e) => {
             const cases = e.target.innerHTML
             const includesArray = naviList
