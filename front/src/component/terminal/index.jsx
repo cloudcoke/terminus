@@ -25,6 +25,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
         command = location.split("/")[3]
     } else {
         kind = "linux"
+        command = "linux"
     }
     let commandInput = ""
     // const handleKeyDown = (e) => {
@@ -210,6 +211,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
         }
     }, [env])
     useEffect(() => {
+        console.log(command)
         console.log(kind)
         if (kind === "linux") {
             socket.emit("send", "exit")
