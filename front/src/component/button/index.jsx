@@ -37,7 +37,7 @@ export const Button = (props) => {
             }
         }
         const handleSocket = () => {
-            socket.emit("send", "clear")
+            kind === "linux" ? socket.emit("send", "clear") : socket.emit("send", "system clear")
         }
         const handleExam = () => {
             dispatch(changeExamMode())
