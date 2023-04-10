@@ -7,6 +7,7 @@ import { Button } from "../button"
 import { useLocation } from "react-router-dom"
 import { useSelector } from "react-redux"
 import request from "../../utils/request"
+import { useCallback } from "react"
 
 //test
 export const Termi = ({ height, socket, setSubmit }) => {
@@ -26,21 +27,21 @@ export const Termi = ({ height, socket, setSubmit }) => {
     //         e.preventDefault()
     //     }
     // }
-    const clearInput = (length) => {
+    const clearInput = useCallback((length) => {
         for (let i = 0; i < length; i++) {
             term.current.write("\b \b")
         }
-    }
-    const handleEnter = (a) => {
+    }, [])
+    const handleEnter = useCallback((a) => {
         if (!a) return null
         setHistory((prev) => ({
             command: [...prev.command, a],
             index: 0,
         }))
         clearInput(a.length)
-    }
+    }, [])
 
-    const handleUp = (prev) => {
+    const handleUp = useCallback((prev) => {
         if (!prev || !prev.command || prev.command.length === 0) {
             return { command: [], index: 0 }
         }
@@ -60,7 +61,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
                 index: newIndex,
             }
         }
-    }
+    }, [])
     useEffect(() => {
         socket.emit("user", userId)
         socket.emit("command", `${command}/${kind}`)
@@ -207,7 +208,6 @@ export const Termi = ({ height, socket, setSubmit }) => {
         if (kind === "linux") {
             socket.emit("send", "exit")
         }
-        console.log(userId)
         socket.emit("user", userId)
         socket.emit("command", `${command}/${kind}`)
         kind === "linux" ? socket.emit("send", "clear") : socket.emit("send", "system clear;")
