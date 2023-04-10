@@ -209,7 +209,8 @@ export const Termi = ({ height, socket, setSubmit }) => {
     useEffect(() => {
         console.log(kind)
         if (kind === "linux") {
-            socket.emit("send", "exit")
+            console.log(1, 1)
+            // socket.emit("send", "exit")
         }
         console.log(userId)
         socket.emit("user", userId)
@@ -227,7 +228,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
             <TermWrap ref={terms} tabIndex={0} height={height}>
                 <input type="hidden" ref={hidden} />
             </TermWrap>
-            {location !== "/freeterminal" && (
+            {location !== `/quiz/${kind}/freeterminal` && (
                 <BtnWrap>
                     <Button text="Exam" height="4" socket={socket} />
                     <CenterBtn>
