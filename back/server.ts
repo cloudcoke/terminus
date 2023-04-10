@@ -37,7 +37,7 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
   console.log("new session")
   const term = pty.spawn(shell, [], {
-    name: "xterm-color",
+    name: "xterm-256color",
   })
 
   terminals.set(socket, term)
@@ -45,8 +45,11 @@ io.on("connection", (socket) => {
     if (userId === "") {
       userId = "test"
     }
-    term.write(`bash /home/ubuntu/user.sh -u ${userId}\r`)
-    term.write(`clear\r`)
+    socket.on("command", (cmd) => {
+      const kind = cmd.split("/")[1]
+      term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+      term.write(`clear\r`)
+    })
   })
 
   term.on("data", (data: any) => {

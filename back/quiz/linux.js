@@ -11,7 +11,7 @@ const quizData = [
   },
   {
     command: "pwd",
-    prompt: "Print Working Directory의 약자로 현재 디렉터리의 전체 경로를 화면에 표시하는 명령어 입니다.",
+    prompt: "Print Working Directory의 약자로 현재 디렉터리의 절대 경로를 화면에 표시하는 명령어 입니다.",
     exam: "현재 위치를 출력해 보세요.",
     answer: "pwd",
     setting: "",
@@ -43,8 +43,8 @@ const quizData = [
   {
     command: "cp",
     prompt: "Copy의 약자로 파일이나 디렉터리를 복사하는 명령어 입니다.",
-    exam: "사용자의 홈 디렉터리에 있는 test 파일을 test1 파일로 복사해 주세요. [절대 경로를 사용하세요.]",
-    answer: "cp /home/test/test /home/test/test1",
+    exam: "사용자의 홈 디렉터리에 있는 coffee 파일을 coke 파일로 복사해 주세요. [절대 경로를 사용하세요.]",
+    answer: "cp /home/test/coffee /home/test/coke",
     setting: "",
     hint: "",
     difficulty: "easy",
@@ -53,8 +53,8 @@ const quizData = [
   {
     command: "touch",
     prompt: "크기가 0인 새 파일을 생성하거나 생성된 파일이 존재한다면 파일의 최종 수정 시간을 변경하는 명령어 입니다.",
-    exam: "사용자의 홈 디렉터리에 파일 이름이 test1234라는 파일을 만들어 주세요. [절대 경로를 사용하세요.]",
-    answer: "touch /home/test/test1234",
+    exam: "사용자의 홈 디렉터리에 파일 이름이 toast1234라는 파일을 만들어 주세요. [절대 경로를 사용하세요.]",
+    answer: "touch /home/test/toast1234",
     setting: "",
     hint: "",
     difficulty: "easy",
@@ -63,8 +63,8 @@ const quizData = [
   {
     command: "mv",
     prompt: "Move의 약자로 파일이나 디렉터리의 이름을 변경하거나 다른 디렉터리로 옮길 때 사용하는 명령어 입니다.",
-    exam: "사용자의 홈 디렉터리에 test5678 파일을 test4321로 이름을 바꿔주세요. [절대 경로를 사용하세요.]",
-    answer: "mv /home/test/test5678 /home/test/test4321",
+    exam: "사용자의 홈 디렉터리에 movie5678 파일을 movie4321로 이름을 바꿔주세요. [절대 경로를 사용하세요.]",
+    answer: "mv /home/test/movie5678 /home/test/movie4321",
     setting: "",
     hint: "",
     difficulty: "easy",
