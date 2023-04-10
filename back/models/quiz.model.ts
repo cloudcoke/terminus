@@ -14,7 +14,7 @@ class Quiz extends Model {
 
     @AllowNull(true)
     @Column({
-        type: DataType.STRING,
+        type: DataType.TEXT,
     })
     public exam!: string;
 
@@ -27,7 +27,7 @@ class Quiz extends Model {
 
     @AllowNull(false)
     @Column({
-        type: DataType.STRING,
+        type: DataType.TEXT,
     })
     public prompt!: string;
 
