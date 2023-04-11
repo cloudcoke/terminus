@@ -1,29 +1,28 @@
-import { Column, AllowNull, PrimaryKey, Model, Table, DataType, ForeignKey, BelongsTo } from "sequelize-typescript";
-import User from "./user.model";
+import { Column, AllowNull, PrimaryKey, Model, Table, DataType, ForeignKey, BelongsTo } from "sequelize-typescript"
+import User from "./user.model"
 
 @Table({
-    tableName: "Comment",
-    timestamps: true,
-    omitNull: true,
-    charset: "utf8mb4",
-    collate: "utf8mb4_general_ci",
+  tableName: "Comment",
+  timestamps: true,
+  omitNull: true,
+  charset: "utf8mb4",
+  collate: "utf8mb4_general_ci",
 })
 class Comment extends Model {
-    @AllowNull(false)
-    @Column({
-        type: DataType.STRING,
-    })
-    public comment!: string;
+  @AllowNull(false)
+  @Column({
+    type: DataType.STRING,
+  })
+  public comment!: string
 
-    @ForeignKey(() => User)
-    @Column({
-        type: DataType.STRING,
-    })
-    public userid!: string;
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.STRING,
+  })
+  public userId!: string
 
-    @BelongsTo(() => User, { foreignKey: "userid" })
-    public user!: User;
+  @BelongsTo(() => User, { foreignKey: "userId" })
+  public user!: User
 }
 
-export default Comment;
-
+export default Comment
