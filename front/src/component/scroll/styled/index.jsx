@@ -23,20 +23,18 @@ export const ScrollSt = styled.div`
     position: absolute;
     top: 85%;
     left: calc(50% - 2.5rem);
+    width: 5rem;
     font-size: 1.8rem;
     text-align: center;
     ul {
         width: 5rem;
         position: absolute;
     }
-    li {
-        display: inline-block;
-        margin-top: 6rem;
-    }
-    ul span {
+
+    .scrollSpan {
         background-color: #ffffff00;
         position: absolute;
-        top: 0;
+        top: -3rem;
         left: 50%;
         width: 3rem;
         height: 5rem;
@@ -45,7 +43,7 @@ export const ScrollSt = styled.div`
         border-radius: 50px;
         box-sizing: border-box;
     }
-    ul span::before {
+    .wheel::before {
         position: absolute;
         top: 1rem;
         left: 50%;
@@ -57,5 +55,13 @@ export const ScrollSt = styled.div`
         border-radius: 100%;
         animation: ${wheel} 2s infinite;
         box-sizing: border-box;
+    }
+    .scrollSpan > span {
+        position: absolute;
+        bottom: -3rem;
+        left: calc(50% - 2.5rem);
+        width: 5rem;
+        margin-top: 3rem;
+        margin-left: 0;
     }
 `
