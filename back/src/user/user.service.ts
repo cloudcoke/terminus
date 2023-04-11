@@ -11,10 +11,14 @@ export class UserService {
     public UserRepository: repository;
     public jwt: JWT;
     public crypto: typeof crypto;
+    public totalQuiz: any;
+
     constructor({ UserRepository, jwt }: UserServiceType) {
         this.UserRepository = UserRepository;
         this.jwt = jwt;
         this.crypto = jwt.crypto;
+        this.totalQuiz = new Object();
+        this.TotalQuiz();
     }
 
     async inputUser({ userId, userPw }: Users) {
@@ -52,10 +56,30 @@ export class UserService {
 
     async ranked() {
         try {
-            const response = this.UserRepository.getRank();
+            const data: any = await this.UserRepository.getRank();
+            const response = data.filter((v: any) => parseInt(v.totalPoints) < this.totalQuiz.total).slice(0, 3);
             return response;
         } catch (error: any) {
             throw new Error(error);
+        }
+    }
+
+    async graduate() {
+        try {
+            const data: any = await this.UserRepository.getRank();
+            const response = data.filter((v: any) => parseInt(v.totalPoints) >= this.totalQuiz.total);
+
+            return response;
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
+
+    async TotalQuiz() {
+        if (!this.totalQuiz.total) {
+            const a = await this.UserRepository.getTotalQuiz();
+            this.totalQuiz.total = a * 10;
+            return;
         }
     }
 }

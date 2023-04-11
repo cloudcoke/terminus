@@ -63,6 +63,15 @@ class UserContoller {
             next(error);
         }
     }
+
+    async getGraduate(req: Request, res: Response, next: NextFunction) {
+        try {
+            const data = await this.UserService.graduate();
+            res.json(data);
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 // export const Controller = new UserContoller(Service);

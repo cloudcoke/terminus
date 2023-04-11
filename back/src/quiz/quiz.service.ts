@@ -22,6 +22,7 @@ interface Lists {
 
 export class QuizService {
     public Repository: repository;
+
     constructor({ Repository }: ServiceType) {
         this.Repository = Repository;
     }
