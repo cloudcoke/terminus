@@ -5,8 +5,10 @@ export const Scroll = () => {
         <>
             <ScrollSt>
                 <ul>
-                    <span />
-                    <li>Scroll</li>
+                    <span className="wheel" />
+                    <li className="scrollSpan">
+                        <span>Scroll</span>
+                    </li>
                 </ul>
             </ScrollSt>
         </>

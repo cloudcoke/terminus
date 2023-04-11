@@ -54,7 +54,6 @@ export const BodyWrap = styled.div`
     }
     span {
         display: inline-block;
-        margin-left: 0.4rem;
         width: 1rem;
         height: 1.6rem;
     }

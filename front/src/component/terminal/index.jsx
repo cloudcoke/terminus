@@ -74,6 +74,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
                 term.current.write(`${datar}`)
             })
             let viMode = false
+            console.log(env)
             term.current = new Terminal({
                 fontFamily: "D2Coding",
                 cursorBlink: true,
