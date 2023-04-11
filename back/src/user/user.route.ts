@@ -4,6 +4,7 @@ const router: Router = express.Router();
 
 router.get("/profile/:userId", (req: Request, res: Response, next: NextFunction) => UserContoller.profile(req, res, next));
 router.get("/ranking", (req: Request, res: Response, next: NextFunction) => UserContoller.ranking(req, res, next));
+router.get("/graduate", (req: Request, res: Response, next: NextFunction) => UserContoller.getGraduate(req, res, next));
 router.post("/", (req: Request, res: Response, next: NextFunction) => UserContoller.signUp(req, res, next));
 router.post("/check", (req: Request, res: Response, next: NextFunction) => UserContoller.checkId(req, res, next));
 
