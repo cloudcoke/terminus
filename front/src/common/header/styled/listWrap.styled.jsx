@@ -26,7 +26,7 @@ export const Ul = styled.ul`
     li {
         margin: 1rem 0 0 3rem;
         font-size: 1.8rem;
-        font-weight: 400;
+        font-weight: 500;
     }
     li::before {
         content: "☉";
