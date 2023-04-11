@@ -48,7 +48,6 @@ io.on("connection", (socket) => {
   })
 
   terminals.set(socket, term)
-  let userId: string
   socket.on("user", userHandler)
   socket.on("command", (cmd) => {
     const kind = cmd.split("/")[1]
