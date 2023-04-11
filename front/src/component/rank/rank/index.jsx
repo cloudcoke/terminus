@@ -5,7 +5,6 @@ import { Bar, Graph, GraphWrap, RankWarp } from "../styled"
 const Ranking = (rankState) => {
     const Div = rankState.map((v, i) => (
         <div key={i}>
-            {/* <div>{i + 1}</div> */}
             <p>{v.userId}</p>
         </div>
     ))

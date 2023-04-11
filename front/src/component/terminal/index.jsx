@@ -103,6 +103,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
                         case "\r": // Enter
                             if (commandInput.indexOf("vi") >= 0) viMode = true
                             if (commandInput.indexOf("exit") >= 0) break
+                            if (commandInput.indexOf("mysql -u") >= 0) break
                             handleEnter(commandInput)
                             handleEmit(commandInput)
                             commandInput = ""
@@ -208,7 +209,6 @@ export const Termi = ({ height, socket, setSubmit }) => {
     }, [env])
     useEffect(() => {
         if (kind === "linux") {
-            console.log(1, 1)
             // socket.emit("send", "exit")
         }
         socket.emit("user", userId)
