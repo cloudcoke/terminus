@@ -36,12 +36,12 @@ const io = new Server(httpServer, {
   },
 })
 let userId: string | undefined
-let kindData: string | undefined
 const userHandler = (data: string | undefined) => {
   userId = data === "" ? "test" : data
 }
 
 io.on("connection", (socket) => {
+  let kindData: string | undefined
   console.log("new session")
   const term = pty.spawn(shell, [], {
     name: "xterm-256color",
@@ -51,13 +51,28 @@ io.on("connection", (socket) => {
   socket.on("user", userHandler)
   socket.on("command", (cmd) => {
     const kind = cmd.split("/")[1]
-    if (kindData === undefined || kindData === "linux") {
+    if (kindData === undefined && kind === "linux") {
       kindData = kind
       term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
-    } else if (kindData === "sql") {
+      return
+    } else if (kindData === undefined && kind === "sql") {
+      kindData = kind
+      term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+      return
+    } else if (kindData === "sql" && kind === "sql") {
       kindData = kind
       term.write("exit\r")
       term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+      return
+    } else if (kindData === "sql" && kind === "linux") {
+      kindData = kind
+      term.write("exit\r")
+      term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+      return
+    } else {
+      kindData = kind
+      term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+      return
     }
   })
 
