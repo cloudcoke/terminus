@@ -8,5 +8,4 @@ export const CardWrapSt = styled.div`
     height: 100%;
     background-color: #242424;
     padding: 2rem;
-    font-family: "Youth";
 `

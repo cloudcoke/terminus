@@ -5,8 +5,8 @@ export const Ul = styled.ul`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    font-family: "Youth";
-    font-weight: bold;
+    font-family: "SCoreDream";
+    font-weight: 700;
     letter-spacing: 0.5rem;
     & + & {
         margin-top: 2rem;
@@ -26,6 +26,7 @@ export const Ul = styled.ul`
     li {
         margin: 1rem 0 0 3rem;
         font-size: 1.8rem;
+        font-weight: 400;
     }
     li::before {
         content: "☉";
