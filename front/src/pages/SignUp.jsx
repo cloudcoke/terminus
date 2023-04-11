@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { SignUpForm } from "../component/signUpForm"
+import { SignUpForm } from "../component/SignUpForm"
 import TypingEffect from "../component/Typing"
 
 export const SignUp = () => {

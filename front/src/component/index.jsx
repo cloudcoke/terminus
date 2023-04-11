@@ -1,6 +1,6 @@
 export * from "./button"
 export * from "./toggle"
-export * from "./signUpForm"
+export * from "./SignUpForm"
 export * from "./Typing"
 export * from "./loading"
 export * from "./bashlogo"
