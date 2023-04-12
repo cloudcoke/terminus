@@ -135,26 +135,7 @@ const sqlQuiz = [
   {
     command: "join(inner join)",
     prompt: `두 개 이상의 테이블 사이의 공통 열을 기반으로 데이터를 결합하는 데 사용하는 명령어 입니다. inner join은 두 테이블에서 일치하는 행만 반환합니다.`,
-    exam: `blackcows 데이터 베이스에서 각 주문에 대한 고객의 이름과 주문 합계를 검색해 보세요. [소문자로 작성해 주세요.]
-    mysql> select * from orders;
-    +----------+-------------+------------+--------+
-    | order_id | customer_id | order_date | total  |
-    +----------+-------------+------------+--------+
-    |        1 |         101 | 2021-01-01 |  50.00 |
-    |        2 |         102 | 2021-01-02 |  75.00 |
-    |        3 |         101 | 2021-01-03 |  25.00 |
-    |        4 |         103 | 2021-01-04 | 100.00 |
-    |        5 |         101 | 2021-01-05 |  35.00 |
-    +----------+-------------+------------+--------+
-
-    mysql> select * from customers;
-    +-------------+------------+-----------+-------------------------+
-    | customer_id | first_name | last_name | email                   |
-    +-------------+------------+-----------+-------------------------+
-    |         101 | John       | Smith     | john.smith@example.com  |
-    |         102 | Jane       | Doe       | jane.doe@example.com    |
-    |         103 | Bob        | Johnson   | bob.johnson@example.com |
-    +-------------+------------+-----------+-------------------------+`,
+    exam: `blackcows 데이터 베이스에서 orders 테이블과 customers를 확인하고 각 주문에 대한 고객의 이름과 주문 합계를 검색해 보세요. [소문자로 작성해 주세요.]`,
     answer:
       "select customers.first_name, customers.last_name, orders.total from customers inner join orders on customers.customer_id = orders.customer_id;",
     setting: "",
@@ -165,26 +146,7 @@ const sqlQuiz = [
   {
     command: "left join",
     prompt: `왼쪽 테이블의 모든 행과 오른쪽 테이블의 일치하는 행을 반환하거나 오른쪽 테이블의 일치하지 않는 행에 대해 null 값을 반환합니다.`,
-    exam: `blackcows 데이터 베이스에서 주문하지 않은 고객을 포함하여 각 주문에 대한 고객 이름과 주문 합계를 검색해 보세요. [소문자로 작성해 주세요.]
-    mysql> select * from orders;
-    +----------+-------------+------------+--------+
-    | order_id | customer_id | order_date | total  |
-    +----------+-------------+------------+--------+
-    |        1 |         101 | 2021-01-01 |  50.00 |
-    |        2 |         102 | 2021-01-02 |  75.00 |
-    |        3 |         101 | 2021-01-03 |  25.00 |
-    |        4 |         103 | 2021-01-04 | 100.00 |
-    |        5 |         101 | 2021-01-05 |  35.00 |
-    +----------+-------------+------------+--------+
-
-    mysql> select * from customers;
-    +-------------+------------+-----------+-------------------------+
-    | customer_id | first_name | last_name | email                   |
-    +-------------+------------+-----------+-------------------------+
-    |         101 | John       | Smith     | john.smith@example.com  |
-    |         102 | Jane       | Doe       | jane.doe@example.com    |
-    |         103 | Bob        | Johnson   | bob.johnson@example.com |
-    +-------------+------------+-----------+-------------------------+`,
+    exam: `blackcows 데이터 베이스에서 orders 테이블과 customers를 확인하고 주문하지 않은 고객을 포함하여 각 주문에 대한 고객 이름과 주문 합계를 검색해 보세요. [소문자로 작성해 주세요.]`,
     answer:
       "select customers.first_name, customers.last_name, orders.total from customers left join orders on customers.customer_id = orders.customer_id;",
     setting: "",
@@ -195,26 +157,7 @@ const sqlQuiz = [
   {
     command: "right join",
     prompt: `오른쪽 테이블의 모든 행과 왼쪽 테이블의 일치하는 행을 반환하거나 왼쪽 테이블의 일치하지 않는 행에 대해 null 값을 반환합니다.`,
-    exam: `blackcows 데이터 베이스에서 고객 정보가 누락된 주문을 포함하여 각 주문에 대한 주문 id와 주문 날짜를 검색해 보세요. [소문자로 작성해 주세요.]
-    sql> select * from orders;
-    +----------+-------------+------------+--------+
-    | order_id | customer_id | order_date | total  |
-    +----------+-------------+------------+--------+
-    |        1 |         101 | 2021-01-01 |  50.00 |
-    |        2 |         102 | 2021-01-02 |  75.00 |
-    |        3 |         101 | 2021-01-03 |  25.00 |
-    |        4 |         103 | 2021-01-04 | 100.00 |
-    |        5 |         101 | 2021-01-05 |  35.00 |
-    +----------+-------------+------------+--------+
-
-    sql> select * from customers;
-    +-------------+------------+-----------+-------------------------+
-    | customer_id | first_name | last_name | email                   |
-    +-------------+------------+-----------+-------------------------+
-    |         101 | John       | Smith     | john.smith@example.com  |
-    |         102 | Jane       | Doe       | jane.doe@example.com    |
-    |         103 | Bob        | Johnson   | bob.johnson@example.com |
-    +-------------+------------+-----------+-------------------------+`,
+    exam: `blackcows 데이터 베이스에서 orders 테이블과 customers를 확인하고 고객 정보가 누락된 주문을 포함하여 각 주문에 대한 주문 id와 주문 날짜를 검색해 보세요. [소문자로 작성해 주세요.]`,
     answer:
       "select orders.order_id, orders.order_date, customers.first_name, customers.last_name from customers right join orders on customers.customer_id = orders.customer_id;",
     setting: "",
