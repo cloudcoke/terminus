@@ -16,18 +16,17 @@ export const ProfilePoint = () => {
     useEffect(() => {
         handleProfile()
     }, [])
-
     const pointList = userPoint.map((v, i) => (
         <PointUlistSC key={i}>
             <PointListSC>{v.createdAt}</PointListSC>
             <PointListSC color={v.SourceTable}>{v.command && v.command}</PointListSC>
             <PointListSC color={v.SourceTable}>
-                <p>{v.SourceTable === "PointUp" ? "+" : "-"}</p>
+                <p>{v.SourceTable === "PointUp" ? "+" : "PointDown" ? "-" : ""}</p>
                 {v.Point}
             </PointListSC>
         </PointUlistSC>
     ))
-
+    console.log(userPoint)
     return (
         <>
             <PointUlistSC>
