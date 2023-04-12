@@ -90,6 +90,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
             }
 
             term.current.prompt()
+            clearInput(commandInput.length)
             term.current.onData((data) => {
                 if (viMode === false) {
                     switch (data) {
@@ -209,7 +210,6 @@ export const Termi = ({ height, socket, setSubmit }) => {
         socket.emit("user", userId)
         socket.emit("command", `${command}/${kind}`)
         kind === "linux" ? socket.emit("send", "clear") : socket.emit("send", "system clear;")
-        commandInput = ""
         return () => {
             socket.off("user")
             socket.off("command")
