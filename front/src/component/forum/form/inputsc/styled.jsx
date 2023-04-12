@@ -10,3 +10,10 @@ export const InputSc = styled.input`
     font-size: 1.6rem;
 `;
 
+export const FormSc = styled.form`
+    display: flex; 
+    padding: 2rem; 
+    box-sizing: border-box, 
+    justify-content: space-between
+`;
+
