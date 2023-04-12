@@ -135,25 +135,25 @@ const sqlQuiz = [
     {
         command: "join(inner join)",
         prompt: `두 개 이상의 테이블 사이의 공통 열을 기반으로 데이터를 결합하는 데 사용하는 명령어 입니다. inner join은 두 테이블에서 일치하는 행만 반환합니다.`,
-        exam: `각 주문에 대한 고객의 이름과 주문 합계를 검색해 보세요. [소문자로 작성해 주세요.]<br/>
-    mysql> select * from orders;<br/>
-    +----------+-------------+------------+--------+<br/>
-    | order_id | customer_id | order_date | total  |<br/>
-    +----------+-------------+------------+--------+<br/>
-    |        1 |         101 | 2021-01-01 |  50.00 |<br/>
-    |        2 |         102 | 2021-01-02 |  75.00 |<br/>
-    |        3 |         101 | 2021-01-03 |  25.00 |<br/>
-    |        4 |         103 | 2021-01-04 | 100.00 |<br/>
-    |        5 |         101 | 2021-01-05 |  35.00 |<br/>
-    +----------+-------------+------------+--------+<br/>
-<br/>
-    mysql> select * from customers;<br/>
-    +-------------+------------+-----------+-------------------------+<br/>
-    | customer_id | first_name | last_name | email                   |<br/>
-    +-------------+------------+-----------+-------------------------+<br/>
-    |         101 | John       | Smith     | john.smith@example.com  |<br/>
-    |         102 | Jane       | Doe       | jane.doe@example.com    |<br/>
-    |         103 | Bob        | Johnson   | bob.johnson@example.com |<br/>
+        exam: `각 주문에 대한 고객의 이름과 주문 합계를 검색해 보세요. [소문자로 작성해 주세요.]
+    mysql> select * from orders;
+    +----------+-------------+------------+--------+
+    | order_id | customer_id | order_date | total  |
+    +----------+-------------+------------+--------+
+    |        1 |         101 | 2021-01-01 |  50.00 |
+    |        2 |         102 | 2021-01-02 |  75.00 |
+    |        3 |         101 | 2021-01-03 |  25.00 |
+    |        4 |         103 | 2021-01-04 | 100.00 |
+    |        5 |         101 | 2021-01-05 |  35.00 |
+    +----------+-------------+------------+--------+
+
+    mysql> select * from customers;
+    +-------------+------------+-----------+-------------------------+
+    | customer_id | first_name | last_name | email                   |
+    +-------------+------------+-----------+-------------------------+
+    |         101 | John       | Smith     | john.smith@example.com  |
+    |         102 | Jane       | Doe       | jane.doe@example.com    |
+    |         103 | Bob        | Johnson   | bob.johnson@example.com |
     +-------------+------------+-----------+-------------------------+`,
         answer: "select customers.first_name, customers.last_name, orders.total from customers inner join orders on customers.customer_id = orders.customer_id;",
         setting: "",
