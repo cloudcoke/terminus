@@ -27,29 +27,49 @@ io.on("connection", (socket) => {
   socket.on("user", userHandler)
   socket.on("command", (cmd) => {
     const kind = cmd.split("/")[1]
-    if (kindData === undefined && kind === "linux") {
+    console.log(kind, "kind")
+    console.log(kindData, "kindData")
+    const write = () => {
       kindData = kind
       term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
-      return
-    } else if (kindData === undefined && kind === "sql") {
-      kindData = kind
-      term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
-      return
-    } else if (kindData === "sql" && kind === "sql") {
-      kindData = kind
-      term.write("exit\r")
-      term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
-      return
-    } else if (kindData === "sql" && kind === "linux") {
-      kindData = kind
-      term.write("exit\r")
-      term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
-      return
-    } else {
-      kindData = kind
-      term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+    }
+    if (kindData === undefined) {
+      write()
       return
     }
+    if (kindData === "sql") {
+      term.write("exit\r")
+      write()
+      return
+    }
+    if (kindData === "linux") {
+      write()
+      return
+    }
+    //   kindData = kind
+    // if (kindData === undefined && kind === "linux") {
+    //   kindData = kind
+    //   term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+    //   return
+    // } else if (kindData === undefined && kind === "sql") {
+    //   kindData = kind
+    //   term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+    //   return
+    // } else if (kindData === "sql" && kind === "sql") {
+    //   kindData = kind
+    //   term.write("exit\r")
+    //   term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+    //   return
+    // } else if (kindData === "sql" && kind === "linux") {
+    //   kindData = kind
+    //   term.write("exit\r")
+    //   term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+    //   return
+    // } else {
+    //   kindData = kind
+    //   term.write(`bash /home/ubuntu/user.sh -u ${userId} -k ${kind}\r`)
+    //   return
+    // }
   })
 
   term.on("data", (data: any) => {
