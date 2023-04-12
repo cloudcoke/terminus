@@ -11,6 +11,7 @@ export const Forum = () => {
     const inputRef = useRef(null);
     const wrapRef = useRef(null);
     let li;
+    console.log(list);
 
     if (list)
         li = list.map((v, i) => (
@@ -48,6 +49,7 @@ export const Forum = () => {
         const year = new Date().getFullYear();
         if (!date) date = `${year}${month}${day}`;
         const data = await request.get(`/comment/${date}`);
+        console.log(data.data, "dat");
         setlist(data.data);
     };
 

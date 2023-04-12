@@ -50,7 +50,11 @@ class CommentService {
             let month = Number(date.slice(4, 6));
             const day = Number(date.slice(6, 8));
             const response = await this.Repository.findAllDateComment({ year, month, day });
-            return response;
+            let data = response.map((v) => {
+                let k = { ...v, isUpdate: false };
+                return k;
+            });
+            return data;
         } catch (e: any) {
             throw new Error(e);
         }
