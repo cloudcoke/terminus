@@ -2,7 +2,7 @@ const quizData = [
   {
     command: "ls",
     prompt: "list의 약자로 특정 경로의 디렉토리 내용을 출력하는 명령어 입니다.",
-    exam: "/home/test/hello 디렉터리 내부에 있는 파일들의 자세한 내용과 숨김 파일을 출력해보세요. [절대 경로를 사용하세요.]",
+    exam: "hello 디렉터리 내부에 있는 파일들의 자세한 내용과 숨김 파일을 출력해보세요. [절대 경로를 사용하세요.]",
     answer: "ls -al /home/test/hello",
     setting: "",
     hint: "",
@@ -254,7 +254,7 @@ const quizData = [
   {
     command: "compress",
     prompt: "파일을 .Z 확장자로 압축하는 명령어 입니다.",
-    exam: "compress 명령어로 압축률을 확인하면서 /home/test/comp.txt 파일의 압축을 진행해 보세요. [절대 경로를 사용하세요.]",
+    exam: "compress 명령어로 압축률을 확인하면서 comp.txt 파일의 압축을 진행해 보세요. [절대 경로를 사용하세요.]",
     answer: "compress -v /home/test/comp.txt",
     setting: "",
     hint: "",
@@ -264,7 +264,7 @@ const quizData = [
   {
     command: "uncompress",
     prompt: "압축된 파일을 압축 해제하는 명령어 입니다.",
-    exam: "uncompress 명령어로 자세한 내용을 확인하면서 /home/test/uncomp 파일을 압축 해제해 보세요. [절대 경로를 사용하세요.]",
+    exam: "uncompress 명령어로 자세한 내용을 확인하면서 uncomp 파일을 압축 해제해 보세요. [절대 경로를 사용하세요.]",
     answer: "uncompress -v /home/test/uncomp.Z",
     setting: "",
     hint: "",
@@ -274,7 +274,7 @@ const quizData = [
   {
     command: "gzip",
     prompt: "파일을 .gz 확장자로 압축하는 명령어 입니다.",
-    exam: "gzip 명령어를 이용해 압축률을 확인하면서 /home/test/gzipcomp 파일의 압축을 진행해 보세요. [절대 경로를 사용하세요.]",
+    exam: "gzip 명령어를 이용해 압축률을 확인하면서 gzipcomp 파일의 압축을 진행해 보세요. [절대 경로를 사용하세요.]",
     answer: "gzip -v /home/test/gzipcomp",
     setting: "",
     hint: "",
@@ -284,7 +284,7 @@ const quizData = [
   {
     command: "bzip2",
     prompt: "파일을 .bz2 확장자로 압축하는 명령어 입니다.",
-    exam: "bzip2 명령어를 이용해 압축률을 확인하면서 /home/test/bzip2comp 파일의 압축을 진행해 보세요. [절대 경로를 사용하세요.]",
+    exam: "bzip2 명령어를 이용해 압축률을 확인하면서 bzip2comp 파일의 압축을 진행해 보세요. [절대 경로를 사용하세요.]",
     answer: "bzip2 -v /home/test/bzip2comp",
     setting: "",
     hint: "",
@@ -294,7 +294,7 @@ const quizData = [
   {
     command: "tar",
     prompt: "파일 또는 디렉토리를 그룹화하는 명령어 입니다.",
-    exam: "tar 명령어를 이용해 /home/test/Americano /home/test/DecafAmericano 파일을 묶어 /home/test/mega.tar 파일을 생성하고 처리 과정을 출력하면서 gzip압축을 진행해 보세요. [절대 경로를 사용하세요.]",
+    exam: "tar 명령어를 이용해 Americano DecafAmericano 파일을 묶어 mega.tar 파일을 생성하고 처리 과정을 출력하면서 gzip압축을 진행해 보세요. [절대 경로를 사용하세요.]",
     answer: "tar -zcvf /home/test/mega.tar /home/test/Americano /home/test/DecafAmericano",
     setting: "",
     hint: "",
@@ -304,7 +304,7 @@ const quizData = [
   {
     command: "ln",
     prompt: "파일간의 링크를 생성하는 데 사용하는 명령어 입니다.",
-    exam: "ln 명령어를 이용해 /home/test/link 파일을 /home/test/linkto 이름으로 심볼릭 링크를 만들어보세요. [절대 경로를 사용하세요.]",
+    exam: "ln 명령어를 이용해 link 파일을 linkto 이름으로 심볼릭 링크를 만들어보세요. [절대 경로를 사용하세요.]",
     answer: "ln -s /home/test/link /home/test/linkto",
     setting: "",
     hint: "",
@@ -315,7 +315,7 @@ const quizData = [
     command: "sed",
     prompt:
       "파일이나 텍스트를 편집하는데 사용되는 명령어 입니다. 텍스트 검색 및 바꾸기, 텍스트 필터링, 다양한 방식으로 텍스트 변환 등 다양한 작업에 사용할 수 있습니다.",
-    exam: "sed 명령어를 사용해 /home/test/foo 파일에서 hello라는 문자를 모두 hell이라는 문자로 바꾸어서 출력해 보세요.",
+    exam: "sed 명령어를 사용해 foo 파일에서 hello라는 문자를 모두 hell이라는 문자로 바꾸어서 출력해 보세요.",
     answer: "sed 's/hello/hell/g' /home/test/foo",
     setting: "",
     hint: "",
@@ -336,7 +336,7 @@ const quizData = [
   {
     command: "chmod",
     prompt:
-      "chmod를 사용해 /home/test/changeme 파일의 권한을 소유자는 읽기 쓰기 실행으로 그룹은 읽기 쓰기로 다른 사용자는 읽기로 변경해 보세요.",
+      "chmod를 사용해 changeme 파일의 권한을 소유자는 읽기 쓰기 실행으로 그룹은 읽기 쓰기로 다른 사용자는 읽기로 변경해 보세요.",
     exam: "chmod 764 /home/test/changeme",
     answer: "",
     setting: "",
