@@ -335,10 +335,9 @@ const quizData = [
   },
   {
     command: "chmod",
-    prompt:
-      "chmod를 사용해 changeme 파일의 권한을 소유자는 읽기 쓰기 실행으로 그룹은 읽기 쓰기로 다른 사용자는 읽기로 변경해 보세요.",
-    exam: "chmod 764 /home/test/changeme",
-    answer: "",
+    prompt: "Change Mode의 약자로 파일 또는 디렉터리의 권한을 변경하는 데 사용하는 명령어 입니다.",
+    exam: "chmod를 사용해 changeme 파일의 권한을 소유자는 읽기 쓰기 실행으로 그룹은 읽기 쓰기로 다른 사용자는 읽기로 변경해 보세요.",
+    answer: "chmod 764 /home/test/changeme",
     setting: "",
     hint: "",
     difficulty: "hard",
