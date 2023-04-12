@@ -41,8 +41,11 @@ class QuizContoller implements QuizContollerMethods {
         try {
             const { command, userId, answer } = req.body;
             const check = await this.QuizService.answerCheck({ command, userId, answer });
-            if (check) res.json({ data: check, status: 200 });
-            else res.json({ data: check, status: 401, messege: "정답이 아닙니다" });
+            if (check) {
+                return res.json({ data: check, status: 200 });
+            } else if (typeof check === "string") {
+                return res.json({ data: check, status: 401 });
+            } else res.json({ data: check, status: 401, messege: "정답이 아닙니다" });
         } catch (error) {
             next(error);
         }
