@@ -14,7 +14,7 @@ const sqlQuiz = [
         prompt: `데이터 베이스를 선택하는 데 사용하는 명령어 입니다. 
     use 명령어를 사용해 데이터 베이스를 선택한 후에는 use 명령어를 사용하여 다른 데이터 베이스를 선택할 때까지 실행하는 모든 명령이 선택한 데이터 베이스에 적용됩니다.`,
         exam: "hello 데이터 베이스를 선택해 보세요. [소문자로 작성해 주세요.]",
-        answer: "use hello",
+        answer: "use hello;",
         setting: "",
         hint: "",
         difficulty: "easy",
