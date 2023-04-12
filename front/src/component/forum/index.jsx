@@ -9,27 +9,20 @@ export const Forum = () => {
     const user = useSelector((state) => state.user);
     const [list, setlist] = useState("");
     const inputRef = useRef(null);
+    const modifyRef = useRef(null);
     const wrapRef = useRef(null);
     let li;
-    console.log(list);
 
-    if (list)
-        li = list.map((v, i) => (
-            <List key={i} id={v.id} className="forumList">
-                <div className="p">
-                    <div>
-                        {v.userId}
-                        <span className="date">{v.createdAt}</span>
-                    </div>
-                    <div>
-                        <span className="modify">수정</span>
-                        <span className="delete">삭제</span>
-                    </div>
-                </div>
-                {v.isUpdata && <span>{v.comment}</span>}
-                {!v.isUpdata && <input defaultValue={v.comment}></input>}
-            </List>
-        ));
+    const modifyHandler = async (e) => {
+        e.preventDefault();
+        const idx = e.target.parentNode.id;
+        if (!modifyRef.current.value) return alert("내용이 없습니다");
+        const body = {
+            comment: modifyRef.current.value,
+        };
+        const data = await request.put(`/comment/${idx}`, body);
+        getList();
+    };
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -43,21 +36,48 @@ export const Forum = () => {
         inputRef.current.value = "";
     };
 
+    if (list)
+        li = list.map((v, i) => {
+            const comment = v.isUpdate ? (
+                <form onSubmit={modifyHandler}>
+                    <InputForm type="text" values={v.comment} refs={modifyRef} placeholder=" " />
+                </form>
+            ) : (
+                <span>{v.comment}</span>
+            );
+            return (
+                <List key={i} id={v.id} className="forumList">
+                    <div className="p">
+                        <div>
+                            {v.userId}
+                            <span className="date">{v.createdAt}</span>
+                        </div>
+                        <div>
+                            <span className="modify">수정</span>
+                            <span className="delete">삭제</span>
+                        </div>
+                    </div>
+                    {comment}
+                </List>
+            );
+        });
+
     const getList = async (date) => {
         const month = (new Date().getMonth() + 1).toString().padStart(2, "0");
         const day = new Date().getDate().toString().padStart(2, "0");
         const year = new Date().getFullYear();
         if (!date) date = `${year}${month}${day}`;
         const data = await request.get(`/comment/${date}`);
-        console.log(data.data, "dat");
         setlist(data.data);
     };
 
     const changed = async (className, idx) => {
         switch (className) {
             case "modify":
-                const a = list.filter((v) => v.id === parseInt(idx));
-                a[0].isUpdata = true;
+                let index = list.findIndex((v) => v.id === parseInt(idx));
+                const lists = [...list];
+                lists[index].isUpdate = !lists[index].isUpdate;
+                setlist(lists);
 
                 break;
             case "delete":
@@ -97,7 +117,7 @@ export const Forum = () => {
                 </DivWrap>
                 {user.isLogin && (
                     <form style={{ display: "flex", padding: "2rem", boxSizing: "border-box", justifyContent: "space-between" }} onSubmit={submitHandler}>
-                        <InputForm refs={inputRef} />
+                        <InputForm refs={inputRef} id={"comment"} />
                         <Button height={4} text="등록" fontsize={2} answerSubmit={submitHandler} setSubmit={{ list, setlist }} />
                     </form>
                 )}
