@@ -25,8 +25,8 @@ export const Forum = () => {
                         <span className="delete">삭제</span>
                     </div>
                 </div>
-                {!v.isUpdata && <input defaultValue={v.comment}></input>}
                 {v.isUpdata && <span>{v.comment}</span>}
+                {!v.isUpdata && <input defaultValue={v.comment}></input>}
             </List>
         ));
 
