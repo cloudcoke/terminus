@@ -76,6 +76,7 @@ export class QuizService {
     async answerCheck({ command, userId, answer }: Quizs) {
         try {
             const quiz = await this.Repository.getQuiz({ command });
+            if (typeof userId === "string") answer = answer?.replace(userId, "test");
             if (answer === quiz.answer) {
                 let secceced;
                 if (userId) {
