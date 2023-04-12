@@ -1,7 +1,6 @@
 import { List, DivWrap } from "./styled";
 import { memo, useEffect, useRef, useState } from "react";
 import { Button } from "../button";
-import arrayList from "../../zdummy/uldummy";
 import { InputForm } from "./form";
 import { useSelector } from "react-redux";
 import request from "../../utils/request";
@@ -26,7 +25,8 @@ export const Forum = () => {
                         <span className="delete">삭제</span>
                     </div>
                 </div>
-                {!v.isUpdata && <span>{v.comment}</span>}
+                {!v.isUpdata && <input defaultValue={v.comment}></input>}
+                {v.isUpdata && <span>{v.comment}</span>}
             </List>
         ));
 
@@ -54,6 +54,9 @@ export const Forum = () => {
     const changed = async (className, idx) => {
         switch (className) {
             case "modify":
+                const a = list.filter((v) => v.id === parseInt(idx));
+                a[0].isUpdata = true;
+
                 break;
             case "delete":
                 if (window.confirm("삭제 하시겠습니까?")) {
@@ -70,7 +73,7 @@ export const Forum = () => {
 
     const clickHandler = (e) => {
         if (e.target.className === "modify" || e.target.className === "delete") {
-            let idx = e.target.parentNode.parentNode.id;
+            let idx = e.target.parentNode.parentNode.parentNode.id;
             return changed(e.target.className, idx);
         }
         return;
@@ -80,9 +83,13 @@ export const Forum = () => {
         getList();
     }, []);
 
+    useEffect(() => {
+        wrapRef.current.scrollTop = wrapRef.current.scrollHeight;
+    }, [list]);
+
     return (
         <>
-            <div style={{ margin: "5rem auto 0", padding: "2rem", border: "2px groove #eee", width: "85rem" }}>
+            <div style={{ margin: "5rem auto 0", padding: "2rem", border: "2px groove #8d8d8d", width: "85rem", borderRadius: "2rem" }}>
                 <DivWrap onClick={clickHandler} ref={wrapRef}>
                     {li}
                 </DivWrap>

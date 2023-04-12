@@ -28,14 +28,14 @@ export const List = styled.div`
         font-weight: 400;
         width: 5rem !important;
         height: 4rem !important;
-        font-size: 2rem;
+        font-size: 1.4rem;
     }
 
     & > span {
         display: block !important;
         width: 100% !important;
         height: min-content !important;
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
 
     &:nth-child(2n) {
