@@ -37,6 +37,9 @@ export const Prompt = () => {
             </div>
         ))
     }
+    console.log(quiz.exam)
+
+    // const a = quiz.exam.replace("\n", "<br/>")
     return !examMode ? (
         <PromptWrap>
             <div className="wwwrap">

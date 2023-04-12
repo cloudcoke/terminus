@@ -57,7 +57,7 @@ export const BodyWrap = styled.div`
         width: 1rem;
         height: 1.6rem;
     }
-    & > dl {
+    & dl {
         display: flex;
         align-items: center;
         font-size: 1.8rem;
