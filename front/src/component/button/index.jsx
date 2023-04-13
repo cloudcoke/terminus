@@ -18,9 +18,11 @@ export const Button = (props) => {
     const NAV = ({ text, socket }) => {
         const path = text.toLowerCase().replace(" ", "")
         const { kind, list: naviList } = useSelector((state) => state.mode)
-        const currentCommand = useMemo(() => location.pathname.slice(1).split("/")[2])
+        let currentCommand = useMemo(() => location.pathname.slice(1).split("/")[2])
         const { userId } = useSelector((state) => state.user.data)
-
+        if (currentCommand.indexOf("%20") !== -1) {
+            currentCommand = currentCommand.replace("%20", " ")
+        }
         const handleBtn = (e) => {
             const cases = e.target.innerHTML
             const includesArray = naviList
