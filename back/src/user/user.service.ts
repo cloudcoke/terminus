@@ -69,6 +69,7 @@ export class UserService {
         try {
             const data: any = await this.UserRepository.getRank();
             const response = data.filter((v: any) => parseInt(v.totalPoints) < this.totalQuiz.total).slice(0, 3);
+            // const datas = [...response]
             return response;
         } catch (error: any) {
             throw new Error(error);
