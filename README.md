@@ -73,6 +73,9 @@ Linux 및 SQL에 대한 지식을 테스트하는 연습 문제
 <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white"/>
 <img src="https://img.shields.io/badge/GitHub Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white"/>
 
+## 이슈 사항
+ <a href="https://github.com/cloudcoke/terminus/wiki/%EC%9D%B4%EC%8A%88-%EC%82%AC%ED%95%AD"><img style="height:40px;" src="https://img.shields.io/badge/이슈 사항-c93939?style=for-the-badge"/></a>
+ 
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=200&section=footer&text=Thanks&fontAlignY=70&fontSize=35)
 
 </div>
