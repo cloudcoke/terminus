@@ -20,10 +20,10 @@ export const Button = (props) => {
         const { kind, list: naviList } = useSelector((state) => state.mode)
         let currentCommand = useMemo(() => location.pathname.slice(1).split("/")[2])
         const { userId } = useSelector((state) => state.user.data)
-        if (currentCommand.indexOf("%20") !== -1) {
-            currentCommand = currentCommand.replace("%20", " ")
-        }
         const handleBtn = (e) => {
+            if (currentCommand.indexOf("%20") !== -1) {
+                currentCommand = currentCommand.replace("%20", " ")
+            }
             const cases = e.target.innerHTML
             const includesArray = naviList
                 .map((v) => v.command)
