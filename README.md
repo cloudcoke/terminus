@@ -1,5 +1,7 @@
 <div align="center">
+
 ![header](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=250&section=header&text=Terminus&fontSize=35)
+
 </div>
 
 # Linux 명령어 및 SQL 쿼리 연습 사이트
