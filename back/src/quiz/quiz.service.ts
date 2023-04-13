@@ -75,8 +75,9 @@ export class QuizService {
 
     async answerCheck({ command, userId, answer }: Quizs) {
         try {
+            if (command.indexOf("%20") !== -1) command.replaceAll("%20", " ");
             const quiz = await this.Repository.getQuiz({ command });
-            if (typeof userId === "string") answer = answer?.replaceAll(userId, "test");
+            if (typeof userId === "string") answer = answer?.replaceAll(`/${userId}`, "/test");
             if (answer === quiz.answer) {
                 let secceced;
                 if (userId) {
