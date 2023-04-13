@@ -16,7 +16,6 @@ export const Profile = () => {
             data: { point, total },
         } = await request.get(`/user/profile/${userId}`)
         if (point) setUserPoint(point)
-        console.log(total)
         setTotalPoint(total)
     }
     useEffect(() => {
