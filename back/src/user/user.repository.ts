@@ -61,7 +61,7 @@ PointUp.createdAt
 FROM User
 LEFT JOIN PointUp ON User.userId = PointUp.userId
 LEFT JOIN Quiz ON PointUp.quizid = Quiz.id
-WHERE User.userId = "${userId}"
+WHERE User.userId = "${userId}" AND PointUp.Point IS NOT NULL AND PointUp.quizid IS NOT NULL AND Quiz.command IS NOT NULL
 UNION
 SELECT
 'PointDown' AS SourceTable,
@@ -72,7 +72,7 @@ PointDown.userId,
 PointDown.createdAt
 FROM User
 LEFT JOIN PointDown ON User.userId = PointDown.userId
-WHERE User.userId = "${userId}"
+WHERE User.userId = "${userId}" AND PointDown.Point IS NOT NULL
 ORDER BY createdAt ASC;`,
                 { logging: false }
             );
