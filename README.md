@@ -41,9 +41,14 @@ Linux 및 SQL에 대한 지식을 테스트하는 연습 문제
 | 이민수 | <a href="https://github.com/cloudcoke"><img src="https://img.shields.io/badge/cloudcoke-6163ff?style=for-the-badge&logo=github"/></a> |
 | 박경철 | <a href="https://github.com/kyungcheol1"><img src="https://img.shields.io/badge/kyungcheol1-8f00ff?style=for-the-badge&logo=github"/></a> |
 | 백종환 | <a href="https://github.com/100space"><img src="https://img.shields.io/badge/100space-9a62e6?style=for-the-badge&logo=github"/></a> |
+  
+## 제작 기간
+2023년 3월 23일 ~ 2023년 4월 14일
+  
+<br/><br/>
 
-# 사용 스택
-
+## 사용 스택
+  
 ### Front-End
 
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
@@ -71,6 +76,3 @@ Linux 및 SQL에 대한 지식을 테스트하는 연습 문제
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=200&section=footer&text=Thanks&fontAlignY=70&fontSize=35)
 
 </div>
-
-</div>
-
