@@ -11,7 +11,6 @@ export const ProfilePoint = ({ userPoint }) => {
             </PointListSC>
         </PointUlistSC>
     ))
-    console.log(userPoint)
     return (
         <>
             <PointUlistSC>
