@@ -1,6 +1,7 @@
 <div align="center">
 
 ![header](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=250&section=header&text=Terminus&fontSize=35)
+![Group 30](https://user-images.githubusercontent.com/83705076/231755888-0147268a-085b-4c04-b88c-85c277db3c0b.png)
 
 </div>
 
