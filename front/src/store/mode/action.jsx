@@ -16,11 +16,9 @@ export const ChangeEnv = (payload) => ({
 
 export const ModeList = (mode) => {
     return async (dispatch) => {
-        try {
-            const kind = mode ? "linux" : "sql"
-            const response = await request.get(`/quiz/${kind}`)
-            dispatch(ChangeList({ list: response.data, kind }))
-            return response
-        } catch (error) {}
+        const kind = mode ? "linux" : "sql"
+        const response = await request.get(`/quiz/${kind}`)
+        dispatch(ChangeList({ list: response.data, kind }))
+        return response
     }
 }

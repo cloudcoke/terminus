@@ -40,9 +40,7 @@ export const UserLogout = () => {
 }
 export const UserSignUp = ({ userId, userPw }) => {
     return async (dispatch) => {
-        try {
-            const response = await request.post("/user", { userId, userPw })
-            return response.data.status
-        } catch (error) {}
+        const response = await request.post("/user", { userId, userPw })
+        return response.data.status
     }
 }

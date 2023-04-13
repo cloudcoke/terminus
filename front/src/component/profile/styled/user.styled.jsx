@@ -17,9 +17,17 @@ export const USER = styled.div`
         height: 80%;
         display: flex;
         align-items: flex-end;
+        color: #444;
     }
     & > div:nth-child(1) {
         line-height: 2.2rem;
         font-size: 2.6rem;
+    }
+    & > div:nth-child(3) {
+        font-family: "YOUTH";
+        margin-left: 5rem;
+        & > p {
+            margin-left: 1rem;
+        }
     }
 `

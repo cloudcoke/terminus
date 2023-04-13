@@ -71,7 +71,6 @@ export const Termi = ({ height, socket, setSubmit }) => {
                 term.current.write(`${datar}`)
             })
             let viMode = false
-            console.log(env)
             term.current = new Terminal({
                 fontFamily: "D2Coding",
                 cursorBlink: true,
@@ -234,7 +233,7 @@ export const Termi = ({ height, socket, setSubmit }) => {
                         <Button text="Clear" height="4" background="#e42020" socket={socket} />
                         <Button text="Next" height="4" socket={socket} setSubmit={setSubmit} />
                     </CenterBtn>
-                    {examMode ? (
+                    {examMode && userId ? (
                         <Button text="Submit" height="4" answerSubmit={{ answer, setSubmit }} />
                     ) : (
                         <div style={{ width: "10rem", height: "4rem" }}></div>

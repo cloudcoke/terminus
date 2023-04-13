@@ -62,10 +62,6 @@ export const Button = (props) => {
             }
         }
 
-        const handleForum = (e) => {
-            console.log(e.target.parentNode)
-        }
-
         switch (text) {
             case "Exam":
                 return (
