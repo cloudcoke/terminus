@@ -28,14 +28,14 @@ export const PointListSC = styled.li`
     &:nth-child(1) {
         margin: 0 10rem 0 0;
         justify-content: center;
-        width: 17.2rem;
+        width: 45%;
         height: 100%;
     }
     &:nth-child(2) {
         margin-top: 0;
         justify-content: flex-end;
         padding-right: 2rem;
-        width: 11.7rem;
+        width: 25%;
         ${(props) =>
             props.color === "PointUp"
                 ? "color : #1a5454"
@@ -47,7 +47,7 @@ export const PointListSC = styled.li`
     }
     &:nth-child(3) {
         margin-top: 0;
-        width: 11.7rem;
+        width: 25%;
         height: 100%;
         justify-content: center;
         ${(props) =>
