@@ -35,9 +35,20 @@ export class UserService {
     async getProfile({ userId }: Users) {
         try {
             const data = await this.UserRepository.profilePoint({ userId });
+            const sumData = (data: any) => {
+                let a: number = 0;
+                data.forEach((element: any) => {
+                    a += element.Point;
+                });
+                return a;
+            };
+            const Up: number = sumData(data.filter((v: any) => v.SourceTable === "PointUp"));
+            const Down: number = sumData(data.filter((v: any) => v.SourceTable === "PointDown"));
+
             const point = {
                 userId,
                 point: data,
+                total: Up - Down,
             };
             return point;
         } catch (error: any) {
