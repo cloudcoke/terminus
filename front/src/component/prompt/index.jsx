@@ -18,7 +18,6 @@ export const Prompt = () => {
     // 커맨드가 바뀔 때마다 요청
     const quest = async () => {
         const response = await request.get(`/quiz/${kind}/${command}`)
-        console.log(response.data)
         setQuiz(response.data)
     }
 
@@ -37,9 +36,7 @@ export const Prompt = () => {
             </div>
         ))
     }
-    console.log(quiz.exam)
 
-    // const a = quiz.exam.replace("\n", "<br/>")
     return !examMode ? (
         <PromptWrap>
             <div className="wwwrap">
@@ -52,9 +49,7 @@ export const Prompt = () => {
         </PromptWrap>
     ) : (
         <PromptWrap>
-            <div className="option">
-                <div>{quiz.exam}</div>
-            </div>
+            <div>{quiz.exam}</div>
         </PromptWrap>
     )
 }
