@@ -52,7 +52,7 @@ export const Button = (props) => {
             if (answer) {
                 const response = await request.post("/quiz/exam", { userId, command: currentCommand, answer })
                 const { data } = response.data
-                console.log(data)
+                console.log(response)
                 if (data === true) {
                     data && setSubmit(true)
                 } else if (data === false) {
