@@ -11,8 +11,8 @@ export const TermWrap = styled.div`
         overflow-y: scroll;
         height: 100%;
     }
-    .xterm-dom-renderer-owner-1 .xterm-rows {
-        /* color: #029502 !important; */
+    .xterm-rows {
+        width: 80%;
     }
     & span {
         background-color: initial;

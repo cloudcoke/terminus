@@ -11,7 +11,6 @@ const Ranking = (rankState) => {
     return <>{Div}</>
 }
 const Graphy = ({ rank, rankState }) => {
-    console.log(rankState)
     const Div = rankState.map((v, i) => (
         <div key={i}>
             <div className="backgroundBar">
@@ -37,7 +36,7 @@ export const Rank = ({ rank }) => {
         ranklists()
     }, [])
     return (
-        <GraphWrap height={26} flex>
+        <GraphWrap height={20} flex>
             <RankWarp>{Ranking(rankState)}</RankWarp>
             <Graph>{Graphy({ rank, rankState })}</Graph>
         </GraphWrap>

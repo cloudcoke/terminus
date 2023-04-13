@@ -11,6 +11,8 @@ const barAni = keyframes`
 export const RankWarp = styled.div`
     display: flex;
     flex-direction: column;
+    font-family: "SCoreDream";
+    font-weight: 700;
     width: 30%;
     height: 100%;
     & > div {
@@ -19,7 +21,7 @@ export const RankWarp = styled.div`
         height: calc(100% / 3);
         justify-content: center;
         align-items: center;
-        padding: 1.5rem 3rem;
+        padding: 0rem 3rem;
         font-size: 2rem;
     }
     & > div > div {
@@ -40,12 +42,12 @@ export const Graph = styled.div`
         justify-content: flex-start;
         align-items: center;
         font-size: 4rem;
-        padding: 3rem;
+        padding: 1.5rem 3rem;
     }
     .backgroundBar {
         width: 100%;
         background-color: #8f8f8f;
-        height: 100%;
+        height: 2.5rem;
         border-radius: 2rem;
     }
 `
@@ -53,7 +55,7 @@ export const Bar = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 100%;
+    height: 2.5rem;
     width: calc((${(props) => props.point} / 600) * 100%);
     padding: 0.7rem 1.4rem;
     border-radius: 2rem;

@@ -8,12 +8,11 @@ import { useSelector } from "react-redux"
 
 export const Quiz = memo(({ socket }) => {
     const [submit, setSubmit] = useState(false)
-    const { userId } = useSelector((state) => state.user.data)
     return (
         <>
             <Prompt />
             <Termi height={60} socket={socket} setSubmit={setSubmit} />
-            {submit && userId && <Submit setSubmit={setSubmit} />}
+            {submit && <Submit setSubmit={setSubmit} />}
         </>
     )
 })
