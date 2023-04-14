@@ -126,7 +126,7 @@ const sqlQuiz = [
     command: "delete",
     prompt: `테이블에서 하나 이상의 데이터 행을 제거하는 데 사용하는 명령어 입니다. 주로 where 절에 조건을 걸어 삭제할 행을 선택합니다. where 절을 생략하면 테이블의 모든 행이 삭제됩니다.`,
     exam: "my_database의 my_table 테이블에서 name이 cocacola인 행을 delete와 where절만 사용해 제거해 주세요. [소문자로 작성해 주세요.]",
-    answer: "delete from my_table where name='cocacola'",
+    answer: "delete from my_table where name='cocacola';",
     setting: "",
     hint: "",
     difficulty: "middle",
